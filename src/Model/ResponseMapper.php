@@ -7,12 +7,12 @@ declare(strict_types=1);
 namespace Dhl\Sdk\Group\Tracking\Model;
 
 use Dhl\Sdk\Group\Tracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\TrackingResponseType;
 
 class ResponseMapper
 {
-    public function map(\JsonSerializable $response): TrackResponseInterface
+    public function map(TrackingResponseType $response): TrackResponseInterface
     {
         return null;
     }
-
 }

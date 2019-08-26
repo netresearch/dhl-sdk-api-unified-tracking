@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Shipment;
+namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Types;
 
 /**
  * Class Product
@@ -21,5 +21,13 @@ class Product
      *
      * @var string
      */
-    public $productName;
+    private $productName;
+
+    /**
+     * @return string
+     */
+    public function getProductName(): string
+    {
+        return $this->productName;
+    }
 }

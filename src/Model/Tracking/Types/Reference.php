@@ -4,14 +4,14 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Shipment;
+namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Types;
 
 class Reference
 {
     /**
      * @var string
      */
-    public $number;
+    private $number;
 
     /**
      * One of:
@@ -26,5 +26,21 @@ class Reference
      *
      * @var string
      */
-    public $type;
+    private $type;
+
+    /**
+     * @return string
+     */
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
 }

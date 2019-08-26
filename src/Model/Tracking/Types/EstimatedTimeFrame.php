@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Shipment;
+namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Types;
 
 /**
  * Class EstimatedTimeFrame
@@ -22,7 +22,7 @@ class EstimatedTimeFrame
      *
      * @var string
      */
-    public $estimatedFrom;
+    private $estimatedFrom;
 
     /**
      * example: 2018-08-03T22:00:00Z
@@ -30,5 +30,21 @@ class EstimatedTimeFrame
      *
      * @var string
      */
-    public $estimatedThrough;
+    private $estimatedThrough;
+
+    /**
+     * @return string
+     */
+    public function getEstimatedFrom(): string
+    {
+        return $this->estimatedFrom;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEstimatedThrough(): string
+    {
+        return $this->estimatedThrough;
+    }
 }

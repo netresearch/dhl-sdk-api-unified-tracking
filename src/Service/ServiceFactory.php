@@ -8,13 +8,14 @@ namespace Dhl\Sdk\Group\Tracking\Service;
 
 use Dhl\Sdk\Group\Tracking\Api\ServiceFactoryInterface;
 use Dhl\Sdk\Group\Tracking\Api\TrackingServiceInterface;
+use Dhl\Sdk\Group\Tracking\Model\ResponseMapper;
+use Dhl\Sdk\Group\Tracking\Serializer\JsonSerializer;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\Common\PluginClientFactory;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
-use Http\Discovery\StreamFactoryDiscovery;
 use Psr\Log\LoggerInterface;
 
 class ServiceFactory implements ServiceFactoryInterface
@@ -29,15 +30,15 @@ class ServiceFactory implements ServiceFactoryInterface
         );
         $loggerPlugin = new LoggerPlugin($logger);
         $requestFactory = MessageFactoryDiscovery::find();
-        $streamFactory = StreamFactoryDiscovery::find();
+        $jsonSerializer = new JsonSerializer();
 
         $clientFactory = new PluginClientFactory();
         $client = $clientFactory->createClient(
             new PluginClient(HttpClientDiscovery::find()),
             [$headerPlugin, $loggerPlugin]
         );
-        $responseMapper = null;
+        $responseMapper = new ResponseMapper();
 
-        return new TrackingService($client, $requestFactory, $streamFactory, $responseMapper);
+        return new TrackingService($client, $requestFactory, $jsonSerializer, $responseMapper);
     }
 }

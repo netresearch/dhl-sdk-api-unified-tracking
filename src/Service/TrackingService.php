@@ -92,5 +92,4 @@ class TrackingService implements TrackingServiceInterface
 
         return $this->responseMapper->map($responseObject);
     }
-
 }

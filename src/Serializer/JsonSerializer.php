@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\Sdk\Group\Tracking\Serializer;
 
 
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Shipment\TrackingResponseType;
+use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\TrackingResponseType;
 
 class JsonSerializer
 {
