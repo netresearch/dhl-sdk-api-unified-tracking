@@ -14,4 +14,11 @@ class TrackResponse
             __DIR__ . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'successful_track.json'
         );
     }
+
+    public static function getNotFoundTrackResponse(): string
+    {
+        return file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'not_found.json'
+        );
+    }
 }

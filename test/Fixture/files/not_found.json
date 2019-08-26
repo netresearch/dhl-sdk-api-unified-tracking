@@ -1,0 +1,6 @@
+{
+  "title": "No result found",
+  "detail": "No shipment with given tracking number found.",
+  "status": 404,
+  "instance": "/shipment/8264715546"
+}

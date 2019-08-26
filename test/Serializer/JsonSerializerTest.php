@@ -21,5 +21,9 @@ class JsonSerializerTest extends TestCase
         $responseObject = $subject->decode($jsonResponse);
 
         $this->assertCount(1, $responseObject->getShipments());
+
+        $shipment = $responseObject->getShipments()[0];
+        $this->assertEquals('7777777770', $shipment->getId());
+        $this->assertEquals('express', $shipment->getService());
     }
 }

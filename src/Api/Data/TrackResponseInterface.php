@@ -8,5 +8,5 @@ namespace Dhl\Sdk\Group\Tracking\Api\Data;
 
 interface TrackResponseInterface
 {
-
+    // @TODO Create public api type
 }

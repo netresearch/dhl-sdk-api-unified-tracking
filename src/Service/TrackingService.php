@@ -10,6 +10,7 @@ use Dhl\Sdk\Group\Tracking\Api\Data\TrackResponseInterface;
 use Dhl\Sdk\Group\Tracking\Api\TrackingServiceInterface;
 use Dhl\Sdk\Group\Tracking\Model\ResponseMapper;
 use Dhl\Sdk\Group\Tracking\Serializer\JsonSerializer;
+use Exception;
 use Http\Client\Common\Exception\ClientErrorException;
 use Http\Client\Exception\HttpException;
 use Http\Message\RequestFactory;
@@ -86,7 +87,7 @@ class TrackingService implements TrackingServiceInterface
             // @TODO handle exception
         } catch (HttpException $exception) {
             // @TODO handle exception
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // @TODO handle exception
         }
 
