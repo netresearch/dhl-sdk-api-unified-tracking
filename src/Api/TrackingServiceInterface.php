@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Api;
+namespace Dhl\Sdk\GroupTracking\Api;
 
-use Dhl\Sdk\Group\Tracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
 
 /**
  * Interface TrackingServiceInterface

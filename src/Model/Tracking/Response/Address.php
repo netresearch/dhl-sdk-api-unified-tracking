@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Response;
+namespace Dhl\Sdk\GroupTracking\Model\Tracking\Response;
 
-use Dhl\Sdk\Group\Tracking\Api\Data\AddressInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\AddressInterface;
 
 class Address implements AddressInterface
 {

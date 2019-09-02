@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Test\Service;
+namespace Dhl\Sdk\GroupTracking\Test\Service;
 
-use Dhl\Sdk\Group\Tracking\Api\TrackingServiceInterface;
-use Dhl\Sdk\Group\Tracking\Service\ServiceFactory;
+use Dhl\Sdk\GroupTracking\Api\TrackingServiceInterface;
+use Dhl\Sdk\GroupTracking\Service\ServiceFactory;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\Strategy\MockClientStrategy;
 use PHPUnit\Framework\TestCase;

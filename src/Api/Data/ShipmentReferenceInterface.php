@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Api\Data;
+namespace Dhl\Sdk\GroupTracking\Api\Data;
 
 /**
  * Interface ShipmentReferenceInterface

@@ -4,25 +4,25 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model;
+namespace Dhl\Sdk\GroupTracking\Model;
 
-use Dhl\Sdk\Group\Tracking\Api\Data\TrackResponseInterface;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\Address;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\DeliveryTimeFrame;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\EstimatedDelivery;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\Person;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\PhysicalAttributes;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\ProofOfDelivery;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\ShipmentEvent;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Response\ShipmentReference;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\TrackResponse;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\Details;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\Person as ApiPerson;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\Place;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\Reference;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\Shipment;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\ShipmentEvent as ApiShipmentEvent;
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\TrackingResponseType;
+use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\Address;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\DeliveryTimeFrame;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\EstimatedDelivery;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\Person;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\PhysicalAttributes;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\ProofOfDelivery;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\ShipmentEvent;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Response\ShipmentReference;
+use Dhl\Sdk\GroupTracking\Model\Tracking\TrackResponse;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Details;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Person as ApiPerson;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Place;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Reference;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Shipment;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\ShipmentEvent as ApiShipmentEvent;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\TrackingResponseType;
 
 class ResponseMapper
 {

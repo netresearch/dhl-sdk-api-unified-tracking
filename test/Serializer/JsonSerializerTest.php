@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Test\Serializer;
+namespace Dhl\Sdk\GroupTracking\Test\Serializer;
 
-use Dhl\Sdk\Group\Tracking\Serializer\JsonSerializer;
-use Dhl\Sdk\Group\Tracking\Test\Fixture\TrackResponse;
+use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
+use Dhl\Sdk\GroupTracking\Test\Fixture\TrackResponse;
 use PHPUnit\Framework\TestCase;
 
 class JsonSerializerTest extends TestCase

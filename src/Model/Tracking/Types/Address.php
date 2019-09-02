@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Types;
+namespace Dhl\Sdk\GroupTracking\Model\Tracking\Types;
 
 class Address
 {

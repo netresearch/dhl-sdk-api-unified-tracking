@@ -4,15 +4,17 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Service;
+namespace Dhl\Sdk\GroupTracking\Service;
 
-use Dhl\Sdk\Group\Tracking\Api\Data\TrackResponseInterface;
-use Dhl\Sdk\Group\Tracking\Api\TrackingServiceInterface;
-use Dhl\Sdk\Group\Tracking\Model\ResponseMapper;
-use Dhl\Sdk\Group\Tracking\Serializer\JsonSerializer;
-use Exception;
+use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\GroupTracking\Api\TrackingServiceInterface;
+use Dhl\Sdk\GroupTracking\Exception\ClientException;
+use Dhl\Sdk\GroupTracking\Exception\ServerException;
+use Dhl\Sdk\GroupTracking\Exception\ServiceException;
+use Dhl\Sdk\GroupTracking\Model\ResponseMapper;
+use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
 use Http\Client\Common\Exception\ClientErrorException;
-use Http\Client\Exception\HttpException;
+use Http\Client\Common\Exception\ServerErrorException;
 use Http\Message\RequestFactory;
 use Psr\Http\Client\ClientInterface;
 
@@ -58,6 +60,17 @@ class TrackingService implements TrackingServiceInterface
         $this->responseMapper = $responseMapper;
     }
 
+    /**
+     * @param string $trackingNumber
+     * @param string|null $service
+     * @param string|null $requesterCountryCode
+     * @param string|null $originCountryCode
+     * @param string|null $recipientPostalCode
+     * @param string $language
+     * @return TrackResponseInterface
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ServiceException
+     */
     public function retrieveTrackingInformation(
         string $trackingNumber,
         string $service = null,
@@ -83,15 +96,12 @@ class TrackingService implements TrackingServiceInterface
             $response = $this->client->sendRequest($request);
             $responseJson = (string) $response->getBody();
             $responseObject = $this->serializer->decode($responseJson);
+        } catch (\JsonMapper_Exception $exception) {
+            throw ClientException::create($exception);
         } catch (ClientErrorException $exception) {
-            // @TODO handle exception
-            throw $exception;
-        } catch (HttpException $exception) {
-            // @TODO handle exception
-            throw $exception;
-        } catch (Exception $exception) {
-            // @TODO handle exception
-            throw $exception;
+            throw ClientException::create($exception);
+        } catch (ServerErrorException $exception) {
+            throw ServerException::create($exception);
         }
 
         return $this->responseMapper->map($responseObject);

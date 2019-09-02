@@ -4,16 +4,16 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model\Tracking;
+namespace Dhl\Sdk\GroupTracking\Model\Tracking;
 
-use Dhl\Sdk\Group\Tracking\Api\Data\AddressInterface;
-use Dhl\Sdk\Group\Tracking\Api\Data\EstimatedDeliveryInterface;
-use Dhl\Sdk\Group\Tracking\Api\Data\PersonInterface;
-use Dhl\Sdk\Group\Tracking\Api\Data\PhysicalAttributesInterface;
-use Dhl\Sdk\Group\Tracking\Api\Data\ProofOfDeliveryInterface;
-use Dhl\Sdk\Group\Tracking\Api\Data\ShipmentEventInterface;
-use Dhl\Sdk\Group\Tracking\Api\Data\ShipmentReferenceInterface;
-use Dhl\Sdk\Group\Tracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\AddressInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\EstimatedDeliveryInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\PersonInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\PhysicalAttributesInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\ProofOfDeliveryInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\ShipmentEventInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\ShipmentReferenceInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
 
 class TrackResponse implements TrackResponseInterface
 {

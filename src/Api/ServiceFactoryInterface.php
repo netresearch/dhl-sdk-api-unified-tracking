@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Api;
+namespace Dhl\Sdk\GroupTracking\Api;
 
 use Psr\Log\LoggerInterface;
 

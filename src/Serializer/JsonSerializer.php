@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Serializer;
+namespace Dhl\Sdk\GroupTracking\Serializer;
 
-use Dhl\Sdk\Group\Tracking\Model\Tracking\Types\TrackingResponseType;
+use Dhl\Sdk\GroupTracking\Model\Tracking\Types\TrackingResponseType;
 use JsonMapper;
 use function json_decode;
 
@@ -28,6 +28,11 @@ class JsonSerializer
         $this->classMap = $classMap;
     }
 
+    /**
+     * @param string $jsonResponse
+     * @return TrackingResponseType
+     * @throws \JsonMapper_Exception
+     */
     public function decode(string $jsonResponse): TrackingResponseType
     {
         $jsonMapper = new JsonMapper();

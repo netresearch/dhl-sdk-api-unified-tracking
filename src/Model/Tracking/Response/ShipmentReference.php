@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Response;
+namespace Dhl\Sdk\GroupTracking\Model\Tracking\Response;
 
-use Dhl\Sdk\Group\Tracking\Api\Data\ShipmentReferenceInterface;
+use Dhl\Sdk\GroupTracking\Api\Data\ShipmentReferenceInterface;
 
 class ShipmentReference implements ShipmentReferenceInterface
 {
