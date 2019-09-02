@@ -12,12 +12,14 @@ use Dhl\Sdk\GroupTracking\Http\Plugin\TrackingErrorPlugin;
 use Dhl\Sdk\GroupTracking\Model\ResponseMapper;
 use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
 use Dhl\Sdk\GroupTracking\Service\TrackingService;
+use Dhl\Sdk\GroupTracking\Test\Expectation\TrackingServiceTestExpectation;
 use Dhl\Sdk\GroupTracking\Test\Fixture\TrackResponse;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\Common\PluginClientFactory;
 use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\Formatter\FullHttpMessageFormatter;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
@@ -38,8 +40,21 @@ class TrackingServiceTest extends TestCase
 
         $client->addResponse($response);
 
+        $headerPlugin = new HeaderDefaultsPlugin(
+            [
+                'DHL-API-Key' => 'MY_TEST_KEY',
+                'Accept' => 'application/json',
+            ]
+        );
+        $logger = new TestLogger();
+        $loggerPlugin = new LoggerPlugin($logger);
+        $clientFactory = new PluginClientFactory();
+
         $subject = new TrackingService(
-            $this->createPluginClient($client),
+            $clientFactory->createClient(
+                new PluginClient($client),
+                [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
+            ),
             $messageFactory,
             new JsonSerializer(),
             new ResponseMapper()
@@ -51,6 +66,69 @@ class TrackingServiceTest extends TestCase
         $result = $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
 
         $this->assertSame((string) $data['id'], $result->getId());
+    }
+
+    /**
+     * @dataProvider errorDataProvider
+     * @test
+     * @param string $jsonResponse
+     * @throws Dhl\Sdk\GroupTracking\Exception\ClientException
+     * @throws Dhl\Sdk\GroupTracking\Exception\ServerException
+     * @throws Dhl\Sdk\GroupTracking\Exception\ServiceException
+     */
+    public function testRetrieveTrackingInformationError(string $jsonResponse)
+    {
+        $response = json_decode($jsonResponse, true);
+        $this->expectException(ClientException::class);
+        if ($response) {
+            $this->expectExceptionCode($response['status']);
+            $this->expectExceptionMessageRegExp("#{$response['title']}#");
+        }
+
+        $client = new Client();
+        $messageFactory = MessageFactoryDiscovery::find();
+        $httpResponnse = $messageFactory->createResponse($response['status'], $response['title'], [], $jsonResponse);
+
+        $client->setDefaultResponse($httpResponnse);
+        $headerPlugin = new HeaderDefaultsPlugin(
+            [
+                'DHL-API-Key' => 'MY_TEST_KEY',
+                'Accept' => 'application/json',
+            ]
+        );
+        $logger = new TestLogger();
+        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter());
+        $clientFactory = new PluginClientFactory();
+
+        $subject = new TrackingService(
+            $clientFactory->createClient(
+                new PluginClient($client),
+                [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
+            ),
+            $messageFactory,
+            new JsonSerializer(),
+            new ResponseMapper()
+        );
+
+        try {
+            $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
+        } catch (ClientException $exception) {
+            $lastRequest = $client->getLastRequest();
+
+            TrackingServiceTestExpectation::assertErrorLogged($jsonResponse, $logger);
+            TrackingServiceTestExpectation::assertCommunicationLogged($jsonResponse, $lastRequest, $logger);
+            throw $exception;
+        }
+    }
+
+    public function successDataProvider(): array
+    {
+        return TrackResponse::getSuccessFullTrackResponses();
+    }
+
+    public function errorDataProvider(): array
+    {
+        return TrackResponse::getNotFoundTrackResponse();
     }
 
     /**
@@ -72,44 +150,5 @@ class TrackingServiceTest extends TestCase
             new PluginClient($mockClient),
             [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
         );
-    }
-
-    /**
-     * @dataProvider errorDataProvider
-     * @test
-     * @param string $jsonResponse
-     */
-    public function testRetrieveTrackingInformationError(string $jsonResponse)
-    {
-        $client = new Client();
-        $messageFactory = MessageFactoryDiscovery::find();
-        $response = json_decode($jsonResponse, true);
-        $httpResponnse = $messageFactory->createResponse($response['status'], $response['title'], [], $jsonResponse);
-
-        $client->setDefaultResponse($httpResponnse);
-
-        $subject = new TrackingService(
-            $this->createPluginClient($client),
-            $messageFactory,
-            new JsonSerializer(),
-            new ResponseMapper()
-        );
-
-        try {
-            $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
-        } catch (ClientException $exception) {
-            $lastRequest = $client->getLastRequest();
-
-        }
-    }
-
-    public function successDataProvider(): array
-    {
-        return TrackResponse::getSuccessFullTrackResponses();
-    }
-
-    public function errorDataProvider(): array
-    {
-        return TrackResponse::getNotFoundTrackResponse();
     }
 }
