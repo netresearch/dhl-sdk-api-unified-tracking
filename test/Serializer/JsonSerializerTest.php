@@ -13,17 +13,27 @@ use PHPUnit\Framework\TestCase;
 class JsonSerializerTest extends TestCase
 {
 
-    public function testDecode()
+    /**
+     * @dataProvider responseJsonProvider
+     */
+    public function testDecode(string $jsonResponse)
     {
-        $jsonResponse = TrackResponse::getSuccessFullTrackResponse();
-
+        $data = json_decode($jsonResponse, true);
         $subject = new JsonSerializer();
         $responseObject = $subject->decode($jsonResponse);
 
         $this->assertCount(1, $responseObject->getShipments());
 
         $shipment = $responseObject->getShipments()[0];
-        $this->assertEquals('7777777770', $shipment->getId());
-        $this->assertEquals('express', $shipment->getService());
+        $this->assertEquals($data["shipments"][0]['id'], $shipment->getId());
+        $this->assertEquals($data["shipments"][0]['service'], $shipment->getService());
+    }
+
+    /**
+     * @return string[]
+     */
+    public function responseJsonProvider(): array
+    {
+        return TrackResponse::getSuccessFullTrackResponses();
     }
 }

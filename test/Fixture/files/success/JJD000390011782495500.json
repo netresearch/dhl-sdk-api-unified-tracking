@@ -1,0 +1,82 @@
+{
+  "shipments": [
+    {
+      "id": "JJD000390011782495500",
+      "service": "parcel-de",
+      "origin": {
+        "address": {
+          "countryCode": "DE"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "DE"
+        }
+      },
+      "status": {
+        "timestamp": "2019-08-30T08:59:00",
+        "location": {
+          "address": {
+            "addressLocality": "Germany"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "The shipment has been successfully delivered",
+        "description": "The shipment has been successfully delivered"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL PAKET (parcel)"
+        },
+        "receiver": {
+          "@type": "Person",
+          "name": "Max Muster"
+        },
+        "totalNumberOfPieces": 1,
+        "pieceIds": [
+          "JD000390011782495500"
+        ],
+        "weight": {
+          "value": 0.24,
+          "unitText": "kg"
+        }
+      },
+      "events": [
+        {
+          "timestamp": "2019-08-30T08:59:00",
+          "location": {
+            "address": {
+              "addressLocality": "Germany"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "The shipment has been successfully delivered",
+          "description": "The shipment has been successfully delivered"
+        },
+        {
+          "timestamp": "2019-08-30T07:34:00",
+          "statusCode": "transit",
+          "status": "The shipment has been loaded onto the delivery vehicle",
+          "description": "The shipment has been loaded onto the delivery vehicle"
+        },
+        {
+          "timestamp": "2019-08-30T02:05:00",
+          "location": {
+            "address": {
+              "addressLocality": "Radefeld, Germany"
+            }
+          },
+          "statusCode": "transit",
+          "status": "The shipment has been processed in the destination parcel center",
+          "description": "The shipment has been processed in the destination parcel center"
+        },
+        {
+          "timestamp": "2019-08-29T16:55:00",
+          "statusCode": "pre-transit",
+          "status": "The instruction data for this shipment have been provided by the sender to DHL electronically",
+          "description": "The instruction data for this shipment have been provided by the sender to DHL electronically"
+        }
+      ]
+    }
+  ]
+}
