@@ -30,7 +30,7 @@ class EstimatedDelivery implements EstimatedDeliveryInterface
     /**
      * EstimatedDelivery constructor.
      *
-     * @param \DateTime|null $dateTime
+     * @param \DateTime $dateTime
      * @param DeliveryTimeFrameInterface|null $timeFrame
      * @param string $timeRemark
      */

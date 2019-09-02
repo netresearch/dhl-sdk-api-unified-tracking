@@ -44,13 +44,13 @@ class TrackingService implements TrackingServiceInterface
      * @param ClientInterface $client
      * @param RequestFactory $requestFactory
      * @param JsonSerializer $serializer
-     * @param null $responseMapper
+     * @param ResponseMapper $responseMapper
      */
     public function __construct(
         ClientInterface $client,
         RequestFactory $requestFactory,
         JsonSerializer $serializer,
-        $responseMapper
+        ResponseMapper $responseMapper
     ) {
         $this->client = $client;
         $this->requestFactory = $requestFactory;
@@ -85,10 +85,13 @@ class TrackingService implements TrackingServiceInterface
             $responseObject = $this->serializer->decode($responseJson);
         } catch (ClientErrorException $exception) {
             // @TODO handle exception
+            throw $exception;
         } catch (HttpException $exception) {
             // @TODO handle exception
+            throw $exception;
         } catch (Exception $exception) {
             // @TODO handle exception
+            throw $exception;
         }
 
         return $this->responseMapper->map($responseObject);

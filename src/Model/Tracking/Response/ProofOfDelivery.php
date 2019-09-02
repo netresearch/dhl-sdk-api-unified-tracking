@@ -12,7 +12,7 @@ use Dhl\Sdk\Group\Tracking\Api\Data\ProofOfDeliveryInterface;
 class ProofOfDelivery implements ProofOfDeliveryInterface
 {
     /**
-     * @var \Datetime
+     * @var \DateTime
      */
     private $timeStamp;
 
@@ -29,11 +29,11 @@ class ProofOfDelivery implements ProofOfDeliveryInterface
     /**
      * ProofOfDelivery constructor.
      *
-     * @param \Datetime $timeStamp
+     * @param \DateTime $timeStamp
      * @param string $documentUrl
      * @param PersonInterface|null $signee
      */
-    public function __construct(\Datetime $timeStamp, string $documentUrl = '', PersonInterface $signee = null)
+    public function __construct(\DateTime $timeStamp, string $documentUrl = '', PersonInterface $signee = null)
     {
         $this->timeStamp = $timeStamp;
         $this->documentUrl = $documentUrl;

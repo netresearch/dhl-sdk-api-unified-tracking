@@ -36,6 +36,9 @@ class JsonSerializer
 
         $response = json_decode($jsonResponse, false);
 
-        return $jsonMapper->map($response, new TrackingResponseType());
+        /** @var TrackingResponseType $mappedResponse */
+        $mappedResponse = $jsonMapper->map($response, new TrackingResponseType());
+
+        return $mappedResponse;
     }
 }

@@ -46,6 +46,4 @@ class ProofOfDelivery
     {
         return $this->signed;
     }
-
-
 }

@@ -32,7 +32,7 @@ class ResponseMapper
         $shipment = current($response->getShipments());
 
         $shipmentDetails = $shipment->getDetails();
-        $proofOfDelivery = $shipmentDetails->getProofOfDelivery() ? $this->convertProofOfDelivery(
+        $proofOfDelivery = $shipmentDetails->getProofOfDelivery() !== null ? $this->convertProofOfDelivery(
             $shipmentDetails->getProofOfDelivery()
         ) : null;
 
@@ -55,10 +55,10 @@ class ResponseMapper
             $this->convertEvent($shipment->getStatus()),
             $shipmentDetails->getTotalNumberOfPieces(),
             $this->createPhysicalAttributes($shipmentDetails),
-            $shipmentDetails->getProduct() ? $shipmentDetails->getProduct()->getProductName() : '',
-            $shipment->getEstimatedTimeOfDelivery() ? $this->extractEstimatedDelivery($shipment) : null,
-            $shipmentDetails->getSender() ? $this->convertPerson($shipmentDetails->getSender()) : null,
-            $shipmentDetails->getReceiver() ? $this->convertPerson($shipmentDetails->getReceiver()) : null,
+            $shipmentDetails->getProduct() !== null ? $shipmentDetails->getProduct()->getProductName() : '',
+            empty($shipment->getEstimatedTimeOfDelivery()) ? $this->extractEstimatedDelivery($shipment) : null,
+            $shipmentDetails->getSender() !== null ? $this->convertPerson($shipmentDetails->getSender()) : null,
+            $shipmentDetails->getReceiver() !== null ? $this->convertPerson($shipmentDetails->getReceiver()) : null,
             $proofOfDelivery,
             $shipmentEvents,
             $shipmentDetails->getPieceIds(),
@@ -76,7 +76,7 @@ class ResponseMapper
         return new ProofOfDelivery(
             new \DateTime($proofOfDelivery->getTimestamp()),
             $proofOfDelivery->getDocumentUrl(),
-            $proofOfDelivery->getSigned() ? $this->convertPerson($proofOfDelivery->getSigned()) : null
+            $proofOfDelivery->getSigned() !== null ? $this->convertPerson($proofOfDelivery->getSigned()) : null
         );
     }
 
@@ -130,13 +130,13 @@ class ResponseMapper
      */
     private function createPhysicalAttributes(Details $details): PhysicalAttributes
     {
-        $dimensionUnit = $details->getDimensions() !== null ? $details->getDimensions()->getHeight()->getUnitText(
-        ) : '';
-        if (empty($dimensionUnit)) {
+        if ($details->getDimensions() === null) {
+            $dimensionUnit = '';
             $width = null;
             $height = null;
             $length = null;
         } else {
+            $dimensionUnit = $details->getDimensions()->getHeight()->getUnitText();
             $width = $details->getDimensions()->getWidth()->getValue();
             $height = $details->getDimensions()->getHeight()->getValue();
             $length = $details->getDimensions()->getLength()->getValue();
@@ -155,7 +155,7 @@ class ResponseMapper
 
     private function extractEstimatedDelivery(Shipment $shipment): EstimatedDelivery
     {
-        $timeFrame = $shipment->getEstimatedDeliveryTimeFrame() ? new DeliveryTimeFrame(
+        $timeFrame = $shipment->getEstimatedDeliveryTimeFrame() !== null ? new DeliveryTimeFrame(
             new \DateTime($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedFrom()),
             new \DateTime($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedThrough())
         ) : null;
