@@ -15,13 +15,13 @@ use Dhl\Sdk\GroupTracking\Model\ResponseMapper;
 use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
 use Http\Client\Common\Exception\ClientErrorException;
 use Http\Client\Common\Exception\ServerErrorException;
+use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
-use Psr\Http\Client\ClientInterface;
 
 class TrackingService implements TrackingServiceInterface
 {
     /**
-     * @var ClientInterface
+     * @var HttpClient
      */
     private $client;
 
@@ -43,13 +43,13 @@ class TrackingService implements TrackingServiceInterface
     /**
      * TrackingService constructor.
      *
-     * @param ClientInterface $client
+     * @param HttpClient $client
      * @param RequestFactory $requestFactory
      * @param JsonSerializer $serializer
      * @param ResponseMapper $responseMapper
      */
     public function __construct(
-        ClientInterface $client,
+        HttpClient $client,
         RequestFactory $requestFactory,
         JsonSerializer $serializer,
         ResponseMapper $responseMapper

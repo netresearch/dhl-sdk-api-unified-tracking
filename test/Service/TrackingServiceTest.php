@@ -87,9 +87,9 @@ class TrackingServiceTest extends TestCase
 
         $client = new Client();
         $messageFactory = MessageFactoryDiscovery::find();
-        $httpResponnse = $messageFactory->createResponse($response['status'], $response['title'], [], $jsonResponse);
+        $httpResponse = $messageFactory->createResponse($response['status'], $response['title'], [], $jsonResponse);
 
-        $client->setDefaultResponse($httpResponnse);
+        $client->setDefaultResponse($httpResponse);
         $headerPlugin = new HeaderDefaultsPlugin(
             [
                 'DHL-API-Key' => 'MY_TEST_KEY',
