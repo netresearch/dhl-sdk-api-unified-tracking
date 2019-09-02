@@ -22,7 +22,7 @@ class EstimatedTimeFrame
      *
      * @var string
      */
-    private $estimatedFrom;
+    private $estimatedFrom = '';
 
     /**
      * example: 2018-08-03T22:00:00Z
@@ -30,7 +30,7 @@ class EstimatedTimeFrame
      *
      * @var string
      */
-    private $estimatedThrough;
+    private $estimatedThrough = '';
 
     /**
      * @return string

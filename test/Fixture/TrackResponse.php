@@ -17,8 +17,7 @@ class TrackResponse
         $finder->name('*.json')->in(__DIR__ . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'success');
         $result = [];
         /** @var SplFileInfo $file */
-        foreach ($finder->files() as
-            $file) {
+        foreach ($finder->files() as $file) {
             $result[$file->getFilenameWithoutExtension()] = ['jsonResponse' => file_get_contents($file->getPathname())];
         }
 
@@ -27,8 +26,14 @@ class TrackResponse
 
     public static function getNotFoundTrackResponse(): array
     {
-        return file_get_contents(
-            __DIR__ . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'not_found.json'
-        );
+        $finder = new Finder();
+        $finder->name('*.json')->in(__DIR__ . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'error');
+        $result = [];
+        /** @var SplFileInfo $file */
+        foreach ($finder->files() as $file) {
+            $result[$file->getFilenameWithoutExtension()] = ['jsonResponse' => file_get_contents($file->getPathname())];
+        }
+
+        return $result;
     }
 }

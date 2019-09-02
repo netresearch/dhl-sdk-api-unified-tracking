@@ -11,22 +11,22 @@ class Address
     /**
      * @var string
      */
-    private $countryCode;
+    private $countryCode = '';
 
     /**
      * @var string
      */
-    private $postalCode;
+    private $postalCode = '';
 
     /**
      * @var string
      */
-    private $addressLocality;
+    private $addressLocality = '';
 
     /**
      * @var string
      */
-    private $streetAddress;
+    private $streetAddress = '';
 
     /**
      * @return string

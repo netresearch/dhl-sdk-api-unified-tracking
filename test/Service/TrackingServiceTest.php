@@ -6,43 +6,92 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Group\Tracking\Test\Service;
 
+use Dhl\Sdk\Group\Tracking\Api\Data\TrackResponseInterface;
 use Dhl\Sdk\Group\Tracking\Model\ResponseMapper;
 use Dhl\Sdk\Group\Tracking\Serializer\JsonSerializer;
 use Dhl\Sdk\Group\Tracking\Service\TrackingService;
 use Dhl\Sdk\Group\Tracking\Test\Fixture\TrackResponse;
+use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
+use Http\Client\Common\Plugin\LoggerPlugin;
+use Http\Client\Common\PluginClient;
+use Http\Client\Common\PluginClientFactory;
 use Http\Client\Exception\HttpException;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 
 class TrackingServiceTest extends TestCase
 {
 
-    public function testRetrieveTrackingInformationSuccess()
+    /**
+     * @dataProvider successDataProvider
+     * @test
+     * @param string $jsonResponse
+     */
+    public function testRetrieveTrackingInformationSuccess(string $jsonResponse)
     {
-        $responseFactory = MessageFactoryDiscovery::find();
-        $response = $responseFactory->createResponse(200, null, [], TrackResponse::getSuccessFullTrackResponse());
-        $client = new Client($responseFactory);
+        $messageFactory = MessageFactoryDiscovery::find();
+        $response = $messageFactory->createResponse(200, null, [], $jsonResponse);
+        $client = new Client($messageFactory);
 
         $client->addResponse($response);
 
-        $subject = new TrackingService($client, $responseFactory, new JsonSerializer(), new ResponseMapper());
+        $subject = new TrackingService(
+            $this->createPluginClient($client),
+            $messageFactory,
+            new JsonSerializer(),
+            new ResponseMapper()
+        );
 
-        /** @var \Dhl\Sdk\Group\Tracking\Model\Tracking\TrackResponse $result */
+        $data = json_decode($jsonResponse, true)['shipments'][0];
+
+        /** @var TrackResponseInterface $result */
         $result = $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
 
-        $rawResponse = $result->getOriginResponse();
+        $this->assertSame((string) $data['id'], $result->getId());
     }
 
-    public function testRetrieveTrackingInformationError()
+    /**
+     * @param $mockClient
+     * @return PluginClient
+     */
+    private function createPluginClient(Client $mockClient): PluginClient
+    {
+        $headerPlugin = new HeaderDefaultsPlugin(
+            [
+                'DHL-API-Key' => 'MY_TEST_KEY',
+                'Accept' => 'application/json',
+            ]
+        );
+        $loggerPlugin = new LoggerPlugin(new NullLogger());
+        $clientFactory = new PluginClientFactory();
+
+        return $clientFactory->createClient(
+            new PluginClient($mockClient),
+            [$headerPlugin, $loggerPlugin]
+        );
+    }
+
+    /**
+     * @dataProvider errorDataProvider
+     * @test
+     * @param string $jsonResponse
+     */
+    public function testRetrieveTrackingInformationError(string $jsonResponse)
     {
         $client = new Client();
-        $responseFactory = MessageFactoryDiscovery::find();
-        $response = $responseFactory->createResponse(404, null, [], TrackResponse::getNotFoundTrackResponse());
+        $messageFactory = MessageFactoryDiscovery::find();
+        $response = $messageFactory->createResponse(404, null, [], $jsonResponse);
 
         $client->addResponse($response);
 
-        $subject = new TrackingService($client, $responseFactory, new JsonSerializer(), new ResponseMapper());
+        $subject = new TrackingService(
+            $this->createPluginClient($client),
+            $messageFactory,
+            new JsonSerializer(),
+            new ResponseMapper()
+        );
 
         $result = $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
     }
@@ -53,5 +102,15 @@ class TrackingServiceTest extends TestCase
         $responseFactory = MessageFactoryDiscovery::find();
         $exception = new HttpException('Computer says no');
         $client->addException($exception);
+    }
+
+    public function successDataProvider(): array
+    {
+        return TrackResponse::getSuccessFullTrackResponses();
+    }
+
+    public function errorDataProvider(): array
+    {
+        return TrackResponse::getNotFoundTrackResponse();
     }
 }

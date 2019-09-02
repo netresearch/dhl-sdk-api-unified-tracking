@@ -11,7 +11,7 @@ class Reference
     /**
      * @var string
      */
-    private $number;
+    private $number = '';
 
     /**
      * One of:
@@ -26,7 +26,7 @@ class Reference
      *
      * @var string
      */
-    private $type;
+    private $type = '';
 
     /**
      * @return string

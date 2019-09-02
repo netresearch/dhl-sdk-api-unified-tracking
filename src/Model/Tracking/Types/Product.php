@@ -21,7 +21,7 @@ class Product
      *
      * @var string
      */
-    private $productName;
+    private $productName = '';
 
     /**
      * @return string

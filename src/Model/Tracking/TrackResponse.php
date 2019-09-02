@@ -53,12 +53,12 @@ class TrackResponse implements TrackResponseInterface
     private $statusEvents = [];
 
     /**
-     * @var PersonInterface
+     * @var PersonInterface|null
      */
     private $sender;
 
     /**
-     * @var PersonInterface
+     * @var PersonInterface|null
      */
     private $receiver;
 
@@ -70,7 +70,7 @@ class TrackResponse implements TrackResponseInterface
     /**
      * @var int
      */
-    private $numberOfPieces;
+    private $numberOfPieces = 1;
 
     /**
      * @var string[]

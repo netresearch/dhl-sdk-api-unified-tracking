@@ -11,20 +11,15 @@ class ProofOfDelivery
     /**
      * @var string
      */
-    private $timestamp;
+    private $timestamp = '';
 
     /**
      * @var string
      */
-    private $signatureUrl;
+    private $documentUrl = '';
 
     /**
-     * @var string
-     */
-    private $documentUrl;
-
-    /**
-     * @var Person
+     * @var Person|null
      */
     private $signed;
 
@@ -39,24 +34,18 @@ class ProofOfDelivery
     /**
      * @return string
      */
-    public function getSignatureUrl(): string
-    {
-        return $this->signatureUrl;
-    }
-
-    /**
-     * @return string
-     */
     public function getDocumentUrl(): string
     {
         return $this->documentUrl;
     }
 
     /**
-     * @return Person
+     * @return Person|null
      */
-    public function getSigned(): Person
+    public function getSigned()
     {
         return $this->signed;
     }
+
+
 }

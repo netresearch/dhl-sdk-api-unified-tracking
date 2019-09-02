@@ -62,7 +62,7 @@ class Shipment
      *
      * @var string
      */
-    private $estimatedTimeOfDelivery;
+    private $estimatedTimeOfDelivery = '';
 
     /**
      * @var EstimatedTimeFrame
@@ -72,7 +72,7 @@ class Shipment
     /**
      * @var string
      */
-    private $estimatedTimeOfDeliveryRemark;
+    private $estimatedTimeOfDeliveryRemark = '';
 
     /**
      * @var Details
@@ -82,7 +82,7 @@ class Shipment
     /**
      * @var ShipmentEvent[]
      */
-    private $events;
+    private $events = [];
 
     /**
      * @return string
@@ -133,9 +133,9 @@ class Shipment
     }
 
     /**
-     * @return EstimatedTimeFrame
+     * @return EstimatedTimeFrame|null
      */
-    public function getEstimatedDeliveryTimeFrame(): EstimatedTimeFrame
+    public function getEstimatedDeliveryTimeFrame()
     {
         return $this->estimatedDeliveryTimeFrame;
     }

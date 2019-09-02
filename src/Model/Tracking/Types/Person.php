@@ -19,22 +19,22 @@ class Person
     /**
      * @var string
      */
-    private $organizationName;
+    private $organizationName = '';
 
     /**
      * @var string
      */
-    private $familyName;
+    private $familyName = '';
 
     /**
      * @var string
      */
-    private $givenName;
+    private $givenName = '';
 
     /**
      * @var string
      */
-    private $name;
+    private $name = '';
 
     /**
      * @return string

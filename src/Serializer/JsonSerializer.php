@@ -34,7 +34,7 @@ class JsonSerializer
         $jsonMapper->bIgnoreVisibility = true;
         $jsonMapper->classMap = $this->classMap;
 
-        $response = json_decode($jsonResponse);
+        $response = json_decode($jsonResponse, false);
 
         return $jsonMapper->map($response, new TrackingResponseType());
     }

@@ -17,27 +17,27 @@ namespace Dhl\Sdk\Group\Tracking\Model\Tracking\Types;
 class Details
 {
     /**
-     * @var Organization
+     * @var Organization|null
      */
     private $carrier;
 
     /**
-     * @var Product
+     * @var Product|null
      */
     private $product;
 
     /**
-     * @var Person
+     * @var Person|null
      */
     private $receiver;
 
     /**
-     * @var Person
+     * @var Person|null
      */
     private $sender;
 
     /**
-     * @var ProofOfDelivery
+     * @var ProofOfDelivery|null
      */
     private $proofOfDelivery;
 
@@ -46,14 +46,14 @@ class Details
      *
      * @var int
      */
-    private $totalNumberOfPiece;
+    private $totalNumberOfPieces;
 
     /**
      * Ids of all the items or pieces in the shipment
      *
      * @var string[]
      */
-    private $pieceIds;
+    private $pieceIds = [];
 
     /**
      * @var Unit
@@ -61,69 +61,63 @@ class Details
     private $weight;
 
     /**
-     * @var Unit
+     * @var Unit|null
      */
     private $volume;
 
     /**
      * A loading meter standard unit of measurement for transport by truck
      *
-     * @var float
+     * @var float|null
      */
     private $loadingMeters;
 
     /**
-     * @var Dimension
+     * @var Dimension|null
      */
     private $dimensions;
 
     /**
-     * @var Reference
+     * @var Reference[]
      */
-    private $references;
+    private $references = [];
 
     /**
-     * @FIXME(nr) this property has a colon in its name according to spec - dunno how that should work - PSI
-     * @var array
+     * @return Organization|null
      */
-    private $dgf_routes;
-
-    /**
-     * @return Organization
-     */
-    public function getCarrier(): Organization
+    public function getCarrier()
     {
         return $this->carrier;
     }
 
     /**
-     * @return Product
+     * @return Product|null
      */
-    public function getProduct(): Product
+    public function getProduct()
     {
         return $this->product;
     }
 
     /**
-     * @return Person
+     * @return Person|null
      */
-    public function getReceiver(): Person
+    public function getReceiver()
     {
         return $this->receiver;
     }
 
     /**
-     * @return Person
+     * @return Person|null
      */
-    public function getSender(): Person
+    public function getSender()
     {
         return $this->sender;
     }
 
     /**
-     * @return ProofOfDelivery
+     * @return ProofOfDelivery|null
      */
-    public function getProofOfDelivery(): ProofOfDelivery
+    public function getProofOfDelivery()
     {
         return $this->proofOfDelivery;
     }
@@ -131,9 +125,9 @@ class Details
     /**
      * @return int
      */
-    public function getTotalNumberOfPiece(): int
+    public function getTotalNumberOfPieces(): int
     {
-        return $this->totalNumberOfPiece;
+        return $this->totalNumberOfPieces;
     }
 
     /**
@@ -153,42 +147,34 @@ class Details
     }
 
     /**
-     * @return Unit
+     * @return Unit|null
      */
-    public function getVolume(): Unit
+    public function getVolume()
     {
         return $this->volume;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getLoadingMeters(): float
+    public function getLoadingMeters()
     {
         return $this->loadingMeters;
     }
 
     /**
-     * @return Dimension
+     * @return Dimension|null
      */
-    public function getDimensions(): Dimension
+    public function getDimensions()
     {
         return $this->dimensions;
     }
 
     /**
-     * @return Reference
+     * @return Reference[]
      */
-    public function getReferences(): Reference
+    public function getReferences(): array
     {
         return $this->references;
-    }
-
-    /**
-     * @return array
-     */
-    public function getDgfRoutes(): array
-    {
-        return $this->dgf_routes;
     }
 }

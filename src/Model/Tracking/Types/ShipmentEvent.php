@@ -21,10 +21,10 @@ class ShipmentEvent
      *
      * @var string
      */
-    private $timestamp;
+    private $timestamp = '';
 
     /**
-     * @var Place
+     * @var Place|null
      */
     private $location;
 
@@ -38,35 +38,35 @@ class ShipmentEvent
      *
      * @var string
      */
-    private $statusCode;
+    private $statusCode = '';
 
     /**
      * Short description of the status - title
      *
      * @var string
      */
-    private $status;
+    private $status = '';
 
     /**
      * Detailed description of the event
      *
      * @var string
      */
-    private $description;
+    private $description = '';
 
     /**
      * Remark regarding the shipment status
      *
      * @var string
      */
-    private $remark;
+    private $remark = '';
 
     /**
      * Description of the next steps
      *
      * @var string
      */
-    private $nextSteps;
+    private $nextSteps = '';
 
     /**
      * @return string
@@ -77,9 +77,9 @@ class ShipmentEvent
     }
 
     /**
-     * @return Place
+     * @return Place|null
      */
-    public function getLocation(): Place
+    public function getLocation()
     {
         return $this->location;
     }

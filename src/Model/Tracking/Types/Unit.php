@@ -16,7 +16,7 @@ class Unit
     /**
      * @var string
      */
-    private $unitText;
+    private $unitText = '';
 
     /**
      * @return float

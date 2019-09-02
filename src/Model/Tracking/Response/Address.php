@@ -39,7 +39,7 @@ class Address implements AddressInterface
      * @param string $streetAddress
      */
     public function __construct(
-        string $countryCode,
+        string $countryCode = '',
         string $postalCode = '',
         string $addressLocality = '',
         string $streetAddress = ''

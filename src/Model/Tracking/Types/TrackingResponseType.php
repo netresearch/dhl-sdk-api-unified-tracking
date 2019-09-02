@@ -13,14 +13,14 @@ class TrackingResponseType
      *
      * @var Shipment[]
      */
-    private $shipments;
+    private $shipments = [];
 
     /**
      * Array of URLs to potentially additional matching shipments in the other services.
      *
      * @var string[]
      */
-    private $possibleAdditionalShipmentsUrl;
+    private $possibleAdditionalShipmentsUrl = [];
 
     /**
      * @return Shipment[]

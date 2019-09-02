@@ -13,7 +13,7 @@ class Organization
      *
      * @var string
      */
-    private $organizationName;
+    private $organizationName = '';
 
     /**
      * @return string

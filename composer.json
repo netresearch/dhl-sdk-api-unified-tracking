@@ -42,5 +42,10 @@
     "php-http/mock-client": "^1.0.0",
     "phpstan/phpstan": "^0.11.5",
     "symfony/finder": "^4.3"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
   }
 }
