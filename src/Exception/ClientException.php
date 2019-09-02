@@ -22,7 +22,7 @@ class ClientException extends ServiceException
      * @param \Exception $exception
      * @return ClientException
      */
-    public static function create(\Exception $exception)
+    public static function create(\Exception $exception): ClientException
     {
         return new static($exception->getMessage(), $exception->getCode(), $exception);
     }
