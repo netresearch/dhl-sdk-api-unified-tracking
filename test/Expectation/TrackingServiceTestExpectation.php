@@ -78,6 +78,7 @@ class TrackingServiceTestExpectation
         foreach ($response->shipments as $shipment) {
             $resultInstance = $result[(string) $shipment->id];
             Assert::assertEquals($shipment->status->statusCode, $resultInstance->getLatestStatus()->getStatusCode());
+            Assert::assertEquals($shipment->service, $resultInstance->getService());
             Assert::assertCount(count($shipment->events), $resultInstance->getStatusEvents());
             if (isset($shipment->details->weight)) {
                 Assert::assertEquals(
