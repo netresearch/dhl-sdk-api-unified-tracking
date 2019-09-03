@@ -40,7 +40,7 @@ interface TrackingServiceInterface
      * @param string $language ISO 639-1 2-character language code for the response.
      * This parameter serves as an indication of the client preferences ONLY. Language availability depends on the
      *     service used. The actual response language is indicated by the Content-Language header.
-     * @return TrackResponseInterface
+     * @return TrackResponseInterface[]
      */
     public function retrieveTrackingInformation(
         string $trackingNumber,
@@ -49,5 +49,5 @@ interface TrackingServiceInterface
         string $originCountryCode = null,
         string $recipientPostalCode = null,
         string $language = 'en'
-    ): TrackResponseInterface;
+    ): array;
 }

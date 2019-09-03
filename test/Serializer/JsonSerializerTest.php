@@ -22,7 +22,7 @@ class JsonSerializerTest extends TestCase
         $subject = new JsonSerializer();
         $responseObject = $subject->decode($jsonResponse);
 
-        $this->assertCount(1, $responseObject->getShipments());
+        $this->assertCount(count($data['shipments']), $responseObject->getShipments());
 
         $shipment = $responseObject->getShipments()[0];
         $this->assertEquals($data["shipments"][0]['id'], $shipment->getId());

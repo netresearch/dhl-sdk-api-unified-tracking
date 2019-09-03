@@ -26,44 +26,56 @@ use Dhl\Sdk\GroupTracking\Model\Tracking\Types\TrackingResponseType;
 
 class ResponseMapper
 {
-    public function map(TrackingResponseType $response): TrackResponseInterface
+    /**
+     * @param TrackingResponseType $response
+     * @return TrackResponseInterface[]
+     * @throws \Exception
+     */
+    public function map(TrackingResponseType $response): array
     {
+        $results = [];
         /** @var Shipment $shipment */
-        $shipment = current($response->getShipments());
+        foreach ($response->getShipments() as $shipment) {
+            $shipmentDetails = $shipment->getDetails();
+            $proofOfDelivery = $shipmentDetails->getProofOfDelivery() !== null ? $this->convertProofOfDelivery(
+                $shipmentDetails->getProofOfDelivery()
+            ) : null;
 
-        $shipmentDetails = $shipment->getDetails();
-        $proofOfDelivery = $shipmentDetails->getProofOfDelivery() !== null ? $this->convertProofOfDelivery(
-            $shipmentDetails->getProofOfDelivery()
-        ) : null;
+            $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
+            $shipmentReferences = array_map(
+                function (Reference $reference) {
+                    return new ShipmentReference(
+                        $reference->getType(),
+                        $reference->getNumber()
+                    );
+                },
+                $shipmentDetails->getReferences()
+            );
+            $physicalAttributes = null;
+            if ($shipment->getDetails()->getWeight() !== null || $shipment->getDetails()->getDimensions() !== null) {
+                $physicalAttributes = $this->createPhysicalAttributes($shipmentDetails);
+            }
+            $trackingId = $shipment->getId();
+            $results[$trackingId] = new TrackResponse(
+                $trackingId,
+                $shipment->getService(),
+                $this->convertEvent($shipment->getStatus()),
+                $shipmentDetails->getTotalNumberOfPieces(),
+                $physicalAttributes,
+                $shipment->getDestination() !== null ? $this->convertAddress($shipment->getDestination()) : null,
+                $shipment->getOrigin() !== null ? $this->convertAddress($shipment->getOrigin()) : null,
+                $shipmentDetails->getProduct() !== null ? $shipmentDetails->getProduct()->getProductName() : '',
+                empty($shipment->getEstimatedTimeOfDelivery()) ? $this->extractEstimatedDelivery($shipment) : null,
+                $shipmentDetails->getSender() !== null ? $this->convertPerson($shipmentDetails->getSender()) : null,
+                $shipmentDetails->getReceiver() !== null ? $this->convertPerson($shipmentDetails->getReceiver()) : null,
+                $proofOfDelivery,
+                $shipmentEvents,
+                $shipmentDetails->getPieceIds(),
+                $shipmentReferences
+            );
+        }
 
-        $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
-        $shipmentReferences = array_map(
-            function (Reference $reference) {
-                return new ShipmentReference(
-                    $reference->getType(),
-                    $reference->getNumber()
-                );
-            },
-            $shipmentDetails->getReferences()
-        );
-
-        return new TrackResponse(
-            $shipment->getId(),
-            $shipment->getService(),
-            $this->convertAddress($shipment->getOrigin()),
-            $this->convertAddress($shipment->getDestination()),
-            $this->convertEvent($shipment->getStatus()),
-            $shipmentDetails->getTotalNumberOfPieces(),
-            $this->createPhysicalAttributes($shipmentDetails),
-            $shipmentDetails->getProduct() !== null ? $shipmentDetails->getProduct()->getProductName() : '',
-            empty($shipment->getEstimatedTimeOfDelivery()) ? $this->extractEstimatedDelivery($shipment) : null,
-            $shipmentDetails->getSender() !== null ? $this->convertPerson($shipmentDetails->getSender()) : null,
-            $shipmentDetails->getReceiver() !== null ? $this->convertPerson($shipmentDetails->getReceiver()) : null,
-            $proofOfDelivery,
-            $shipmentEvents,
-            $shipmentDetails->getPieceIds(),
-            $shipmentReferences
-        );
+        return $results;
     }
 
     /**
@@ -71,8 +83,9 @@ class ResponseMapper
      * @return ProofOfDelivery
      * @throws \Exception
      */
-    private function convertProofOfDelivery(Tracking\Types\ProofOfDelivery $proofOfDelivery): ProofOfDelivery
-    {
+    private function convertProofOfDelivery(
+        Tracking\Types\ProofOfDelivery $proofOfDelivery
+    ): ProofOfDelivery {
         return new ProofOfDelivery(
             new \DateTime($proofOfDelivery->getTimestamp()),
             $proofOfDelivery->getDocumentUrl(),
@@ -80,8 +93,9 @@ class ResponseMapper
         );
     }
 
-    private function convertPerson(ApiPerson $person): Person
-    {
+    private function convertPerson(
+        ApiPerson $person
+    ): Person {
         return new Person(
             $person->getOrganizationName(),
             $person->getFamilyName(),
@@ -91,16 +105,38 @@ class ResponseMapper
     }
 
     /**
-     * @param Place $place
-     * @return Address
+     * @param Details $details
+     * @return PhysicalAttributes
      */
-    private function convertAddress(Place $place): Address
-    {
-        return new Address(
-            $place->getAddress()->getCountryCode(),
-            $place->getAddress()->getPostalCode(),
-            $place->getAddress()->getAddressLocality(),
-            $place->getAddress()->getStreetAddress()
+    private function createPhysicalAttributes(
+        Details $details
+    ): PhysicalAttributes {
+        $dimensionUnit = '';
+        $width = null;
+        $height = null;
+        $length = null;
+        $weight = null;
+        $weightUom = '';
+        if ($details->getDimensions() !== null) {
+            $dimensionUnit = $details->getDimensions()->getHeight()->getUnitText();
+            $width = $details->getDimensions()->getWidth()->getValue();
+            $height = $details->getDimensions()->getHeight()->getValue();
+            $length = $details->getDimensions()->getLength()->getValue();
+        }
+
+        if ($details->getWeight() !== null) {
+            $weight = $details->getWeight()->getValue();
+            $weightUom = $details->getWeight()->getUnitText();
+        }
+
+        return new PhysicalAttributes(
+            $weight,
+            $weightUom,
+            $dimensionUnit,
+            $width,
+            $height,
+            $length,
+            $details->getLoadingMeters()
         );
     }
 
@@ -109,8 +145,9 @@ class ResponseMapper
      * @return ShipmentEvent
      * @throws \Exception
      */
-    private function convertEvent(ApiShipmentEvent $event): ShipmentEvent
-    {
+    private function convertEvent(
+        ApiShipmentEvent $event
+    ): ShipmentEvent {
         $location = $event->getLocation() !== null ? $this->convertAddress($event->getLocation()) : null;
 
         return new ShipmentEvent(
@@ -125,36 +162,23 @@ class ResponseMapper
     }
 
     /**
-     * @param Details $details
-     * @return PhysicalAttributes
+     * @param Place $place
+     * @return Address
      */
-    private function createPhysicalAttributes(Details $details): PhysicalAttributes
-    {
-        if ($details->getDimensions() === null) {
-            $dimensionUnit = '';
-            $width = null;
-            $height = null;
-            $length = null;
-        } else {
-            $dimensionUnit = $details->getDimensions()->getHeight()->getUnitText();
-            $width = $details->getDimensions()->getWidth()->getValue();
-            $height = $details->getDimensions()->getHeight()->getValue();
-            $length = $details->getDimensions()->getLength()->getValue();
-        }
-
-        return new PhysicalAttributes(
-            $details->getWeight()->getValue(),
-            $details->getWeight()->getUnitText(),
-            $dimensionUnit,
-            $width,
-            $height,
-            $length,
-            $details->getLoadingMeters()
+    private function convertAddress(
+        Place $place
+    ): Address {
+        return new Address(
+            $place->getAddress()->getCountryCode(),
+            $place->getAddress()->getPostalCode(),
+            $place->getAddress()->getAddressLocality(),
+            $place->getAddress()->getStreetAddress()
         );
     }
 
-    private function extractEstimatedDelivery(Shipment $shipment): EstimatedDelivery
-    {
+    private function extractEstimatedDelivery(
+        Shipment $shipment
+    ): EstimatedDelivery {
         $timeFrame = $shipment->getEstimatedDeliveryTimeFrame() !== null ? new DeliveryTimeFrame(
             new \DateTime($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedFrom()),
             new \DateTime($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedThrough())

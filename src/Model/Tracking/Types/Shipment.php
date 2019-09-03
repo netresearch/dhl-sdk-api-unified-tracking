@@ -41,14 +41,14 @@ class Shipment
     /**
      * Shipment origin
      *
-     * @var Place
+     * @var Place|null
      */
     private $origin;
 
     /**
      * Shipment destination
      *
-     * @var Place
+     * @var Place|null
      */
     private $destination;
 
@@ -101,17 +101,17 @@ class Shipment
     }
 
     /**
-     * @return Place
+     * @return Place|null
      */
-    public function getOrigin(): Place
+    public function getOrigin()
     {
         return $this->origin;
     }
 
     /**
-     * @return Place
+     * @return Place|null
      */
-    public function getDestination(): Place
+    public function getDestination()
     {
         return $this->destination;
     }

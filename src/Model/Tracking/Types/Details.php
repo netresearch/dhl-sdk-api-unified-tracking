@@ -139,9 +139,9 @@ class Details
     }
 
     /**
-     * @return Unit
+     * @return Unit|null
      */
-    public function getWeight(): Unit
+    public function getWeight()
     {
         return $this->weight;
     }

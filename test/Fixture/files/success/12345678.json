@@ -1,0 +1,100 @@
+{
+  "shipments": [
+    {
+      "id": "12345678",
+      "service": "dgf",
+      "origin": {
+        "address": {
+          "countryCode": "MY",
+          "addressLocality": "JOHOR BAHRU"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "NZ",
+          "addressLocality": "AUCKLAND"
+        }
+      },
+      "status": {
+        "timestamp": "2019-03-12T00:00:00",
+        "statusCode": "delivered",
+        "description": "Document Handover (if no POD)"
+      },
+      "details": {
+        "carrier": {
+          "@type": "Organization",
+          "organizationName": "OCEAN"
+        },
+        "product": {
+          "productName": "Full Container Load"
+        },
+        "totalNumberOfPieces": 448,
+        "weight": {
+          "value": 2732.8,
+          "unitText": "KGM"
+        },
+        "volume": {
+          "value": 20.608,
+          "unitText": "MTQ"
+        },
+        "references": [
+          {
+            "number": "12345678",
+            "type": "housebill"
+          }
+        ],
+        "dgf:routes": [
+          {
+            "dgf:voyageFlightNumber": "902S",
+            "dgf:placeOfAcceptance": {
+              "dgf:locationName": "Johor Bahru"
+            },
+            "dgf:portOfLoading": {
+              "dgf:locationName": "TANJUNG PELEPAS"
+            },
+            "dgf:portOfUnloading": {
+              "dgf:locationName": "TAURANGA"
+            },
+            "dgf:placeOfDelivery": {
+              "dgf:locationName": "Auckland"
+            }
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-03-12T00:00:00",
+          "statusCode": "delivered",
+          "description": "Document Handover (if no POD)"
+        },
+        {
+          "timestamp": "2019-02-14T13:05:00",
+          "statusCode": "pre-transit",
+          "description": "Shipment Entered into System"
+        },
+        {
+          "timestamp": "2019-01-28T23:16:00",
+          "description": "Gated out at Port/Terminal"
+        },
+        {
+          "timestamp": "2019-01-28T02:23:00",
+          "description": "Actual Vessel Arrival"
+        },
+        {
+          "timestamp": "2018-12-20T17:03:00",
+          "statusCode": "pre-transit",
+          "description": "Customer Booking Received"
+        }
+      ]
+    }
+  ],
+  "possibleAdditionalShipmentsUrl": [
+    "/track/shipments?trackingNumber=12345678&requesterCountryCode=US&originCountryCode=US&language=en&service=express",
+    "/track/shipments?trackingNumber=12345678&requesterCountryCode=US&originCountryCode=US&language=en&service=parcel-de",
+    "/track/shipments?trackingNumber=12345678&requesterCountryCode=US&originCountryCode=US&language=en&service=ecommerce",
+    "/track/shipments?trackingNumber=12345678&requesterCountryCode=US&originCountryCode=US&language=en&service=freight",
+    "/track/shipments?trackingNumber=12345678&requesterCountryCode=US&originCountryCode=US&language=en&service=parcel-nl",
+    "/track/shipments?trackingNumber=12345678&requesterCountryCode=US&originCountryCode=US&language=en&service=parcel-pl",
+    "/track/shipments?trackingNumber=12345678&requesterCountryCode=US&originCountryCode=US&language=en&service=dsc"
+  ]
+}

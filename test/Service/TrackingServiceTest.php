@@ -47,7 +47,7 @@ class TrackingServiceTest extends TestCase
             ]
         );
         $logger = new TestLogger();
-        $loggerPlugin = new LoggerPlugin($logger);
+        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
         $clientFactory = new PluginClientFactory();
 
         $subject = new TrackingService(
@@ -60,12 +60,11 @@ class TrackingServiceTest extends TestCase
             new ResponseMapper()
         );
 
-        $data = json_decode($jsonResponse, true)['shipments'][0];
-
-        /** @var TrackResponseInterface $result */
+        /** @var TrackResponseInterface[] $result */
         $result = $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
 
-        $this->assertSame((string) $data['id'], $result->getId());
+        TrackingServiceTestExpectation::assertCommunicationLogged($jsonResponse, $client->getLastRequest(), $logger);
+        TrackingServiceTestExpectation::assertResultCountMatches($jsonResponse, $result);
     }
 
     /**
@@ -97,7 +96,7 @@ class TrackingServiceTest extends TestCase
             ]
         );
         $logger = new TestLogger();
-        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter());
+        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
         $clientFactory = new PluginClientFactory();
 
         $subject = new TrackingService(

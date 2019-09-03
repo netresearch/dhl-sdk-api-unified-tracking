@@ -67,7 +67,7 @@ class TrackingService implements TrackingServiceInterface
      * @param string|null $originCountryCode
      * @param string|null $recipientPostalCode
      * @param string $language
-     * @return TrackResponseInterface
+     * @return TrackResponseInterface[]
      * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws ServiceException
      */
@@ -78,7 +78,7 @@ class TrackingService implements TrackingServiceInterface
         string $originCountryCode = null,
         string $recipientPostalCode = null,
         string $language = 'en'
-    ): TrackResponseInterface {
+    ): array {
 
         $requestParams = array_filter(
             [

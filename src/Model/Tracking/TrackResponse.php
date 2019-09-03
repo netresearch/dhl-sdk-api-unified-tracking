@@ -33,7 +33,7 @@ class TrackResponse implements TrackResponseInterface
     private $estimatedDeliveryTime;
 
     /**
-     * @var AddressInterface
+     * @var AddressInterface|null
      */
     private $originAddress;
 
@@ -83,7 +83,7 @@ class TrackResponse implements TrackResponseInterface
     private $proofOfDelivery;
 
     /**
-     * @var PhysicalAttributesInterface
+     * @var PhysicalAttributesInterface|null
      */
     private $physicalAttributes;
 
@@ -114,11 +114,11 @@ class TrackResponse implements TrackResponseInterface
     public function __construct(
         string $trackingId,
         string $service,
-        AddressInterface $originAddress,
-        AddressInterface $destinationAddress,
         ShipmentEventInterface $latestStatus,
         int $numberOfPieces,
-        PhysicalAttributesInterface $physicalAttributes,
+        PhysicalAttributesInterface $physicalAttributes = null,
+        AddressInterface $destinationAddress = null,
+        AddressInterface $originAddress = null,
         string $shippingProduct = '',
         EstimatedDeliveryInterface $estimatedDeliveryTime = null,
         PersonInterface $sender = null,
@@ -210,7 +210,7 @@ class TrackResponse implements TrackResponseInterface
         return $this->proofOfDelivery;
     }
 
-    public function getPhysicalAttributes(): PhysicalAttributesInterface
+    public function getPhysicalAttributes()
     {
         return $this->physicalAttributes;
     }

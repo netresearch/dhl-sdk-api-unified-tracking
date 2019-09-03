@@ -111,9 +111,9 @@ interface TrackResponseInterface
     /**
      * Accessor for attributes such as weight or package dimensions
      *
-     * @return PhysicalAttributesInterface
+     * @return PhysicalAttributesInterface|null
      */
-    public function getPhysicalAttributes(): PhysicalAttributesInterface;
+    public function getPhysicalAttributes();
 
     /**
      * List of reference numbers to the shipment
