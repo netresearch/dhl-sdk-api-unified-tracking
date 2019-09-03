@@ -1,0 +1,256 @@
+{
+  "shipments": [
+    {
+      "id": "JVGL06048524783718330083",
+      "service": "parcel-nl",
+      "status": {
+        "timestamp": "2019-06-03T10:24:00+02:00",
+        "location": {
+          "address": {
+            "addressLocality": "AMM"
+          }
+        },
+        "statusCode": "transit",
+        "status": "DELIVERED_AT_SHIPPER"
+      },
+      "estimatedDeliveryTimeFrame": {
+        "estimatedFrom": "2019-05-20T06:00:00",
+        "estimatedThrough": "2019-05-20T16:00:00"
+      },
+      "events": [
+        {
+          "timestamp": "2019-06-03T10:24:00+02:00",
+          "location": {
+            "address": {
+              "addressLocality": "AMM"
+            }
+          },
+          "statusCode": "transit",
+          "status": "DELIVERED_AT_SHIPPER"
+        },
+        {
+          "timestamp": "2019-06-03T08:26:00+02:00",
+          "location": {
+            "address": {
+              "addressLocality": "AMM"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ON_ROUTE_TO_SHIPPER"
+        },
+        {
+          "timestamp": "2019-05-31T08:42:00+02:00",
+          "location": {
+            "address": {
+              "addressLocality": "AMM"
+            }
+          },
+          "statusCode": "failure",
+          "status": "RETURNED_TO_SHIPPER",
+          "description": "JVGL06048524927870655",
+          "remark": "JVGL06048524927870655"
+        },
+        {
+          "timestamp": "2019-05-29T17:24:44+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_READY_FOR_RETURN_TO_HUB"
+        },
+        {
+          "timestamp": "2019-05-29T17:19:15+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_RETURNED_FROM_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-29T17:19:15+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_COLLECTED_AT_PARCELSHOP_BY_COURIER"
+        },
+        {
+          "timestamp": "2019-05-29T16:27:41+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_PICKED_UP_AT_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-05-29T00:00:30+02:00",
+          "statusCode": "failure",
+          "status": "STORAGE_PERIOD_ENDED_AT_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-05-21T11:51:50+02:00",
+          "statusCode": "transit",
+          "status": "NOTIFICATION_FOR_PARCELSHOP_COLLECTION_HAS_BEEN_SENT"
+        },
+        {
+          "timestamp": "2019-05-21T11:06:10+02:00",
+          "statusCode": "transit",
+          "status": "SIGNATURE_RECORDED"
+        },
+        {
+          "timestamp": "2019-05-21T11:06:10+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERED_AT_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-05-21T09:57:20+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_HANDED_OVER_TO_COURIER"
+        },
+        {
+          "timestamp": "2019-05-21T09:57:20+02:00",
+          "statusCode": "transit",
+          "status": "OUT_FOR_DELIVERY"
+        },
+        {
+          "timestamp": "2019-05-21T09:52:32+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_SCANNED_INTO_HAND-TERMINAL"
+        },
+        {
+          "timestamp": "2019-05-21T07:09:52+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_ARRIVED_AT_LOCAL_DEPOT"
+        },
+        {
+          "timestamp": "2019-05-21T03:43:52+02:00",
+          "statusCode": "transit",
+          "status": "NEW_DELIVERY_ATTEMPT"
+        },
+        {
+          "timestamp": "2019-05-21T03:43:52+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-21T03:42:23+02:00",
+          "statusCode": "unknown",
+          "status": "INTERVENTION_PROCESSED_FOR_COLLECTION_AT_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-05-20T18:56:43+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_RETURNED_FROM_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-20T18:55:24+02:00",
+          "statusCode": "unknown",
+          "status": "INTERVENTION_DELIVERY_ADDRESS_CHANGED_INTO_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-05-20T18:55:24+02:00",
+          "statusCode": "unknown",
+          "status": "INTERVENTION_PROCESSED_FOR_COLLECTION_AT_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-05-20T17:48:41+02:00",
+          "statusCode": "failure",
+          "status": "NOT_HOME_SYSTEM_INTERVENTION_DELIVERY_AT_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-05-20T17:48:40+02:00",
+          "statusCode": "failure",
+          "status": "NOT_HOME"
+        },
+        {
+          "timestamp": "2019-05-20T16:27:27+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_HANDED_OVER_TO_COURIER"
+        },
+        {
+          "timestamp": "2019-05-20T16:27:27+02:00",
+          "statusCode": "transit",
+          "status": "OUT_FOR_DELIVERY"
+        },
+        {
+          "timestamp": "2019-05-20T16:24:26+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_SCANNED_INTO_HAND-TERMINAL"
+        },
+        {
+          "timestamp": "2019-05-20T14:11:17+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-20T09:44:00+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-20T03:31:47+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-18T10:41:33+02:00",
+          "statusCode": "transit",
+          "status": "INFORMATION_ON_DELIVERY_TRANSMITTED"
+        },
+        {
+          "timestamp": "2019-05-18T10:41:33+02:00",
+          "statusCode": "unknown",
+          "status": "DELIVERY_DATE_CHANGED_BY_DEPOT_MANAGER_REASON_CLOSED"
+        },
+        {
+          "timestamp": "2019-05-18T09:54:39+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-18T09:06:37+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_SCANNED_INTO_HAND-TERMINAL"
+        },
+        {
+          "timestamp": "2019-05-18T07:14:49+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_ARRIVED_AT_LOCAL_DEPOT"
+        },
+        {
+          "timestamp": "2019-05-18T06:35:23+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-18T06:35:08+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-18T03:40:33+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-05-17T18:52:08+02:00",
+          "statusCode": "transit",
+          "status": "INFORMATION_ON_DELIVERY_TRANSMITTED"
+        },
+        {
+          "timestamp": "2019-05-17T18:45:00+02:00",
+          "location": {
+            "address": {
+              "addressLocality": "AMM"
+            }
+          },
+          "statusCode": "transit",
+          "status": "DEPART_FACILITY"
+        },
+        {
+          "timestamp": "2019-05-17T18:45:00+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_SORTED_AT_HUB"
+        },
+        {
+          "timestamp": "2019-05-16T10:15:09+02:00",
+          "statusCode": "pre-transit",
+          "status": "DATA_RECEIVED_WITH_PREFIX_LABEL"
+        },
+        {
+          "timestamp": "2019-05-16T10:14:23.412+02:00",
+          "statusCode": "pre-transit",
+          "status": "PRENOTIFICATION_RECEIVED"
+        }
+      ]
+    }
+  ]
+}

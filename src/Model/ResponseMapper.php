@@ -37,40 +37,62 @@ class ResponseMapper
         /** @var Shipment $shipment */
         foreach ($response->getShipments() as $shipment) {
             $shipmentDetails = $shipment->getDetails();
-            $proofOfDelivery = $shipmentDetails->getProofOfDelivery() !== null ? $this->convertProofOfDelivery(
-                $shipmentDetails->getProofOfDelivery()
-            ) : null;
-
-            $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
-            $shipmentReferences = array_map(
-                function (Reference $reference) {
-                    return new ShipmentReference(
-                        $reference->getType(),
-                        $reference->getNumber()
-                    );
-                },
-                $shipmentDetails->getReferences()
-            );
+            $proofOfDelivery = null;
             $physicalAttributes = null;
-            if ($shipment->getDetails()->getWeight() !== null || $shipment->getDetails()->getDimensions() !== null) {
-                $physicalAttributes = $this->createPhysicalAttributes($shipmentDetails);
+            $shipmentReferences = [];
+            $numberOfPieces = 1;
+            $shippingProduct = '';
+            $pieceIds = [];
+            $sender = null;
+            $receiver = null;
+            if ($shipmentDetails !== null) {
+                $proofOfDelivery = $shipmentDetails->getProofOfDelivery() !== null ? $this->convertProofOfDelivery(
+                    $shipmentDetails->getProofOfDelivery()
+                ) : null;
+                if ($shipmentDetails->getWeight() !== null || $shipmentDetails->getDimensions() !== null) {
+                    $physicalAttributes = $this->createPhysicalAttributes($shipmentDetails);
+                }
+                if ($shipmentDetails->getTotalNumberOfPieces() !== null) {
+                    $numberOfPieces = $shipmentDetails->getTotalNumberOfPieces();
+                }
+                if ($shipmentDetails->getProduct() !== null) {
+                    $shippingProduct = $shipmentDetails->getProduct()->getProductName();
+                }
+                $pieceIds = $shipmentDetails->getPieceIds();
+                $shipmentReferences = array_map(
+                    function (Reference $reference) {
+                        return new ShipmentReference(
+                            $reference->getType(),
+                            $reference->getNumber()
+                        );
+                    },
+                    $shipmentDetails->getReferences()
+                );
+                if ($shipmentDetails->getSender() !== null) {
+                    $sender = $this->convertPerson($shipmentDetails->getSender());
+                }
+                if ($shipmentDetails->getReceiver() !== null) {
+                    $receiver = $this->convertPerson($shipmentDetails->getReceiver());
+                }
             }
+            $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
+
             $trackingId = $shipment->getId();
             $results[$trackingId] = new TrackResponse(
                 $trackingId,
                 $shipment->getService(),
                 $this->convertEvent($shipment->getStatus()),
-                $shipmentDetails->getTotalNumberOfPieces(),
+                $numberOfPieces,
                 $physicalAttributes,
                 $shipment->getDestination() !== null ? $this->convertAddress($shipment->getDestination()) : null,
                 $shipment->getOrigin() !== null ? $this->convertAddress($shipment->getOrigin()) : null,
-                $shipmentDetails->getProduct() !== null ? $shipmentDetails->getProduct()->getProductName() : '',
+                $shippingProduct,
                 !empty($shipment->getEstimatedTimeOfDelivery()) ? $this->extractEstimatedDelivery($shipment) : null,
-                $shipmentDetails->getSender() !== null ? $this->convertPerson($shipmentDetails->getSender()) : null,
-                $shipmentDetails->getReceiver() !== null ? $this->convertPerson($shipmentDetails->getReceiver()) : null,
+                $sender,
+                $receiver,
                 $proofOfDelivery,
                 $shipmentEvents,
-                $shipmentDetails->getPieceIds(),
+                $pieceIds,
                 $shipmentReferences
             );
         }

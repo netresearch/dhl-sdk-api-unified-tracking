@@ -44,7 +44,7 @@ class Details
     /**
      * Total number of items or pieces in the shipment
      *
-     * @var int
+     * @var int|null
      */
     private $totalNumberOfPieces;
 
@@ -123,9 +123,9 @@ class Details
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTotalNumberOfPieces(): int
+    public function getTotalNumberOfPieces()
     {
         return $this->totalNumberOfPieces;
     }

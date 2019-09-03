@@ -75,7 +75,7 @@ class Shipment
     private $estimatedTimeOfDeliveryRemark = '';
 
     /**
-     * @var Details
+     * @var Details|null
      */
     private $details;
 
@@ -149,9 +149,9 @@ class Shipment
     }
 
     /**
-     * @return Details
+     * @return Details|null
      */
-    public function getDetails(): Details
+    public function getDetails()
     {
         return $this->details;
     }

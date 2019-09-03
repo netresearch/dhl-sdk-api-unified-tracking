@@ -1,0 +1,71 @@
+{
+  "shipments": [
+    {
+      "id": "3SHM00001165430",
+      "service": "parcel-nl",
+      "status": {
+        "timestamp": "2019-09-03T11:33:05+02:00",
+        "statusCode": "transit",
+        "status": "NOT_HOME_SYSTEM_INTERVENTION_DELIVERY_AT_PARCELSHOP"
+      },
+      "details": {
+        "carrier": {
+          "@type": "Organization",
+          "organizationName": "ECOMMERCE"
+        }
+      },
+      "events": [
+        {
+          "timestamp": "2019-09-03T11:33:05+02:00",
+          "statusCode": "failure",
+          "status": "NOT_HOME_SYSTEM_INTERVENTION_DELIVERY_AT_PARCELSHOP"
+        },
+        {
+          "timestamp": "2019-09-03T11:33:04+02:00",
+          "statusCode": "failure",
+          "status": "NOT_HOME"
+        },
+        {
+          "timestamp": "2019-09-03T10:06:19+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_HANDED_OVER_TO_COURIER"
+        },
+        {
+          "timestamp": "2019-09-03T10:06:19+02:00",
+          "statusCode": "transit",
+          "status": "OUT_FOR_DELIVERY"
+        },
+        {
+          "timestamp": "2019-09-03T09:58:20+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_SCANNED_INTO_HAND-TERMINAL"
+        },
+        {
+          "timestamp": "2019-09-03T07:35:35+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_ARRIVED_AT_LOCAL_DEPOT"
+        },
+        {
+          "timestamp": "2019-09-03T03:25:18+02:00",
+          "statusCode": "transit",
+          "status": "DELIVERY_PLANNED_IN_ROUTE"
+        },
+        {
+          "timestamp": "2019-09-02T22:43:59+02:00",
+          "statusCode": "transit",
+          "status": "INFORMATION_ON_DELIVERY_TRANSMITTED"
+        },
+        {
+          "timestamp": "2019-09-02T22:39:56+02:00",
+          "statusCode": "transit",
+          "status": "PARCEL_SORTED_AT_HUB"
+        },
+        {
+          "timestamp": "2019-09-02T20:57:16+02:00",
+          "statusCode": "pre-transit",
+          "status": "PRENOTIFICATION_RECEIVED"
+        }
+      ]
+    }
+  ]
+}

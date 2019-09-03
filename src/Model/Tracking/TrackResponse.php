@@ -115,7 +115,7 @@ class TrackResponse implements TrackResponseInterface
         string $trackingId,
         string $service,
         ShipmentEventInterface $latestStatus,
-        int $numberOfPieces,
+        int $numberOfPieces = 1,
         PhysicalAttributesInterface $physicalAttributes = null,
         AddressInterface $destinationAddress = null,
         AddressInterface $originAddress = null,

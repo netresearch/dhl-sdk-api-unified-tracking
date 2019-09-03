@@ -1,0 +1,5 @@
+{
+  "title": "Invalid input",
+  "status": 400,
+  "detail": "Input is invalid: Provided language code 'en_de' isn't valid according to 'ISO 639-1 alpha-2'"
+}

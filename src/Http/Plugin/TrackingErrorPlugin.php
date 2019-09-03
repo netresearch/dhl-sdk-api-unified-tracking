@@ -49,8 +49,11 @@ final class TrackingErrorPlugin implements Plugin
                 $responseData = \json_decode($responseJson, true);
                 if ($statusCode === 400) {
                     // throw bad request error
-                    $message = $responseData['type'] ?? $responseData['title'];
-                    throw new ClientErrorException($message, $request, $response);
+                    throw new ClientErrorException(
+                        $this->formatErrorMessage($statusCode, $responseData),
+                        $request,
+                        $response
+                    );
                 }
 
                 if ($statusCode === 401) {
