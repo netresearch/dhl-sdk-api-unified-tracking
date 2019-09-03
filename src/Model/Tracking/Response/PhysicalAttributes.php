@@ -11,7 +11,7 @@ use Dhl\Sdk\GroupTracking\Api\Data\PhysicalAttributesInterface;
 class PhysicalAttributes implements PhysicalAttributesInterface
 {
     /**
-     * @var float
+     * @var float|null
      */
     private $weight;
 
@@ -48,7 +48,7 @@ class PhysicalAttributes implements PhysicalAttributesInterface
     /**
      * PhysicalAttributes constructor.
      *
-     * @param float $weight
+     * @param float|null $weight
      * @param string $weightUom
      * @param string $dimensionUom
      * @param float|null $width
@@ -57,8 +57,8 @@ class PhysicalAttributes implements PhysicalAttributesInterface
      * @param float|null $loadingMeters
      */
     public function __construct(
-        float $weight,
-        string $weightUom,
+        float $weight = null,
+        string $weightUom = '',
         string $dimensionUom = '',
         float $width = null,
         float $height = null,
@@ -74,7 +74,7 @@ class PhysicalAttributes implements PhysicalAttributesInterface
         $this->loadingMeters = $loadingMeters;
     }
 
-    public function getWeight(): float
+    public function getWeight()
     {
         return $this->weight;
     }

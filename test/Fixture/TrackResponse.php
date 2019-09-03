@@ -18,7 +18,11 @@ class TrackResponse
         $result = [];
         /** @var SplFileInfo $file */
         foreach ($finder->files() as $file) {
-            $result[$file->getFilenameWithoutExtension()] = ['jsonResponse' => file_get_contents($file->getPathname())];
+            $result['TrackId: ' . $file->getFilenameWithoutExtension()] = [
+                'jsonResponse' => file_get_contents(
+                    $file->getPathname()
+                ),
+            ];
         }
 
         return $result;

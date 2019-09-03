@@ -65,6 +65,7 @@ class TrackingServiceTest extends TestCase
 
         TrackingServiceTestExpectation::assertCommunicationLogged($jsonResponse, $client->getLastRequest(), $logger);
         TrackingServiceTestExpectation::assertResultCountMatches($jsonResponse, $result);
+        TrackingServiceTestExpectation::assertResponseStructureMatches($jsonResponse, $result);
     }
 
     /**
@@ -128,26 +129,5 @@ class TrackingServiceTest extends TestCase
     public function errorDataProvider(): array
     {
         return TrackResponse::getNotFoundTrackResponse();
-    }
-
-    /**
-     * @param $mockClient
-     * @return PluginClient
-     */
-    private function createPluginClient(Client $mockClient): PluginClient
-    {
-        $headerPlugin = new HeaderDefaultsPlugin(
-            [
-                'DHL-API-Key' => 'MY_TEST_KEY',
-                'Accept' => 'application/json',
-            ]
-        );
-        $loggerPlugin = new LoggerPlugin(new TestLogger());
-        $clientFactory = new PluginClientFactory();
-
-        return $clientFactory->createClient(
-            new PluginClient($mockClient),
-            [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
-        );
     }
 }

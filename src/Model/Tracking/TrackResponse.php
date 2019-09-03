@@ -38,7 +38,7 @@ class TrackResponse implements TrackResponseInterface
     private $originAddress;
 
     /**
-     * @var AddressInterface
+     * @var AddressInterface|null
      */
     private $destinationAddress;
 
@@ -97,11 +97,11 @@ class TrackResponse implements TrackResponseInterface
      *
      * @param string $trackingId
      * @param string $service
-     * @param AddressInterface $originAddress
-     * @param AddressInterface $destinationAddress
      * @param ShipmentEventInterface $latestStatus
      * @param int $numberOfPieces
-     * @param PhysicalAttributesInterface $physicalAttributes
+     * @param PhysicalAttributesInterface|null $physicalAttributes
+     * @param AddressInterface|null $destinationAddress
+     * @param AddressInterface|null $originAddress
      * @param string $shippingProduct
      * @param EstimatedDeliveryInterface|null $estimatedDeliveryTime
      * @param PersonInterface|null $sender

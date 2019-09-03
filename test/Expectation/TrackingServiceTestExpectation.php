@@ -67,4 +67,83 @@ class TrackingServiceTestExpectation
             Assert::assertInstanceOf(TrackResponseInterface::class, $result[$shipment->id]);
         }
     }
+
+    /**
+     * @param string $jsonResponse
+     * @param TrackResponseInterface[] $result
+     */
+    public static function assertResponseStructureMatches(string $jsonResponse, array $result)
+    {
+        $response = json_decode($jsonResponse, false);
+        foreach ($response->shipments as $shipment) {
+            $resultInstance = $result[(string) $shipment->id];
+            Assert::assertEquals($shipment->status->statusCode, $resultInstance->getLatestStatus()->getStatusCode());
+            Assert::assertCount(count($shipment->events), $resultInstance->getStatusEvents());
+            if (isset($shipment->details->weight)) {
+                Assert::assertEquals(
+                    (float) $shipment->details->weight->value,
+                    $resultInstance->getPhysicalAttributes()->getWeight()
+                );
+                Assert::assertSame(
+                    $shipment->details->weight->unitText,
+                    $resultInstance->getPhysicalAttributes()->getWeightUom()
+                );
+            }
+            if (isset($shipment->details->dimensions)) {
+                $dimensions = $shipment->details->dimensions;
+                Assert::assertSame(
+                    $dimensions->height->unitText,
+                    $resultInstance->getPhysicalAttributes()->getDimensionUom()
+                );
+                Assert::assertSame(
+                    (float) $dimensions->height->value,
+                    $resultInstance->getPhysicalAttributes()->getHeight()
+                );
+                Assert::assertSame(
+                    (float) $dimensions->length->value,
+                    $resultInstance->getPhysicalAttributes()->getLength()
+                );
+                Assert::assertSame(
+                    (float) $dimensions->width->value,
+                    $resultInstance->getPhysicalAttributes()->getWidth()
+                );
+            }
+
+            if (isset($shipment->details->proofOfDelivery)) {
+                $proofOfDelivery = $shipment->details->proofOfDelivery;
+                Assert::assertSame(
+                    $proofOfDelivery->documentUrl,
+                    $resultInstance->getProofOfDelivery()->getDocumentUrl()
+                );
+                Assert::assertSame(
+                    (new \DateTime($proofOfDelivery->timestamp))->getTimestamp(),
+                    $resultInstance->getProofOfDelivery()->getTimeStamp()->getTimestamp()
+                );
+                Assert::assertSame(
+                    $proofOfDelivery->signed->name,
+                    $resultInstance->getProofOfDelivery()->getSignee()->getName()
+                );
+            }
+
+            if (isset($shipment->estimatedTimeOfDelivery)) {
+                Assert::assertNotNull($resultInstance->getEstimatedDeliveryTime());
+                if (isset($shipment->estimatedDeliveryTimeFrame)) {
+                    Assert::assertSame(
+                        strtotime($shipment->estimatedDeliveryTimeFrame->estimatedFrom),
+                        $resultInstance->getEstimatedDeliveryTime()
+                                       ->getTimeFrame()
+                                       ->getStart()
+                                       ->getTimestamp()
+                    );
+                    Assert::assertSame(
+                        strtotime($shipment->estimatedDeliveryTimeFrame->estimatedThrough),
+                        $resultInstance->getEstimatedDeliveryTime()
+                                       ->getTimeFrame()
+                                       ->getEnd()
+                                       ->getTimestamp()
+                    );
+                }
+            }
+        }
+    }
 }

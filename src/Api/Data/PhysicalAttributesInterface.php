@@ -20,9 +20,9 @@ interface PhysicalAttributesInterface
     /**
      * Package weight
      *
-     * @return float
+     * @return float|null
      */
-    public function getWeight(): float;
+    public function getWeight();
 
     /**
      * Unit of measurement for the weight

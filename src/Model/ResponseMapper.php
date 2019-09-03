@@ -65,7 +65,7 @@ class ResponseMapper
                 $shipment->getDestination() !== null ? $this->convertAddress($shipment->getDestination()) : null,
                 $shipment->getOrigin() !== null ? $this->convertAddress($shipment->getOrigin()) : null,
                 $shipmentDetails->getProduct() !== null ? $shipmentDetails->getProduct()->getProductName() : '',
-                empty($shipment->getEstimatedTimeOfDelivery()) ? $this->extractEstimatedDelivery($shipment) : null,
+                !empty($shipment->getEstimatedTimeOfDelivery()) ? $this->extractEstimatedDelivery($shipment) : null,
                 $shipmentDetails->getSender() !== null ? $this->convertPerson($shipmentDetails->getSender()) : null,
                 $shipmentDetails->getReceiver() !== null ? $this->convertPerson($shipmentDetails->getReceiver()) : null,
                 $proofOfDelivery,
