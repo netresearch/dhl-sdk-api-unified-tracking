@@ -12,7 +12,7 @@ namespace Dhl\Sdk\GroupTracking\Api\Data;
  * Describing data regarding handling of proof of delivery
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 interface ProofOfDeliveryInterface
 {

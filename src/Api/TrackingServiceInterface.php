@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\Sdk\GroupTracking\Api;
 
 use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\GroupTracking\Exception\ServiceException;
 
 /**
  * Interface TrackingServiceInterface
@@ -14,11 +15,20 @@ use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
  * Service which is able to fetch data from the group tracking API
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 interface TrackingServiceInterface
 {
     const RESOURCE = 'https://api-eu.dhl.com/track/shipments';
+
+    const SERVICE_FREIGHT = 'freight';
+    const SERVICE_EXPRESS = 'express';
+    const SERVICE_PARCEL_DE = 'parcel-de';
+    const SERVICE_PARCEL_NL = 'parcel-nl';
+    const SERVICE_PARCEL_PL = 'parcel-pl';
+    const SERVICE_DSC = 'dsc';
+    const SERVICE_DGF = 'dgf';
+    const SERVICE_ECOMMERCE = 'ecommerce';
 
     /**
      * Fetches shipment information to given tracking number across all of DHL business units
@@ -40,7 +50,8 @@ interface TrackingServiceInterface
      * @param string $language ISO 639-1 2-character language code for the response.
      * This parameter serves as an indication of the client preferences ONLY. Language availability depends on the
      *     service used. The actual response language is indicated by the Content-Language header.
-     * @return TrackResponseInterface[]
+     * @return TrackResponseInterface[] in the form of [trackingNumber-sequenceNumber => TrackResponseInterface]
+     * @throws ServiceException
      */
     public function retrieveTrackingInformation(
         string $trackingNumber,

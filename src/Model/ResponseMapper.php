@@ -78,8 +78,11 @@ class ResponseMapper
             $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
 
             $trackingId = $shipment->getId();
-            $results[$trackingId] = new TrackResponse(
+            $sequence = count($results);
+            $arrayKey = $trackingId . '-' . $sequence;
+            $results[$arrayKey] = new TrackResponse(
                 $trackingId,
+                $sequence,
                 $shipment->getService(),
                 $this->convertEvent($shipment->getStatus()),
                 $numberOfPieces,

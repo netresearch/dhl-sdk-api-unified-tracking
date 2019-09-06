@@ -12,7 +12,7 @@ namespace Dhl\Sdk\GroupTracking\Api\Data;
  * Describing information regarding the estimated delivery data
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 interface EstimatedDeliveryInterface
 {

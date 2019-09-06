@@ -15,6 +15,7 @@ use Dhl\Sdk\GroupTracking\Model\ResponseMapper;
 use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
 use Http\Client\Common\Exception\ClientErrorException;
 use Http\Client\Common\Exception\ServerErrorException;
+use Http\Client\Exception;
 use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
 
@@ -68,7 +69,6 @@ class TrackingService implements TrackingServiceInterface
      * @param string|null $recipientPostalCode
      * @param string $language
      * @return TrackResponseInterface[]
-     * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws ServiceException
      */
     public function retrieveTrackingInformation(
@@ -101,6 +101,8 @@ class TrackingService implements TrackingServiceInterface
         } catch (ClientErrorException $exception) {
             throw ClientException::create($exception);
         } catch (ServerErrorException $exception) {
+            throw ServerException::create($exception);
+        } catch (Exception $exception) {
             throw ServerException::create($exception);
         }
 

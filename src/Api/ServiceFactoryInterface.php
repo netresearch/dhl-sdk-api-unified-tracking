@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
  * Factory for creating services related to the group tracking API
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 interface ServiceFactoryInterface
 {

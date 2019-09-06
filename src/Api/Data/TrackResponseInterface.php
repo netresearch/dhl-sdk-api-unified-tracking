@@ -12,7 +12,7 @@ namespace Dhl\Sdk\GroupTracking\Api\Data;
  * Describing a tracking response from the group tracking API with a flat structure
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 interface TrackResponseInterface
 {
@@ -21,7 +21,15 @@ interface TrackResponseInterface
      *
      * @return string
      */
-    public function getId(): string;
+    public function getTrackingId(): string;
+
+    /**
+     * In case the response contains multiple entries for one tracking id the sequence number can be used to uniquely
+     * identify the response item
+     *
+     * @return int
+     */
+    public function getSequenceNumber(): int;
 
     /**
      * The responsible DHL carrier service

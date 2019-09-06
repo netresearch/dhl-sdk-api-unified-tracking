@@ -20,7 +20,12 @@ class TrackResponse implements TrackResponseInterface
     /**
      * @var string
      */
-    private $id;
+    private $trackingId;
+
+    /**
+     * @var int
+     */
+    private $sequenceNumber;
 
     /**
      * @var string
@@ -96,6 +101,7 @@ class TrackResponse implements TrackResponseInterface
      * TrackResponse constructor.
      *
      * @param string $trackingId
+     * @param int $sequenceNumber
      * @param string $service
      * @param ShipmentEventInterface $latestStatus
      * @param int $numberOfPieces
@@ -113,6 +119,7 @@ class TrackResponse implements TrackResponseInterface
      */
     public function __construct(
         string $trackingId,
+        int $sequenceNumber,
         string $service,
         ShipmentEventInterface $latestStatus,
         int $numberOfPieces = 1,
@@ -128,7 +135,8 @@ class TrackResponse implements TrackResponseInterface
         array $relatedPieceIds = [],
         array $shipmentReferences = []
     ) {
-        $this->id = $trackingId;
+        $this->trackingId = $trackingId;
+        $this->sequenceNumber = $sequenceNumber;
         $this->service = $service;
         $this->estimatedDeliveryTime = $estimatedDeliveryTime;
         $this->originAddress = $originAddress;
@@ -145,9 +153,14 @@ class TrackResponse implements TrackResponseInterface
         $this->shipmentReferences = $shipmentReferences;
     }
 
-    public function getId(): string
+    public function getTrackingId(): string
     {
-        return $this->id;
+        return $this->trackingId;
+    }
+
+    public function getSequenceNumber(): int
+    {
+        return $this->sequenceNumber;
     }
 
     public function getService(): string

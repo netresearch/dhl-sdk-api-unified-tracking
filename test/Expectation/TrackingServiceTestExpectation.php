@@ -62,21 +62,24 @@ class TrackingServiceTestExpectation
     {
         $response = json_decode($jsonResponse, false);
         Assert::assertCount(count($response->shipments), $result);
-        foreach ($response->shipments as $shipment) {
-            Assert::assertArrayHasKey((string) $shipment->id, $result);
-            Assert::assertInstanceOf(TrackResponseInterface::class, $result[$shipment->id]);
+        foreach ($response->shipments as $key => $shipment) {
+            $index = $shipment->id . '-' . $key;
+            Assert::assertArrayHasKey($index, $result);
+            Assert::assertInstanceOf(TrackResponseInterface::class, $result[$index]);
         }
     }
 
     /**
+     * Assert that all response objects have been converted and the data is in the correct places
+     *
      * @param string $jsonResponse
      * @param TrackResponseInterface[] $result
      */
     public static function assertResponseStructureMatches(string $jsonResponse, array $result)
     {
         $response = json_decode($jsonResponse, false);
-        foreach ($response->shipments as $shipment) {
-            $resultInstance = $result[(string) $shipment->id];
+        foreach ($response->shipments as $key => $shipment) {
+            $resultInstance = $result[$shipment->id . '-' . $key];
             Assert::assertEquals($shipment->status->statusCode, $resultInstance->getLatestStatus()->getStatusCode());
             Assert::assertEquals($shipment->service, $resultInstance->getService());
             Assert::assertCount(count($shipment->events), $resultInstance->getStatusEvents());
@@ -117,7 +120,7 @@ class TrackingServiceTestExpectation
                     $resultInstance->getProofOfDelivery()->getDocumentUrl()
                 );
                 Assert::assertSame(
-                    (new \DateTime($proofOfDelivery->timestamp))->getTimestamp(),
+                    strtotime($proofOfDelivery->timestamp),
                     $resultInstance->getProofOfDelivery()->getTimeStamp()->getTimestamp()
                 );
                 Assert::assertSame(

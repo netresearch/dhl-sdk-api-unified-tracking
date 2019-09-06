@@ -41,32 +41,14 @@ final class TrackingErrorPlugin implements Plugin
 
             if ($statusCode >= 400 && $statusCode < 500) {
                 $responseJson = (string) $response->getBody();
-                if (empty($responseJson) || !\in_array($statusCode, [400, 401, 404], true)) {
+                if (empty($responseJson) || !\in_array($statusCode, [400, 401, 404, 429], true)) {
                     // throw generic client exception
                     throw new ClientErrorException($response->getReasonPhrase(), $request, $response);
                 }
 
                 $responseData = \json_decode($responseJson, true);
-                if ($statusCode === 400) {
+                if (\in_array($statusCode, [400, 401, 404, 429], true)) {
                     // throw bad request error
-                    throw new ClientErrorException(
-                        $this->formatErrorMessage($statusCode, $responseData),
-                        $request,
-                        $response
-                    );
-                }
-
-                if ($statusCode === 401) {
-                    // throw unauthorized error
-                    throw new ClientErrorException(
-                        $this->formatErrorMessage($statusCode, $responseData),
-                        $request,
-                        $response
-                    );
-                }
-
-                if ($statusCode === 404) {
-                    // throw entity not found error
                     throw new ClientErrorException(
                         $this->formatErrorMessage($statusCode, $responseData),
                         $request,

@@ -12,10 +12,16 @@ namespace Dhl\Sdk\GroupTracking\Api\Data;
  * Describing events in shipment handling
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 interface ShipmentEventInterface
 {
+    const STATUS_CODE_PRE_TRANSIT = 'pre-transit';
+    const STATUS_CODE_TRANSIT = 'transit';
+    const STATUS_CODE_DELIVERED = 'delivered';
+    const STATUS_CODE_FAILURE = 'failure';
+    const STATUS_CODE_UNKNOWN = 'unknown';
+
     /**
      * Time on which the event happened
      *

@@ -1,0 +1,5 @@
+{
+  "status": 429,
+  "title": "Too Many Requests",
+  "detail": "Too many requests within defined time period, please try again later."
+}

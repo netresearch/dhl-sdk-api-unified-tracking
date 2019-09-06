@@ -1,0 +1,58 @@
+{
+  "shipments": [
+    {
+      "id": "422891590640",
+      "service": "parcel-pl",
+      "status": {
+        "timestamp": "2016-04-13T13:23:14Z",
+        "location": {
+          "address": {
+            "addressLocality": "Rzeszów"
+          }
+        },
+        "statusCode": "delivered",
+        "description": "przesyłka doręczona do odbiorcy"
+      },
+      "details": {
+        "references": [
+          {
+            "number": "422891590640",
+            "type": "customer-reference"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2016-04-13T13:23:14Z",
+          "location": {
+            "address": {
+              "addressLocality": "Rzeszów"
+            }
+          },
+          "statusCode": "delivered",
+          "description": "przesyłka doręczona do odbiorcy"
+        },
+        {
+          "timestamp": "2016-04-06T14:31:54Z",
+          "location": {
+            "address": {
+              "addressLocality": "Rzeszów"
+            }
+          },
+          "statusCode": "transit",
+          "description": "przesyłka oczekuje na odbiór przez klienta w terminalu DHL"
+        },
+        {
+          "timestamp": "2016-04-04T11:49:31Z",
+          "location": {
+            "address": {
+              "addressLocality": "Rzeszów"
+            }
+          },
+          "statusCode": "failure",
+          "description": "próba doręczenia zakończona niepowodzeniem. Odbiorcy nie było w domu w momencie doręczenia przesyłki"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1193 @@
+{
+  "shipments": [
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "90249",
+          "addressLocality": "GARDENA"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "60091",
+          "addressLocality": "WILMETTE"
+        }
+      },
+      "status": {
+        "timestamp": "2019-08-26T13:04:00-05:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "60091",
+            "addressLocality": "Wilmette, IL, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "IN/AT MAILBOX"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM BPM Ground"
+        },
+        "weight": {
+          "value": 0.8195,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "West Distribution",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "3041908921356072",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9241990198168201334143",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-08-26T13:04:00-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "60091",
+              "addressLocality": "Wilmette, IL, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "IN/AT MAILBOX"
+        },
+        {
+          "timestamp": "2019-08-26T08:29:00-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "60091",
+              "addressLocality": "Wilmette, IL, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "OUT FOR DELIVERY"
+        },
+        {
+          "timestamp": "2019-08-26T04:19:00-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "60091",
+              "addressLocality": "Wilmette, IL, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT POST OFFICE"
+        },
+        {
+          "timestamp": "2019-08-26T03:04:00-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "60091",
+              "addressLocality": "Wilmette, IL, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVED USPS SORT FACILITY"
+        },
+        {
+          "timestamp": "2019-08-24T03:52:34-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "60160",
+              "addressLocality": "Melrose Park, IL, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "TENDERED TO DELIVERY SERVICE PROVIDER"
+        },
+        {
+          "timestamp": "2019-08-23T13:15:09-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "60160",
+              "addressLocality": "Melrose Park, IL, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL DESTINATION DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-20T23:44:07-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "90220",
+              "addressLocality": "Compton, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "DEPARTURE ORIGIN DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-20T08:47:34-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "90220",
+              "addressLocality": "Compton, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "PROCESSED"
+        },
+        {
+          "timestamp": "2019-08-19T17:23:06-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "90220",
+              "addressLocality": "Compton, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT DHL ECOMMERCE DISTRIBUTION CENTER"
+        },
+        {
+          "timestamp": "2019-08-19T14:24:01",
+          "statusCode": "pre-transit",
+          "status": "EN ROUTE TO DHL ECOMMERCE"
+        },
+        {
+          "timestamp": "2019-08-19T14:23:59",
+          "statusCode": "pre-transit",
+          "status": "ELECTRONIC NOTIFICATION RECEIVED: YOUR ORDER HAS BEEN PROCESSED AND TRACKING WILL BE UPDATED SOON"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "19348",
+          "addressLocality": "KENNETT SQUARE"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "24486",
+          "addressLocality": "WEYERS CAVE"
+        }
+      },
+      "status": {
+        "timestamp": "2019-08-16T13:33:00-04:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "24486",
+            "addressLocality": "Weyers Cave, VA, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "FRONT DOOR/PORCH"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM Parcel Plus Ground"
+        },
+        "weight": {
+          "value": 1.343,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "08122019 DOMESTIC",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "1131030842198639",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9261290210341916681559",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-08-16T13:33:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "24486",
+              "addressLocality": "Weyers Cave, VA, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "FRONT DOOR/PORCH"
+        },
+        {
+          "timestamp": "2019-08-16T09:16:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "24486",
+              "addressLocality": "Weyers Cave, VA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "OUT FOR DELIVERY"
+        },
+        {
+          "timestamp": "2019-08-16T08:40:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "24486",
+              "addressLocality": "Weyers Cave, VA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT POST OFFICE"
+        },
+        {
+          "timestamp": "2019-08-14T06:56:20-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "27615",
+              "addressLocality": "Raleigh, NC, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "TENDERED TO DELIVERY SERVICE PROVIDER"
+        },
+        {
+          "timestamp": "2019-08-13T20:59:53-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "27615",
+              "addressLocality": "Raleigh, NC, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL DESTINATION DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-13T07:50:55-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "21075",
+              "addressLocality": "Elkridge, MD, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "DEPARTURE ORIGIN DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-13T01:24:51-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "21075",
+              "addressLocality": "Elkridge, MD, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "PROCESSED"
+        },
+        {
+          "timestamp": "2019-08-12T23:23:44-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "21075",
+              "addressLocality": "Elkridge, MD, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT DHL ECOMMERCE DISTRIBUTION CENTER"
+        },
+        {
+          "timestamp": "2019-08-12T16:09:05",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "addressLocality": "UNITED STATES"
+            }
+          },
+          "statusCode": "pre-transit",
+          "status": "EN ROUTE TO DHL ECOMMERCE"
+        },
+        {
+          "timestamp": "2019-08-12T16:07:12",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "addressLocality": "UNITED STATES"
+            }
+          },
+          "statusCode": "pre-transit",
+          "status": "ELECTRONIC NOTIFICATION RECEIVED: YOUR ORDER HAS BEEN PROCESSED AND TRACKING WILL BE UPDATED SOON"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "75028",
+          "addressLocality": "FLOWER MOUND"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "48223",
+          "addressLocality": "DETROIT"
+        }
+      },
+      "status": {
+        "timestamp": "2019-08-15T10:09:00-04:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "48223",
+            "addressLocality": "Detroit, MI, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "IN/AT MAILBOX"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM Parcel Ground"
+        },
+        "weight": {
+          "value": 0.2943,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "4100808913181693",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9374869903504000568547",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-08-15T10:09:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "48223",
+              "addressLocality": "Detroit, MI, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "IN/AT MAILBOX"
+        },
+        {
+          "timestamp": "2019-08-15T08:18:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "48223",
+              "addressLocality": "Detroit, MI, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "OUT FOR DELIVERY"
+        },
+        {
+          "timestamp": "2019-08-14T11:12:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "48223",
+              "addressLocality": "Detroit, MI, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT POST OFFICE"
+        },
+        {
+          "timestamp": "2019-08-14T09:57:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "48223",
+              "addressLocality": "Detroit, MI, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVED USPS SORT FACILITY"
+        },
+        {
+          "timestamp": "2019-08-12T04:27:21-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "44224",
+              "addressLocality": "Stow, OH, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "TENDERED TO DELIVERY SERVICE PROVIDER"
+        },
+        {
+          "timestamp": "2019-08-11T16:30:13-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "44224",
+              "addressLocality": "Stow, OH, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL DESTINATION DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-10T01:42:46-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "75050",
+              "addressLocality": "Grand Prairie, TX, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "DEPARTURE ORIGIN DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-09T10:14:31-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "75050",
+              "addressLocality": "Grand Prairie, TX, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "PROCESSED"
+        },
+        {
+          "timestamp": "2019-08-08T20:50:21-05:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "75050",
+              "addressLocality": "Grand Prairie, TX, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT DHL ECOMMERCE DISTRIBUTION CENTER"
+        },
+        {
+          "timestamp": "2019-08-08T16:11:35",
+          "statusCode": "pre-transit",
+          "status": "EN ROUTE TO DHL ECOMMERCE"
+        },
+        {
+          "timestamp": "2019-08-08T16:08:42",
+          "statusCode": "pre-transit",
+          "status": "ELECTRONIC NOTIFICATION RECEIVED: YOUR ORDER HAS BEEN PROCESSED AND TRACKING WILL BE UPDATED SOON"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "18102",
+          "addressLocality": "ALLENTOWN"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "91977",
+          "addressLocality": "SPRING VALLEY"
+        }
+      },
+      "status": {
+        "timestamp": "2019-08-09T09:49:00-07:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "91977",
+            "addressLocality": "Spring Valley, CA, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "IN/AT MAILBOX"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM Parcel Expedited"
+        },
+        "weight": {
+          "value": 0.146,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "646190",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "4230508909449850",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9374869903503991807307",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-08-09T09:49:00-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "91977",
+              "addressLocality": "Spring Valley, CA, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "IN/AT MAILBOX"
+        },
+        {
+          "timestamp": "2019-08-09T07:57:00-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "91977",
+              "addressLocality": "Spring Valley, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "OUT FOR DELIVERY"
+        },
+        {
+          "timestamp": "2019-08-09T07:47:00-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "91977",
+              "addressLocality": "Spring Valley, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "SORTING COMPLETE"
+        },
+        {
+          "timestamp": "2019-08-09T03:51:00-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "91977",
+              "addressLocality": "Spring Valley, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT POST OFFICE"
+        },
+        {
+          "timestamp": "2019-08-09T02:36:00-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "91977",
+              "addressLocality": "Spring Valley, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVED USPS SORT FACILITY"
+        },
+        {
+          "timestamp": "2019-08-08T06:00:19-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "90220",
+              "addressLocality": "Compton, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "TENDERED TO DELIVERY SERVICE PROVIDER"
+        },
+        {
+          "timestamp": "2019-08-07T08:52:59-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "90220",
+              "addressLocality": "Compton, CA, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL DESTINATION DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-06T02:48:02-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "07001",
+              "addressLocality": "Avenel, NJ, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "DEPARTURE ORIGIN DHL ECOMMERCE FACILITY"
+        },
+        {
+          "timestamp": "2019-08-05T21:50:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "07001",
+              "addressLocality": "Avenel, NJ, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "PROCESSED"
+        },
+        {
+          "timestamp": "2019-08-05T20:17:59-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "07001",
+              "addressLocality": "Avenel, NJ, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT DHL ECOMMERCE DISTRIBUTION CENTER"
+        },
+        {
+          "timestamp": "2019-08-05T15:26:38",
+          "statusCode": "pre-transit",
+          "status": "EN ROUTE TO DHL ECOMMERCE"
+        },
+        {
+          "timestamp": "2019-08-05T15:25:54",
+          "statusCode": "pre-transit",
+          "status": "ELECTRONIC NOTIFICATION RECEIVED: YOUR ORDER HAS BEEN PROCESSED AND TRACKING WILL BE UPDATED SOON"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "40391",
+          "addressLocality": "WINCHESTER"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "43040",
+          "addressLocality": "MARYSVILLE"
+        }
+      },
+      "status": {
+        "timestamp": "2019-07-17T14:04:00-04:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "43040",
+            "addressLocality": "Marysville, OH, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "IN/AT MAILBOX"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM Parcel Expedited"
+        },
+        "weight": {
+          "value": 0.061,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "938244",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "4051207995250034",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9374869903503939649327",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-07-17T14:04:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "43040",
+              "addressLocality": "Marysville, OH, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "IN/AT MAILBOX"
+        },
+        {
+          "timestamp": "2019-07-17T07:26:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "43040",
+              "addressLocality": "Marysville, OH, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "OUT FOR DELIVERY"
+        },
+        {
+          "timestamp": "2019-07-17T07:16:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "43040",
+              "addressLocality": "Marysville, OH, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "SORTING COMPLETE"
+        },
+        {
+          "timestamp": "2019-07-16T15:03:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "43040",
+              "addressLocality": "Marysville, OH, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT POST OFFICE"
+        },
+        {
+          "timestamp": "2019-07-16T13:48:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "43040",
+              "addressLocality": "Marysville, OH, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVED USPS SORT FACILITY"
+        },
+        {
+          "timestamp": "2019-07-13T03:11:47-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "41048",
+              "addressLocality": "Hebron, KY, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "TENDERED TO DELIVERY SERVICE PROVIDER"
+        },
+        {
+          "timestamp": "2019-07-12T20:24:33-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "41048",
+              "addressLocality": "Hebron, KY, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "PROCESSED"
+        },
+        {
+          "timestamp": "2019-07-12T19:42:37-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "41048",
+              "addressLocality": "Hebron, KY, US"
+            }
+          },
+          "statusCode": "transit",
+          "status": "ARRIVAL AT DHL ECOMMERCE DISTRIBUTION CENTER"
+        },
+        {
+          "timestamp": "2019-07-12T16:46:08",
+          "statusCode": "pre-transit",
+          "status": "EN ROUTE TO DHL ECOMMERCE"
+        },
+        {
+          "timestamp": "2019-07-12T16:43:18",
+          "statusCode": "pre-transit",
+          "status": "ELECTRONIC NOTIFICATION RECEIVED: YOUR ORDER HAS BEEN PROCESSED AND TRACKING WILL BE UPDATED SOON"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "90670",
+          "addressLocality": "SANTA FE SPRINGS"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "23116",
+          "addressLocality": "MECHANICSVILLE"
+        }
+      },
+      "status": {
+        "timestamp": "2019-05-18T15:45:00-04:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "23116",
+            "addressLocality": "Mechanicsville, VA, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "IN/AT MAILBOX"
+      },
+      "details": {
+        "product": {
+          "productName": "SM Marketing Parcel Expedited"
+        },
+        "weight": {
+          "value": 0.071,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "1056634",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "4041405951826564",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9370369903503795136688",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-05-18T15:45:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "23116",
+              "addressLocality": "Mechanicsville, VA, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "IN/AT MAILBOX"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "85021",
+          "addressLocality": "PHOENIX"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "43543",
+          "addressLocality": "MONTPELIER"
+        }
+      },
+      "status": {
+        "timestamp": "2019-05-03T14:13:00-04:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "43543",
+            "addressLocality": "Montpelier, OH, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "IN/AT MAILBOX"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM Parcel Expedited"
+        },
+        "weight": {
+          "value": 0.942,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "1195280",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "4281904933571249",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9374869903503734845672",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-05-03T14:13:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "43543",
+              "addressLocality": "Montpelier, OH, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "IN/AT MAILBOX"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "19348",
+          "addressLocality": "KENNETT SQUARE"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "91423",
+          "addressLocality": "SHERMAN OAKS"
+        }
+      },
+      "status": {
+        "timestamp": "2019-04-27T14:29:00-07:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "91423",
+            "addressLocality": "Sherman Oaks, CA, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "FRONT DOOR/PORCH"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM Parcel Ground"
+        },
+        "weight": {
+          "value": 0.8724,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "315993",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "1132050409181439",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9274890210341915104017",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-04-27T14:29:00-07:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "91423",
+              "addressLocality": "Sherman Oaks, CA, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "FRONT DOOR/PORCH"
+        }
+      ]
+    },
+    {
+      "id": "64888",
+      "service": "ecommerce",
+      "origin": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "85021",
+          "addressLocality": "PHOENIX"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "US",
+          "postalCode": "44103",
+          "addressLocality": "CLEVELAND"
+        }
+      },
+      "status": {
+        "timestamp": "2019-04-12T11:23:00-04:00",
+        "location": {
+          "address": {
+            "countryCode": "US",
+            "postalCode": "44103",
+            "addressLocality": "Cleveland, OH, US"
+          }
+        },
+        "statusCode": "delivered",
+        "status": "DELIVERED",
+        "description": "LEFT WITH INDIVIDUAL"
+      },
+      "details": {
+        "product": {
+          "productName": "DHL SM Parcel Expedited"
+        },
+        "weight": {
+          "value": 0.097,
+          "unitText": "lbs"
+        },
+        "references": [
+          {
+            "number": "1195280",
+            "type": "customer-reference"
+          },
+          {
+            "number": "64888",
+            "type": "customer-confirmation-number"
+          },
+          {
+            "number": "4280504920922812",
+            "type": "ecommerce-number"
+          },
+          {
+            "number": "9374869903503698073005",
+            "type": "local-tracking-number"
+          }
+        ]
+      },
+      "events": [
+        {
+          "timestamp": "2019-04-12T11:23:00-04:00",
+          "location": {
+            "address": {
+              "countryCode": "US",
+              "postalCode": "44103",
+              "addressLocality": "Cleveland, OH, US"
+            }
+          },
+          "statusCode": "delivered",
+          "status": "DELIVERED",
+          "description": "LEFT WITH INDIVIDUAL"
+        }
+      ]
+    }
+  ],
+  "possibleAdditionalShipmentsUrl": [
+    "/track/shipments?trackingNumber=64888&language=en&service=dgf",
+    "/track/shipments?trackingNumber=64888&language=en&service=freight",
+    "/track/shipments?trackingNumber=64888&language=en&service=parcel-nl",
+    "/track/shipments?trackingNumber=64888&language=en&service=parcel-pl"
+  ]
+}
