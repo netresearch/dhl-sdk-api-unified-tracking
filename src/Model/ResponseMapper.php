@@ -4,32 +4,41 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Model;
+namespace Dhl\Sdk\UnifiedTracking\Model;
 
-use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\Address;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\DeliveryTimeFrame;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\EstimatedDelivery;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\Person;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\PhysicalAttributes;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\ProofOfDelivery;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\ShipmentEvent;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Response\ShipmentReference;
-use Dhl\Sdk\GroupTracking\Model\Tracking\TrackResponse;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Details;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Person as ApiPerson;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Place;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Reference;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Shipment;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\ShipmentEvent as ApiShipmentEvent;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\TrackingResponseType;
+use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\Address;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\DeliveryTimeFrame;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\EstimatedDelivery;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\Person;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\PhysicalAttributes;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\ProofOfDelivery;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\ShipmentEvent;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\ShipmentReference;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\TrackResponse;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Details;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Person as ApiPerson;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Place;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Reference;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Shipment;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\ShipmentEvent as ApiShipmentEvent;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
 
+/**
+ * Class ResponseMapper
+ *
+ * @author Paul Siedler <paul.siedler@netresearch.de>
+ * @link https://www.netresearch.de/
+ */
 class ResponseMapper
 {
     /**
+     * Transforms API response types into easier usable TrackResponseInterface
+     *
      * @param TrackingResponseType $response
      * @return TrackResponseInterface[]
      * @throws \Exception
+     * @see TrackResponseInterface
      */
     public function map(TrackingResponseType $response): array
     {
@@ -45,6 +54,7 @@ class ResponseMapper
             $pieceIds = [];
             $sender = null;
             $receiver = null;
+
             if ($shipmentDetails !== null) {
                 $proofOfDelivery = $shipmentDetails->getProofOfDelivery() !== null ? $this->convertProofOfDelivery(
                     $shipmentDetails->getProofOfDelivery()

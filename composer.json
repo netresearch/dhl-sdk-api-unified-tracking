@@ -13,12 +13,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Dhl\\Sdk\\GroupTracking\\": "src/"
+      "Dhl\\Sdk\\UnifiedTracking\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Dhl\\Sdk\\GroupTracking\\Test\\": "test/"
+      "Dhl\\Sdk\\UnifiedTracking\\Test\\": "test/"
     }
   },
   "require": {

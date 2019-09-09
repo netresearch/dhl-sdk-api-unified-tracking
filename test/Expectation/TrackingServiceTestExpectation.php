@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Test\Expectation;
+namespace Dhl\Sdk\UnifiedTracking\Test\Expectation;
 
-use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
 use PHPUnit\Framework\Assert;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\Test\TestLogger;

@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Test\Expectation;
+namespace Dhl\Sdk\UnifiedTracking\Test\Expectation;
 
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\Shipment;
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\TrackingResponseType;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Shipment;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
 use PHPUnit\Framework\Assert;
 
 class JsonSerializerExpectations

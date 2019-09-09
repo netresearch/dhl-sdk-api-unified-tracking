@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Http\Plugin;
+namespace Dhl\Sdk\UnifiedTracking\Http\Plugin;
 
 use Http\Client\Common\Exception\ClientErrorException;
 use Http\Client\Common\Exception\ServerErrorException;

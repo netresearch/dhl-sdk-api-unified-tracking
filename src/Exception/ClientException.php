@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Exception;
+namespace Dhl\Sdk\UnifiedTracking\Exception;
 
 /**
  * Class ClientException

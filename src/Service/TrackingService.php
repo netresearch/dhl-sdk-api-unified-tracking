@@ -4,15 +4,15 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Service;
+namespace Dhl\Sdk\UnifiedTracking\Service;
 
-use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
-use Dhl\Sdk\GroupTracking\Api\TrackingServiceInterface;
-use Dhl\Sdk\GroupTracking\Exception\ClientException;
-use Dhl\Sdk\GroupTracking\Exception\ServerException;
-use Dhl\Sdk\GroupTracking\Exception\ServiceException;
-use Dhl\Sdk\GroupTracking\Model\ResponseMapper;
-use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
+use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\UnifiedTracking\Api\TrackingServiceInterface;
+use Dhl\Sdk\UnifiedTracking\Exception\ClientException;
+use Dhl\Sdk\UnifiedTracking\Exception\ServerException;
+use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
+use Dhl\Sdk\UnifiedTracking\Model\ResponseMapper;
+use Dhl\Sdk\UnifiedTracking\Serializer\JsonSerializer;
 use Http\Client\Common\Exception\ClientErrorException;
 use Http\Client\Common\Exception\ServerErrorException;
 use Http\Client\Exception;

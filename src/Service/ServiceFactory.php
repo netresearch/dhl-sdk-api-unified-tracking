@@ -4,13 +4,13 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Service;
+namespace Dhl\Sdk\UnifiedTracking\Service;
 
-use Dhl\Sdk\GroupTracking\Api\ServiceFactoryInterface;
-use Dhl\Sdk\GroupTracking\Api\TrackingServiceInterface;
-use Dhl\Sdk\GroupTracking\Http\Plugin\TrackingErrorPlugin;
-use Dhl\Sdk\GroupTracking\Model\ResponseMapper;
-use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
+use Dhl\Sdk\UnifiedTracking\Api\ServiceFactoryInterface;
+use Dhl\Sdk\UnifiedTracking\Api\TrackingServiceInterface;
+use Dhl\Sdk\UnifiedTracking\Http\Plugin\TrackingErrorPlugin;
+use Dhl\Sdk\UnifiedTracking\Model\ResponseMapper;
+use Dhl\Sdk\UnifiedTracking\Serializer\JsonSerializer;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;

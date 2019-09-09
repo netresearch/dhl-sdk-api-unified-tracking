@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Serializer;
+namespace Dhl\Sdk\UnifiedTracking\Serializer;
 
-use Dhl\Sdk\GroupTracking\Model\Tracking\Types\TrackingResponseType;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
 use JsonMapper;
 use function json_decode;
 

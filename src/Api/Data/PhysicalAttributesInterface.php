@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Api\Data;
+namespace Dhl\Sdk\UnifiedTracking\Api\Data;
 
 /**
  * Interface PhysicalAttributesInterface

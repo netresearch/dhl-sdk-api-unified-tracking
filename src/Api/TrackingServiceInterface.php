@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Api;
+namespace Dhl\Sdk\UnifiedTracking\Api;
 
-use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
-use Dhl\Sdk\GroupTracking\Exception\ServiceException;
+use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
 
 /**
  * Interface TrackingServiceInterface

@@ -4,20 +4,26 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Test\Service;
+namespace Dhl\Sdk\UnifiedTracking\Test\Service;
 
-use Dhl\Sdk\GroupTracking\Api\Data\TrackResponseInterface;
-use Dhl\Sdk\GroupTracking\Exception\ClientException;
-use Dhl\Sdk\GroupTracking\Http\Plugin\TrackingErrorPlugin;
-use Dhl\Sdk\GroupTracking\Model\ResponseMapper;
-use Dhl\Sdk\GroupTracking\Serializer\JsonSerializer;
-use Dhl\Sdk\GroupTracking\Service\TrackingService;
-use Dhl\Sdk\GroupTracking\Test\Expectation\TrackingServiceTestExpectation;
-use Dhl\Sdk\GroupTracking\Test\Fixture\TrackResponse;
+use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\UnifiedTracking\Exception\ClientException;
+use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
+use Dhl\Sdk\UnifiedTracking\Http\Plugin\TrackingErrorPlugin;
+use Dhl\Sdk\UnifiedTracking\Model\ResponseMapper;
+use Dhl\Sdk\UnifiedTracking\Serializer\JsonSerializer;
+use Dhl\Sdk\UnifiedTracking\Service\TrackingService;
+use Dhl\Sdk\UnifiedTracking\Test\Expectation\TrackingServiceTestExpectation;
+use Dhl\Sdk\UnifiedTracking\Test\Fixture\TrackResponse;
+use Http\Client\Common\Exception\LoopException;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\Common\PluginClientFactory;
+use Http\Client\Exception\HttpException;
+use Http\Client\Exception\NetworkException;
+use Http\Client\Exception\RequestException;
+use Http\Client\Exception\TransferException;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\Formatter\FullHttpMessageFormatter;
 use Http\Mock\Client;
@@ -72,9 +78,9 @@ class TrackingServiceTest extends TestCase
      * @dataProvider errorDataProvider
      * @test
      * @param string $jsonResponse
-     * @throws Dhl\Sdk\GroupTracking\Exception\ClientException
-     * @throws Dhl\Sdk\GroupTracking\Exception\ServerException
-     * @throws Dhl\Sdk\GroupTracking\Exception\ServiceException
+     * @throws Dhl\Sdk\UnifiedTracking\Exception\ClientException
+     * @throws Dhl\Sdk\UnifiedTracking\Exception\ServerException
+     * @throws Dhl\Sdk\UnifiedTracking\Exception\ServiceException
      */
     public function testRetrieveTrackingInformationError(string $jsonResponse)
     {
@@ -129,5 +135,80 @@ class TrackingServiceTest extends TestCase
     public function errorDataProvider(): array
     {
         return TrackResponse::getNotFoundTrackResponse();
+    }
+
+    /**
+     * @param \Exception $exception
+     * @throws ServiceException
+     * @dataProvider exceptionProvider
+     */
+    public function testExceptionMasking(\Exception $exception)
+    {
+        $this->expectException(ServiceException::class);
+
+        $client = new Client();
+        $messageFactory = MessageFactoryDiscovery::find();
+
+        $client->setDefaultException($exception);
+        $headerPlugin = new HeaderDefaultsPlugin(
+            [
+                'DHL-API-Key' => 'MY_TEST_KEY',
+                'Accept' => 'application/json',
+            ]
+        );
+        $logger = new TestLogger();
+        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
+        $clientFactory = new PluginClientFactory();
+
+        $subject = new TrackingService(
+            $clientFactory->createClient(
+                new PluginClient($client),
+                [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
+            ),
+            $messageFactory,
+            new JsonSerializer(),
+            new ResponseMapper()
+        );
+
+        $subject->retrieveTrackingInformation('trackId');
+    }
+
+    /**
+     * @return array
+     */
+    public function exceptionProvider(): array
+    {
+        $messageFactory = MessageFactoryDiscovery::find();
+
+        $request = $messageFactory->createRequest('GET', 'www');
+
+        return [
+            HttpException::class => [
+                'exception' => new HttpException(
+                    'ERROR',
+                    $request,
+                    $messageFactory->createResponse(500)
+                ),
+            ],
+            NetworkException::class => [
+                'exception' => new NetworkException(
+                    'ERROR',
+                    $request
+                ),
+            ],
+            LoopException::class => [
+                'exception' => new LoopException(
+                    'ERROR',
+                    $request
+                ),
+            ],
+            RequestException::class => [
+                'exception' => new RequestException(
+                    'ERROR',
+                    $request
+                ),
+            ],
+            TransferException::class => ['exception' => new TransferException('ERROR')],
+        ];
     }
 }

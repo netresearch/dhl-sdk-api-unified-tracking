@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Model\Tracking\Response;
+namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Response;
 
-use Dhl\Sdk\GroupTracking\Api\Data\DeliveryTimeFrameInterface;
+use Dhl\Sdk\UnifiedTracking\Api\Data\DeliveryTimeFrameInterface;
 
 class DeliveryTimeFrame implements DeliveryTimeFrameInterface
 {

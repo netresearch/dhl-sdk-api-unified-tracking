@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Test\Fixture;
+namespace Dhl\Sdk\UnifiedTracking\Test\Fixture;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;

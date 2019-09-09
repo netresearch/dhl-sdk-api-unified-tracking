@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Model\Tracking\Response;
+namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Response;
 
-use Dhl\Sdk\GroupTracking\Api\Data\AddressInterface;
-use Dhl\Sdk\GroupTracking\Api\Data\ShipmentEventInterface;
+use Dhl\Sdk\UnifiedTracking\Api\Data\AddressInterface;
+use Dhl\Sdk\UnifiedTracking\Api\Data\ShipmentEventInterface;
 
 class ShipmentEvent implements ShipmentEventInterface
 {

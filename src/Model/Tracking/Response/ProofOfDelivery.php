@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Model\Tracking\Response;
+namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Response;
 
-use Dhl\Sdk\GroupTracking\Api\Data\PersonInterface;
-use Dhl\Sdk\GroupTracking\Api\Data\ProofOfDeliveryInterface;
+use Dhl\Sdk\UnifiedTracking\Api\Data\PersonInterface;
+use Dhl\Sdk\UnifiedTracking\Api\Data\ProofOfDeliveryInterface;
 
 class ProofOfDelivery implements ProofOfDeliveryInterface
 {

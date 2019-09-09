@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\GroupTracking\Model\Tracking\Response;
+namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Response;
 
-use Dhl\Sdk\GroupTracking\Api\Data\PhysicalAttributesInterface;
+use Dhl\Sdk\UnifiedTracking\Api\Data\PhysicalAttributesInterface;
 
 class PhysicalAttributes implements PhysicalAttributesInterface
 {
