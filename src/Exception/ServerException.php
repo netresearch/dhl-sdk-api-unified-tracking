@@ -19,10 +19,10 @@ class ServerException extends ServiceException
     /**
      * Create server exception when no response is available
      *
-     * @param \Exception $exception
+     * @param \Throwable $exception
      * @return ServerException
      */
-    public static function create(\Exception $exception): ServerException
+    public static function create(\Throwable $exception): ServerException
     {
         return new static($exception->getMessage(), $exception->getCode(), $exception);
     }

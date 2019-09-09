@@ -19,10 +19,10 @@ class ClientException extends ServiceException
     /**
      * Create client exception
      *
-     * @param \Exception $exception
+     * @param \Throwable $exception
      * @return ClientException
      */
-    public static function create(\Exception $exception): ClientException
+    public static function create(\Throwable $exception): ClientException
     {
         return new static($exception->getMessage(), $exception->getCode(), $exception);
     }
