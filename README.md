@@ -14,7 +14,7 @@ The Shipment Tracking API provides up-to-the-minute shipment status reports. Use
 
 ### Package Requirements
 
-- `netresearch/jsonmapper`: Mapper for deserialization JSON response messages into PHP objects
+- `netresearch/jsonmapper`: Mapper for deserialization of JSON response messages into PHP objects
 - `php-http/discovery`: Discovery service for HTTP client and message factory implementations
 - `php-http/httplug`: Pluggable HTTP client abstraction
 - `php-http/logger-plugin`: HTTP client logger plugin for HTTPlug
@@ -32,10 +32,12 @@ The Shipment Tracking API provides up-to-the-minute shipment status reports. Use
 
 ### Development Package Requirements
 
-- `phpunit/phpunit`: Testing framework
-- `phpstan/phpstan`: Static analysis tool
 - `guzzlehttp/psr7`: PSR-7 HTTP message implementation
+- `phpunit/phpunit`: Testing framework
 - `php-http/mock-client`: HTTPlug mock client implementation
+- `phpstan/phpstan`: Static analysis tool
+- `symfony/finder`: File loader for web service mock responses
+- `squizlabs/php_codesniffer`: Static analysis tool
 
 ## Installation
 

@@ -16,7 +16,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  */
 interface PersonInterface
 {
-
     /**
      * @return string
      */

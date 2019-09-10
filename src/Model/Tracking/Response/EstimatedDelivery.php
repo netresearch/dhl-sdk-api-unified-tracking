@@ -11,7 +11,6 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\EstimatedDeliveryInterface;
 
 class EstimatedDelivery implements EstimatedDeliveryInterface
 {
-
     /**
      * @var \DateTime
      */

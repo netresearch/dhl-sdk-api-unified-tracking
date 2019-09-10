@@ -7,12 +7,9 @@ declare(strict_types=1);
 namespace Dhl\Sdk\UnifiedTracking\Serializer;
 
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
-use JsonMapper;
-use function json_decode;
 
 class JsonSerializer
 {
-
     /**
      * @var string[]
      */
@@ -35,11 +32,11 @@ class JsonSerializer
      */
     public function decode(string $jsonResponse): TrackingResponseType
     {
-        $jsonMapper = new JsonMapper();
+        $jsonMapper = new \JsonMapper();
         $jsonMapper->bIgnoreVisibility = true;
         $jsonMapper->classMap = $this->classMap;
 
-        $response = json_decode($jsonResponse, false);
+        $response = \json_decode($jsonResponse, false);
 
         /** @var TrackingResponseType $mappedResponse */
         $mappedResponse = $jsonMapper->map($response, new TrackingResponseType());

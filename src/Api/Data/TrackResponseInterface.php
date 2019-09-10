@@ -9,7 +9,7 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
 /**
  * Interface TrackResponseInterface
  *
- * Describing a tracking response from the group tracking API with a flat structure
+ * Describing a tracking response from the unified tracking API with a flat structure
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
@@ -79,7 +79,6 @@ interface TrackResponseInterface
      * @return PersonInterface|null
      */
     public function getSender();
-    // sender
 
     /**
      * Personal information of the receiver

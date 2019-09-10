@@ -89,11 +89,11 @@ final class TrackingErrorPlugin implements Plugin
     /**
      * Returns the formatted error message.
      *
+     * @see https://tools.ietf.org/html/rfc7807
+     *
      * @param int $statusCode The response status code
      * @param string[] $responseData The response data in application/problem+json format
      * @return string
-     * @see https://tools.ietf.org/html/rfc7807
-     *
      */
     private function formatErrorMessage(int $statusCode, array $responseData): string
     {

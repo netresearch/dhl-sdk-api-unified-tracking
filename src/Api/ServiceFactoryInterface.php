@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Interface ServiceFactoryInterface
  *
- * Factory for creating services related to the group tracking API
+ * Factory for creating services related to the unified tracking API
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 interface ServiceFactoryInterface
 {
     /**
-     * Create a service able to retrieve data from the group tracking api
+     * Create a service able to retrieve data from the unified tracking api
      *
      * @param string $consumerKey
      * @param LoggerInterface $logger

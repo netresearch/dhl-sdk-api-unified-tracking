@@ -12,7 +12,7 @@ use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
 /**
  * Interface TrackingServiceInterface
  *
- * Service which is able to fetch data from the group tracking API
+ * Service which is able to fetch data from the unified tracking API
  *
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
