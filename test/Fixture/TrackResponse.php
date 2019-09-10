@@ -11,6 +11,11 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class TrackResponse
 {
+    /**
+     * Read response files and return them as json string
+     *
+     * @return array
+     */
     public static function getSuccessFullTrackResponses(): array
     {
         $finder = new Finder();
@@ -18,7 +23,7 @@ class TrackResponse
         $result = [];
         /** @var SplFileInfo $file */
         foreach ($finder->files() as $file) {
-            $result['TrackId: ' . $file->getFilenameWithoutExtension()] = [
+            $result['TrackId: ' . str_replace('*.json', '', $file->getFilename())] = [
                 'jsonResponse' => file_get_contents(
                     $file->getPathname()
                 ),
@@ -28,6 +33,11 @@ class TrackResponse
         return $result;
     }
 
+    /**
+     * Read response files and return them as json string
+     *
+     * @return array
+     */
     public static function getNotFoundTrackResponse(): array
     {
         $finder = new Finder();
@@ -35,7 +45,11 @@ class TrackResponse
         $result = [];
         /** @var SplFileInfo $file */
         foreach ($finder->files() as $file) {
-            $result[$file->getFilenameWithoutExtension()] = ['jsonResponse' => file_get_contents($file->getPathname())];
+            $result[str_replace('*.json', '', $file->getFilename())] = [
+                'jsonResponse' => file_get_contents(
+                    $file->getPathname()
+                ),
+            ];
         }
 
         return $result;

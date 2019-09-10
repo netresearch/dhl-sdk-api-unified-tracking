@@ -27,6 +27,8 @@ use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
 /**
  * Class ResponseMapper
  *
+ * Maps web service response object into public interface types
+ *
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */
@@ -56,9 +58,13 @@ class ResponseMapper
             $receiver = null;
 
             if ($shipmentDetails !== null) {
-                $proofOfDelivery = $shipmentDetails->getProofOfDelivery() !== null ? $this->convertProofOfDelivery(
-                    $shipmentDetails->getProofOfDelivery()
-                ) : null;
+                if ($shipmentDetails->getProofOfDelivery() !== null) {
+                    try {
+                        $proofOfDelivery = $this->convertProofOfDelivery($shipmentDetails->getProofOfDelivery());
+                    } catch (\Exception $exception) {
+                        // no proof of delivery
+                    }
+                }
                 if ($shipmentDetails->getWeight() !== null || $shipmentDetails->getDimensions() !== null) {
                     $physicalAttributes = $this->createPhysicalAttributes($shipmentDetails);
                 }
@@ -85,7 +91,20 @@ class ResponseMapper
                     $receiver = $this->convertPerson($shipmentDetails->getReceiver());
                 }
             }
-            $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
+            try {
+                $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
+            } catch (\Exception $exception) {
+                $shipmentEvents = [];
+            }
+
+            $estimatedDelivery = null;
+            if (!empty($shipment->getEstimatedTimeOfDelivery())) {
+                try {
+                    $estimatedDelivery = $this->extractEstimatedDelivery($shipment);
+                } catch (\Exception $exception) {
+                    // no estimated delivery date in response
+                }
+            }
 
             $trackingId = $shipment->getId();
             $sequence = count($results);
@@ -100,7 +119,7 @@ class ResponseMapper
                 $shipment->getDestination() !== null ? $this->convertAddress($shipment->getDestination()) : null,
                 $shipment->getOrigin() !== null ? $this->convertAddress($shipment->getOrigin()) : null,
                 $shippingProduct,
-                !empty($shipment->getEstimatedTimeOfDelivery()) ? $this->extractEstimatedDelivery($shipment) : null,
+                $estimatedDelivery,
                 $sender,
                 $receiver,
                 $proofOfDelivery,
@@ -128,6 +147,10 @@ class ResponseMapper
         );
     }
 
+    /**
+     * @param ApiPerson $person
+     * @return Person
+     */
     private function convertPerson(
         ApiPerson $person
     ): Person {
@@ -211,6 +234,11 @@ class ResponseMapper
         );
     }
 
+    /**
+     * @param Shipment $shipment
+     * @return EstimatedDelivery
+     * @throws \Exception
+     */
     private function extractEstimatedDelivery(
         Shipment $shipment
     ): EstimatedDelivery {

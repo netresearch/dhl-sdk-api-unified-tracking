@@ -70,6 +70,7 @@ class TrackingService implements TrackingServiceInterface
      * @param string $language
      * @return TrackResponseInterface[]
      * @throws ServiceException
+     * @throws \Exception
      */
     public function retrieveTrackingInformation(
         string $trackingNumber,

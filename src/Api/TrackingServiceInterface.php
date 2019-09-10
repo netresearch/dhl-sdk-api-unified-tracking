@@ -51,7 +51,8 @@ interface TrackingServiceInterface
      * This parameter serves as an indication of the client preferences ONLY. Language availability depends on the
      *     service used. The actual response language is indicated by the Content-Language header.
      * @return TrackResponseInterface[] in the form of [trackingNumber-sequenceNumber => TrackResponseInterface]
-     * @throws ServiceException
+     * @throws ServiceException If web service answers with HTTP errors (bad request, server error, ...)
+     * @throws \Exception If processing the request or response is not possible
      */
     public function retrieveTrackingInformation(
         string $trackingNumber,
