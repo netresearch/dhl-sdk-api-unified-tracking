@@ -14,6 +14,7 @@ use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
  *
  * Service which is able to fetch data from the unified tracking API
  *
+ * @api
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

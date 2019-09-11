@@ -80,7 +80,6 @@ class TrackingService implements TrackingServiceInterface
         string $recipientPostalCode = null,
         string $language = 'en'
     ): array {
-
         $requestParams = array_filter(
             [
                 'trackingNumber' => $trackingNumber,

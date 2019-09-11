@@ -13,6 +13,7 @@ use Psr\Log\LoggerInterface;
  *
  * Factory for creating services related to the unified tracking API
  *
+ * @api
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

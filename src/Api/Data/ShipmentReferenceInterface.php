@@ -11,6 +11,7 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  *
  * Describing shipment references given by the API
  *
+ * @api
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

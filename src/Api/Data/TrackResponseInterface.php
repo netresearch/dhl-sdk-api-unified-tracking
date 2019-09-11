@@ -11,6 +11,7 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  *
  * Describing a tracking response from the unified tracking API with a flat structure
  *
+ * @api
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */
