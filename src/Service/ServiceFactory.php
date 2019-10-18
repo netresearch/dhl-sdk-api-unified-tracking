@@ -30,13 +30,13 @@ class ServiceFactory implements ServiceFactoryInterface
                 'Accept' => 'application/json',
             ]
         );
-        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(4096));
+        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
         $requestFactory = MessageFactoryDiscovery::find();
         $jsonSerializer = new JsonSerializer();
 
         $clientFactory = new PluginClientFactory();
         $client = $clientFactory->createClient(
-            new PluginClient(HttpClientDiscovery::find()),
+            HttpClientDiscovery::find(),
             [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
         );
         $responseMapper = new ResponseMapper();
