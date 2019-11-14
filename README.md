@@ -93,11 +93,13 @@ The library's components suitable for consumption comprise of
 
 ```php
 <?php
-$logger = new \Psr\Log\NullLogger();
 $consumerKey = 'Your application consumer key';
+$logger = new \Psr\Log\NullLogger();
+$defaultTimeZone = new \DateTimeZone('Europe/Berlin'); // or date_default_timezone_get()
+$trackingNumber = '9876543210';
 
 $serviceFactory = new \Dhl\Sdk\UnifiedTracking\Service\ServiceFactory();
-$service = $serviceFactory->createTrackingService($consumerKey, $logger);
+$service = $serviceFactory->createTrackingService($consumerKey, $logger, $defaultTimeZone);
 
-$response = $service->retrieveTrackingInformation('trackingNumber');
+$response = $service->retrieveTrackingInformation($trackingNumber);
 ```

@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Service;
@@ -13,7 +15,6 @@ use Dhl\Sdk\UnifiedTracking\Model\ResponseMapper;
 use Dhl\Sdk\UnifiedTracking\Serializer\JsonSerializer;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
-use Http\Client\Common\PluginClient;
 use Http\Client\Common\PluginClientFactory;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
@@ -22,8 +23,11 @@ use Psr\Log\LoggerInterface;
 
 class ServiceFactory implements ServiceFactoryInterface
 {
-    public function createTrackingService(string $consumerKey, LoggerInterface $logger): TrackingServiceInterface
-    {
+    public function createTrackingService(
+        string $consumerKey,
+        LoggerInterface $logger,
+        \DateTimeZone $defaultTimeZone
+    ): TrackingServiceInterface {
         $headerPlugin = new HeaderDefaultsPlugin(
             [
                 'DHL-API-Key' => $consumerKey,
@@ -39,7 +43,7 @@ class ServiceFactory implements ServiceFactoryInterface
             HttpClientDiscovery::find(),
             [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
         );
-        $responseMapper = new ResponseMapper();
+        $responseMapper = new ResponseMapper($defaultTimeZone);
 
         return new TrackingService($client, $requestFactory, $jsonSerializer, $responseMapper);
     }

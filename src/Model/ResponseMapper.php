@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Model;
@@ -34,6 +36,28 @@ use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
  */
 class ResponseMapper
 {
+    /**
+     * @var \DateTimeZone
+     */
+    private $defaultTimeZone;
+
+    /**
+     * @var DateTimeValidator
+     */
+    private $dateTimeValidator;
+
+    /**
+     * ResponseMapper constructor.
+     *
+     * @param \DateTimeZone $defaultTimeZone
+     */
+    public function __construct(
+        \DateTimeZone $defaultTimeZone
+    ) {
+        $this->defaultTimeZone = $defaultTimeZone;
+        $this->dateTimeValidator = new DateTimeValidator();
+    }
+
     /**
      * Transforms API response types into easier usable TrackResponseInterface
      *
@@ -133,6 +157,31 @@ class ResponseMapper
     }
 
     /**
+     * Returns a \DateTime instance.
+     *
+     * A lack of time zone designator in the date/time string expresses
+     * "local time" (the time zone where the event occurred). To prevent
+     * any unintended time zone calculations in such cases, the \DateTime
+     * instance gets created with the default time zone passed into the SDK
+     * (=the time zone that will be used to display the date in the UI).
+     *
+     * @param string $time
+     *
+     * @return \DateTime
+     * @throws \Exception
+     */
+    private function getDateTimeInstance(string $time): \DateTime
+    {
+        if (!$this->dateTimeValidator->hasTimeZone($time)) {
+            $date = new \DateTime($time, $this->defaultTimeZone);
+        } else {
+            $date = new \DateTime($time);
+        }
+
+        return $date;
+    }
+
+    /**
      * @param Tracking\Types\ProofOfDelivery $proofOfDelivery
      * @return ProofOfDelivery
      * @throws \Exception
@@ -141,7 +190,7 @@ class ResponseMapper
         Tracking\Types\ProofOfDelivery $proofOfDelivery
     ): ProofOfDelivery {
         return new ProofOfDelivery(
-            new \DateTime($proofOfDelivery->getTimestamp()),
+            $this->getDateTimeInstance($proofOfDelivery->getTimestamp()),
             $proofOfDelivery->getDocumentUrl(),
             $proofOfDelivery->getSigned() !== null ? $this->convertPerson($proofOfDelivery->getSigned()) : null
         );
@@ -209,7 +258,7 @@ class ResponseMapper
         $location = $event->getLocation() !== null ? $this->convertAddress($event->getLocation()) : null;
 
         return new ShipmentEvent(
-            new \DateTime($event->getTimestamp()),
+            $this->getDateTimeInstance($event->getTimestamp()),
             $event->getStatusCode(),
             $event->getStatus(),
             $event->getDescription(),
@@ -243,12 +292,12 @@ class ResponseMapper
         Shipment $shipment
     ): EstimatedDelivery {
         $timeFrame = $shipment->getEstimatedDeliveryTimeFrame() !== null ? new DeliveryTimeFrame(
-            new \DateTime($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedFrom()),
-            new \DateTime($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedThrough())
+            $this->getDateTimeInstance($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedFrom()),
+            $this->getDateTimeInstance($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedThrough())
         ) : null;
 
         return new EstimatedDelivery(
-            new \DateTime($shipment->getEstimatedTimeOfDelivery()),
+            $this->getDateTimeInstance($shipment->getEstimatedTimeOfDelivery()),
             $timeFrame,
             $shipment->getEstimatedTimeOfDeliveryRemark()
         );

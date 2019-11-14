@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Api;
@@ -20,11 +22,21 @@ use Psr\Log\LoggerInterface;
 interface ServiceFactoryInterface
 {
     /**
-     * Create a service able to retrieve data from the unified tracking api
+     * Create a service able to retrieve a shipment's tracking history from the Unified Tracking API.
+     *
+     * Some date strings from web service are expressed as "local time" with no
+     * time zone designator. Pass in the user's (UI) time zone to have these
+     * dates displayed properly.
      *
      * @param string $consumerKey
      * @param LoggerInterface $logger
+     * @param \DateTimeZone $defaultTimeZone
+     *
      * @return TrackingServiceInterface
      */
-    public function createTrackingService(string $consumerKey, LoggerInterface $logger): TrackingServiceInterface;
+    public function createTrackingService(
+        string $consumerKey,
+        LoggerInterface $logger,
+        \DateTimeZone $defaultTimeZone
+    ): TrackingServiceInterface;
 }

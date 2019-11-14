@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Test\Service;
@@ -36,7 +38,10 @@ class TrackingServiceTest extends TestCase
     /**
      * @dataProvider successDataProvider
      * @test
+     *
      * @param string $jsonResponse
+     *
+     * @throws ServiceException
      */
     public function testRetrieveTrackingInformationSuccess(string $jsonResponse)
     {
@@ -55,6 +60,7 @@ class TrackingServiceTest extends TestCase
         $logger = new TestLogger();
         $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
         $clientFactory = new PluginClientFactory();
+        $timezone = new \DateTimeZone('Europe/Berlin');
 
         $subject = new TrackingService(
             $clientFactory->createClient(
@@ -63,11 +69,17 @@ class TrackingServiceTest extends TestCase
             ),
             $messageFactory,
             new JsonSerializer(),
-            new ResponseMapper()
+            new ResponseMapper($timezone)
         );
 
         /** @var TrackResponseInterface[] $result */
-        $result = $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
+        $result = $subject->retrieveTrackingInformation(
+            'trackingId',
+            'express',
+            'DE',
+            'US',
+            '04229'
+        );
 
         TrackingServiceTestExpectation::assertCommunicationLogged($jsonResponse, $client->getLastRequest(), $logger);
         TrackingServiceTestExpectation::assertResultCountMatches($jsonResponse, $result);
@@ -77,10 +89,11 @@ class TrackingServiceTest extends TestCase
     /**
      * @dataProvider errorDataProvider
      * @test
+     *
      * @param string $jsonResponse
-     * @throws Dhl\Sdk\UnifiedTracking\Exception\ClientException
-     * @throws Dhl\Sdk\UnifiedTracking\Exception\ServerException
-     * @throws Dhl\Sdk\UnifiedTracking\Exception\ServiceException
+     *
+     * @throws ClientException
+     * @throws ServiceException
      */
     public function testRetrieveTrackingInformationError(string $jsonResponse)
     {
@@ -105,6 +118,7 @@ class TrackingServiceTest extends TestCase
         $logger = new TestLogger();
         $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
         $clientFactory = new PluginClientFactory();
+        $timezone = new \DateTimeZone('Europe/Berlin');
 
         $subject = new TrackingService(
             $clientFactory->createClient(
@@ -113,7 +127,7 @@ class TrackingServiceTest extends TestCase
             ),
             $messageFactory,
             new JsonSerializer(),
-            new ResponseMapper()
+            new ResponseMapper($timezone)
         );
 
         try {
@@ -159,6 +173,7 @@ class TrackingServiceTest extends TestCase
         $logger = new TestLogger();
         $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
         $clientFactory = new PluginClientFactory();
+        $timezone = new \DateTimeZone('Europe/Berlin');
 
         $subject = new TrackingService(
             $clientFactory->createClient(
@@ -167,7 +182,7 @@ class TrackingServiceTest extends TestCase
             ),
             $messageFactory,
             new JsonSerializer(),
-            new ResponseMapper()
+            new ResponseMapper($timezone)
         );
 
         $subject->retrieveTrackingInformation('trackId');
