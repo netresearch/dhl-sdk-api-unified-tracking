@@ -8,9 +8,10 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Http\Plugin;
 
-use Http\Client\Common\Exception\ClientErrorException;
-use Http\Client\Common\Exception\ServerErrorException;
+use Dhl\Sdk\UnifiedTracking\Exception\AuthenticationErrorException;
+use Dhl\Sdk\UnifiedTracking\Exception\DetailedErrorException;
 use Http\Client\Common\Plugin;
+use Http\Client\Exception\HttpException;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -24,68 +25,21 @@ use Psr\Http\Message\ResponseInterface;
 final class TrackingErrorPlugin implements Plugin
 {
     /**
-     * Handle the request and return the response coming from the next callable.
-     *
-     * @param RequestInterface $request
-     * @param callable $next Next middleware in the chain, the request is passed as the first argument
-     * @param callable $first First middleware in the chain, used to to restart a request
-     *
-     * @return Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as HttpAsyncClient).
+     * HTTP response codes
      */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
+    const HTTP_UNAUTHORIZED = 401;
+
+    /**
+     * Returns TRUE if the response contains a detailed error response.
+     *
+     * @param ResponseInterface $response
+     *
+     * @return bool
+     */
+    private function isDetailedErrorResponse(ResponseInterface $response): bool
     {
-        /** @var Promise $promise */
-        $promise = $next($request);
-
-        // a response is available. transform error responses into exceptions
-        $fnFulfilled = function (ResponseInterface $response) use ($request) {
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode >= 400 && $statusCode < 500) {
-                $responseJson = (string) $response->getBody();
-                if (empty($responseJson) || !\in_array($statusCode, [400, 401, 404, 429], true)) {
-                    // throw generic client exception
-                    throw new ClientErrorException($response->getReasonPhrase(), $request, $response);
-                }
-
-                $responseData = \json_decode($responseJson, true);
-                if (\in_array($statusCode, [400, 401, 404, 429], true)) {
-                    // throw bad request error
-                    throw new ClientErrorException(
-                        $this->formatErrorMessage($statusCode, $responseData),
-                        $request,
-                        $response
-                    );
-                }
-            } elseif ($statusCode >= 500 && $statusCode < 600) {
-                $responseJson = (string) $response->getBody();
-                if (empty($responseJson) || !\in_array($statusCode, [500, 503], true)) {
-                    // throw generic server exception
-                    throw new ServerErrorException($response->getReasonPhrase(), $request, $response);
-                }
-
-                $responseData = \json_decode($responseJson, true);
-                if ($statusCode === 500) {
-                    // throw internal service error
-                    $message = $responseData['type'] ?? $responseData['title'];
-                    throw new ServerErrorException($message, $request, $response);
-                }
-
-                if ($statusCode === 503) {
-                    // throw service unavailable error
-                    throw new ServerErrorException(
-                        $this->formatErrorMessage($statusCode, $responseData),
-                        $request,
-                        $response
-                    );
-                }
-            }
-
-            // no error
-            return $response;
-        };
-
-        return $promise->then($fnFulfilled);
+        $contentTypes = $response->getHeader('Content-Type');
+        return $contentTypes && ($contentTypes[0] === 'application/json');
     }
 
     /**
@@ -114,5 +68,90 @@ final class TrackingErrorPlugin implements Plugin
             $errorDetail,
             $statusCode
         );
+    }
+
+    /**
+     * Handles client/server errors with error messages in response body.
+     *
+     * @param int $statusCode
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     *
+     * @return void
+     *
+     * @throws AuthenticationErrorException
+     * @throws DetailedErrorException
+     */
+    private function handleDetailedError(int $statusCode, RequestInterface $request, ResponseInterface $response)
+    {
+        $responseJson = (string) $response->getBody();
+        $responseData = \json_decode($responseJson, true);
+        $errorMessage = $this->formatErrorMessage($statusCode, $responseData);
+
+        if ($statusCode === self::HTTP_UNAUTHORIZED) {
+            throw new AuthenticationErrorException($errorMessage, $request, $response);
+        }
+
+        // 400, 404, 429 - throw bad request errors
+        // 503 - throw service unavailable error
+        throw new DetailedErrorException($errorMessage, $request, $response);
+    }
+
+    /**
+     * Handles all client/server errors when response does not contains body with error message.
+     *
+     * @param int $statusCode
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     *
+     * @return void
+     *
+     * @throws AuthenticationErrorException
+     * @throws HttpException
+     */
+    private function handleError(int $statusCode, RequestInterface $request, ResponseInterface $response)
+    {
+        if ($statusCode === self::HTTP_UNAUTHORIZED) {
+            throw new AuthenticationErrorException(
+                'Authentication failed. Please check your access credentials.',
+                $request,
+                $response
+            );
+        }
+
+        // 400, 404, 429 - throw bad request errors
+        // 503 - throw service unavailable error
+        throw new HttpException($response->getReasonPhrase(), $request, $response);
+    }
+
+    /**
+     * Handle the request and return the response coming from the next callable.
+     *
+     * @param RequestInterface $request
+     * @param callable $next Next middleware in the chain, the request is passed as the first argument
+     * @param callable $first First middleware in the chain, used to to restart a request
+     *
+     * @return Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as HttpAsyncClient).
+     */
+    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
+    {
+        /** @var Promise $promise */
+        $promise = $next($request);
+
+        // a response is available. transform error responses into exceptions
+        $fnFulfilled = function (ResponseInterface $response) use ($request) {
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode >= 400 && $statusCode < 600) {
+                $this->isDetailedErrorResponse($response)
+                    ? $this->handleDetailedError($statusCode, $request, $response)
+                    : $this->handleError($statusCode, $request, $response);
+            }
+
+            // no error
+            return $response;
+        };
+
+        return $promise->then($fnFulfilled);
     }
 }

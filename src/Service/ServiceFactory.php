@@ -10,12 +10,14 @@ namespace Dhl\Sdk\UnifiedTracking\Service;
 
 use Dhl\Sdk\UnifiedTracking\Api\ServiceFactoryInterface;
 use Dhl\Sdk\UnifiedTracking\Api\TrackingServiceInterface;
+use Dhl\Sdk\UnifiedTracking\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\UnifiedTracking\Http\Plugin\TrackingErrorPlugin;
 use Dhl\Sdk\UnifiedTracking\Model\ResponseMapper;
 use Dhl\Sdk\UnifiedTracking\Serializer\JsonSerializer;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClientFactory;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\Formatter\FullHttpMessageFormatter;
@@ -34,15 +36,27 @@ class ServiceFactory implements ServiceFactoryInterface
                 'Accept' => 'application/json',
             ]
         );
-        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
-        $requestFactory = MessageFactoryDiscovery::find();
-        $jsonSerializer = new JsonSerializer();
 
+        try {
+            $requestFactory = MessageFactoryDiscovery::find();
+            $httpClient = HttpClientDiscovery::find();
+        } catch (NotFoundException $exception) {
+            throw ServiceExceptionFactory::create($exception);
+        }
+
+        $loggerPlugin = new LoggerPlugin($logger, new FullHttpMessageFormatter(null));
+        $jsonSerializer = new JsonSerializer();
         $clientFactory = new PluginClientFactory();
+
         $client = $clientFactory->createClient(
-            HttpClientDiscovery::find(),
-            [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
+            $httpClient,
+            [
+                $headerPlugin,
+                $loggerPlugin,
+                new TrackingErrorPlugin()
+            ]
         );
+
         $responseMapper = new ResponseMapper($defaultTimeZone);
 
         return new TrackingService($client, $requestFactory, $jsonSerializer, $responseMapper);

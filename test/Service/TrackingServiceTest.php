@@ -9,7 +9,8 @@ declare(strict_types=1);
 namespace Dhl\Sdk\UnifiedTracking\Test\Service;
 
 use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
-use Dhl\Sdk\UnifiedTracking\Exception\ClientException;
+use Dhl\Sdk\UnifiedTracking\Exception\AuthenticationException;
+use Dhl\Sdk\UnifiedTracking\Exception\DetailedServiceException;
 use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
 use Dhl\Sdk\UnifiedTracking\Http\Plugin\TrackingErrorPlugin;
 use Dhl\Sdk\UnifiedTracking\Model\ResponseMapper;
@@ -34,16 +35,69 @@ use Psr\Log\Test\TestLogger;
 
 class TrackingServiceTest extends TestCase
 {
+    /**
+     * @return string[][]
+     */
+    public function successDataProvider(): array
+    {
+        return TrackResponse::getSuccessFullTrackResponses();
+    }
 
     /**
-     * @dataProvider successDataProvider
+     * @return string[][]
+     */
+    public function errorDataProvider(): array
+    {
+        return TrackResponse::getNotFoundTrackResponse();
+    }
+
+    /**
+     * @return TransferException[][]
+     */
+    public function exceptionProvider(): array
+    {
+        $messageFactory = MessageFactoryDiscovery::find();
+
+        $request = $messageFactory->createRequest('GET', 'www');
+
+        return [
+            HttpException::class => [
+                'exception' => new HttpException(
+                    'ERROR',
+                    $request,
+                    $messageFactory->createResponse(500)
+                ),
+            ],
+            NetworkException::class => [
+                'exception' => new NetworkException(
+                    'ERROR',
+                    $request
+                ),
+            ],
+            LoopException::class => [
+                'exception' => new LoopException(
+                    'ERROR',
+                    $request
+                ),
+            ],
+            RequestException::class => [
+                'exception' => new RequestException(
+                    'ERROR',
+                    $request
+                ),
+            ],
+            TransferException::class => ['exception' => new TransferException('ERROR')],
+        ];
+    }
+
+    /**
      * @test
+     * @dataProvider successDataProvider
      *
      * @param string $jsonResponse
-     *
      * @throws ServiceException
      */
-    public function testRetrieveTrackingInformationSuccess(string $jsonResponse)
+    public function retrieveTrackingInformationSuccess(string $jsonResponse)
     {
         $messageFactory = MessageFactoryDiscovery::find();
         $response = $messageFactory->createResponse(200, null, [], $jsonResponse);
@@ -87,26 +141,36 @@ class TrackingServiceTest extends TestCase
     }
 
     /**
-     * @dataProvider errorDataProvider
      * @test
+     * @dataProvider errorDataProvider
      *
      * @param string $jsonResponse
-     *
-     * @throws ClientException
      * @throws ServiceException
      */
-    public function testRetrieveTrackingInformationError(string $jsonResponse)
+    public function retrieveTrackingInformationError(string $jsonResponse)
     {
         $response = json_decode($jsonResponse, true);
-        $this->expectException(ClientException::class);
-        if ($response) {
-            $this->expectExceptionCode($response['status']);
-            $this->expectExceptionMessageRegExp("#{$response['title']}#");
+
+        if ($response['status'] === 401) {
+            $this->expectException(AuthenticationException::class);
+            $this->expectExceptionMessageRegExp('/^Authentication failed\./');
+        } else {
+            $this->expectException(DetailedServiceException::class);
         }
+
+        $this->expectExceptionCode($response['status']);
+        $this->expectExceptionMessageRegExp("#{$response['title']}#");
 
         $client = new Client();
         $messageFactory = MessageFactoryDiscovery::find();
-        $httpResponse = $messageFactory->createResponse($response['status'], $response['title'], [], $jsonResponse);
+        $httpResponse = $messageFactory->createResponse(
+            $response['status'],
+            $response['title'],
+            [
+                'Content-Type' => 'application/json',
+            ],
+            $jsonResponse
+        );
 
         $client->setDefaultResponse($httpResponse);
         $headerPlugin = new HeaderDefaultsPlugin(
@@ -132,7 +196,7 @@ class TrackingServiceTest extends TestCase
 
         try {
             $subject->retrieveTrackingInformation('trackingId', 'express', 'DE', 'US', '04229');
-        } catch (ClientException $exception) {
+        } catch (ServiceException $exception) {
             $lastRequest = $client->getLastRequest();
 
             TrackingServiceTestExpectation::assertErrorLogged($jsonResponse, $logger);
@@ -141,22 +205,16 @@ class TrackingServiceTest extends TestCase
         }
     }
 
-    public function successDataProvider(): array
-    {
-        return TrackResponse::getSuccessFullTrackResponses();
-    }
-
-    public function errorDataProvider(): array
-    {
-        return TrackResponse::getNotFoundTrackResponse();
-    }
-
     /**
+     * Assert that HTTP client exceptions are transformed into service exceptions.
+     *
+     * @test
+     * @dataProvider exceptionProvider
+     *
      * @param \Exception $exception
      * @throws ServiceException
-     * @dataProvider exceptionProvider
      */
-    public function testExceptionMasking(\Exception $exception)
+    public function exceptionMasking(\Exception $exception)
     {
         $this->expectException(ServiceException::class);
 
@@ -186,44 +244,5 @@ class TrackingServiceTest extends TestCase
         );
 
         $subject->retrieveTrackingInformation('trackId');
-    }
-
-    /**
-     * @return array
-     */
-    public function exceptionProvider(): array
-    {
-        $messageFactory = MessageFactoryDiscovery::find();
-
-        $request = $messageFactory->createRequest('GET', 'www');
-
-        return [
-            HttpException::class => [
-                'exception' => new HttpException(
-                    'ERROR',
-                    $request,
-                    $messageFactory->createResponse(500)
-                ),
-            ],
-            NetworkException::class => [
-                'exception' => new NetworkException(
-                    'ERROR',
-                    $request
-                ),
-            ],
-            LoopException::class => [
-                'exception' => new LoopException(
-                    'ERROR',
-                    $request
-                ),
-            ],
-            RequestException::class => [
-                'exception' => new RequestException(
-                    'ERROR',
-                    $request
-                ),
-            ],
-            TransferException::class => ['exception' => new TransferException('ERROR')],
-        ];
     }
 }

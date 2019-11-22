@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Api;
 
+use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -33,6 +34,8 @@ interface ServiceFactoryInterface
      * @param \DateTimeZone $defaultTimeZone
      *
      * @return TrackingServiceInterface
+     *
+     * @throws ServiceException
      */
     public function createTrackingService(
         string $consumerKey,

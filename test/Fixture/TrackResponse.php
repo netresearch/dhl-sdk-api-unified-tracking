@@ -16,7 +16,7 @@ class TrackResponse
     /**
      * Read response files and return them as json string
      *
-     * @return array
+     * @return string[][]
      */
     public static function getSuccessFullTrackResponses(): array
     {
@@ -38,7 +38,7 @@ class TrackResponse
     /**
      * Read response files and return them as json string
      *
-     * @return array
+     * @return string[][]
      */
     public static function getNotFoundTrackResponse(): array
     {

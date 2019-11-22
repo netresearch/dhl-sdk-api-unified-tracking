@@ -62,6 +62,7 @@ class ResponseMapper
      * Transforms API response types into easier usable TrackResponseInterface
      *
      * @param TrackingResponseType $response
+     *
      * @return TrackResponseInterface[]
      * @throws \Exception
      * @see TrackResponseInterface
@@ -100,7 +101,7 @@ class ResponseMapper
                 }
                 $pieceIds = $shipmentDetails->getPieceIds();
                 $shipmentReferences = array_map(
-                    function (Reference $reference) {
+                    static function (Reference $reference) {
                         return new ShipmentReference(
                             $reference->getType(),
                             $reference->getNumber()

@@ -8,18 +8,17 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Exception;
 
-use Http\Client\Exception;
-
 /**
  * Class ServiceException
  *
- * Generic SDK exception, can be used to catch any communication exception in
- * cases where the exact type does not matter.
+ * Generic SDK exception, can be used to catch any SDK exception
+ * in cases where the exact type does not matter. Exception messages
+ * are suitable for logging.
  *
  * @api
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
+ * @link   https://www.netresearch.de/
  */
-abstract class ServiceException extends \Exception implements Exception
+class ServiceException extends \Exception
 {
 }

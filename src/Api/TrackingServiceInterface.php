@@ -9,6 +9,8 @@ declare(strict_types=1);
 namespace Dhl\Sdk\UnifiedTracking\Api;
 
 use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
+use Dhl\Sdk\UnifiedTracking\Exception\AuthenticationException;
+use Dhl\Sdk\UnifiedTracking\Exception\DetailedServiceException;
 use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
 
 /**
@@ -53,9 +55,12 @@ interface TrackingServiceInterface
      * @param string $language ISO 639-1 2-character language code for the response.
      * This parameter serves as an indication of the client preferences ONLY. Language availability depends on the
      *     service used. The actual response language is indicated by the Content-Language header.
+     *
      * @return TrackResponseInterface[] in the form of [trackingNumber-sequenceNumber => TrackResponseInterface]
-     * @throws ServiceException If web service answers with HTTP errors (bad request, server error, ...)
-     * @throws \Exception If processing the request or response is not possible
+     *
+     * @throws AuthenticationException
+     * @throws DetailedServiceException
+     * @throws ServiceException
      */
     public function retrieveTrackingInformation(
         string $trackingNumber,
