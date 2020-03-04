@@ -19,11 +19,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  */
 interface TrackResponseInterface
 {
-    /**
-     * The tracking id
-     *
-     * @return string
-     */
     public function getTrackingId(): string;
 
     /**
@@ -41,26 +36,11 @@ interface TrackResponseInterface
      */
     public function getService(): string;
 
-    /**
-     * Delivery date/time estimation
-     *
-     * @return EstimatedDeliveryInterface|null
-     */
-    public function getEstimatedDeliveryTime();
+    public function getEstimatedDeliveryTime(): ?EstimatedDeliveryInterface;
 
-    /**
-     * Shipping origin address
-     *
-     * @return AddressInterface|null
-     */
-    public function getOriginAddress();
+    public function getOriginAddress(): ?AddressInterface;
 
-    /**
-     * Shipping destination address
-     *
-     * @return AddressInterface|null
-     */
-    public function getDestinationAddress();
+    public function getDestinationAddress(): ?AddressInterface;
 
     /**
      * Last relevant shipment event registered for this shipment
@@ -81,21 +61,21 @@ interface TrackResponseInterface
      *
      * @return PersonInterface|null
      */
-    public function getSender();
+    public function getSender(): ?PersonInterface;
 
     /**
      * Personal information of the receiver
      *
      * @return PersonInterface|null
      */
-    public function getReceiver();
+    public function getReceiver(): ?PersonInterface;
 
     /**
      * Product name of the shipping product used to transport the shipment
      *
      * @return string|null
      */
-    public function getShippingProduct();
+    public function getShippingProduct(): ?string;
 
     /**
      * Number of packages associated with this shipment
@@ -116,14 +96,14 @@ interface TrackResponseInterface
      *
      * @return ProofOfDeliveryInterface|null
      */
-    public function getProofOfDelivery();
+    public function getProofOfDelivery(): ?ProofOfDeliveryInterface;
 
     /**
      * Accessor for attributes such as weight or package dimensions
      *
      * @return PhysicalAttributesInterface|null
      */
-    public function getPhysicalAttributes();
+    public function getPhysicalAttributes(): ?PhysicalAttributesInterface;
 
     /**
      * List of reference numbers to the shipment

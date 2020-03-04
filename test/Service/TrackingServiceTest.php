@@ -27,9 +27,10 @@ use Http\Client\Exception\HttpException;
 use Http\Client\Exception\NetworkException;
 use Http\Client\Exception\RequestException;
 use Http\Client\Exception\TransferException;
-use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\Formatter\FullHttpMessageFormatter;
 use Http\Mock\Client;
+use Nyholm\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 
@@ -56,7 +57,7 @@ class TrackingServiceTest extends TestCase
      */
     public function exceptionProvider(): array
     {
-        $messageFactory = MessageFactoryDiscovery::find();
+        $messageFactory = Psr17FactoryDiscovery::findRequestFactory();
 
         $request = $messageFactory->createRequest('GET', 'www');
 
@@ -99,9 +100,11 @@ class TrackingServiceTest extends TestCase
      */
     public function retrieveTrackingInformationSuccess(string $jsonResponse)
     {
-        $messageFactory = MessageFactoryDiscovery::find();
-        $response = $messageFactory->createResponse(200, null, [], $jsonResponse);
-        $client = new Client($messageFactory);
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
+        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+        $response = $responseFactory->createResponse()->withBody($streamFactory->createStream($jsonResponse));
+        $client = new Client();
 
         $client->addResponse($response);
 
@@ -121,7 +124,7 @@ class TrackingServiceTest extends TestCase
                 new PluginClient($client),
                 [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
             ),
-            $messageFactory,
+            $requestFactory,
             new JsonSerializer(),
             new ResponseMapper($timezone)
         );
@@ -147,7 +150,7 @@ class TrackingServiceTest extends TestCase
      * @param string $jsonResponse
      * @throws ServiceException
      */
-    public function retrieveTrackingInformationError(string $jsonResponse)
+    public function retrieveTrackingInformationError(string $jsonResponse): void
     {
         $response = json_decode($jsonResponse, true);
 
@@ -162,15 +165,13 @@ class TrackingServiceTest extends TestCase
         $this->expectExceptionMessageRegExp("#{$response['title']}#");
 
         $client = new Client();
-        $messageFactory = MessageFactoryDiscovery::find();
-        $httpResponse = $messageFactory->createResponse(
-            $response['status'],
-            $response['title'],
-            [
-                'Content-Type' => 'application/json',
-            ],
-            $jsonResponse
-        );
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
+        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+
+        $httpResponse = $responseFactory->createResponse($response['status'], $response['title'])
+            ->withBody($streamFactory->createStream($jsonResponse))
+            ->withHeader('Content-Type', 'application/json');
 
         $client->setDefaultResponse($httpResponse);
         $headerPlugin = new HeaderDefaultsPlugin(
@@ -189,7 +190,7 @@ class TrackingServiceTest extends TestCase
                 new PluginClient($client),
                 [$headerPlugin, $loggerPlugin, new TrackingErrorPlugin()]
             ),
-            $messageFactory,
+            $requestFactory,
             new JsonSerializer(),
             new ResponseMapper($timezone)
         );
@@ -219,7 +220,7 @@ class TrackingServiceTest extends TestCase
         $this->expectException(ServiceException::class);
 
         $client = new Client();
-        $messageFactory = MessageFactoryDiscovery::find();
+        $messageFactory = Psr17FactoryDiscovery::findRequestFactory();
 
         $client->setDefaultException($exception);
         $headerPlugin = new HeaderDefaultsPlugin(

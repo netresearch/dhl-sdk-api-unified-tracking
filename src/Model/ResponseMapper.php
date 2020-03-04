@@ -46,11 +46,6 @@ class ResponseMapper
      */
     private $dateTimeValidator;
 
-    /**
-     * ResponseMapper constructor.
-     *
-     * @param \DateTimeZone $defaultTimeZone
-     */
     public function __construct(
         \DateTimeZone $defaultTimeZone
     ) {

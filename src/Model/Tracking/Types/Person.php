@@ -38,33 +38,21 @@ class Person
      */
     private $name = '';
 
-    /**
-     * @return string
-     */
     public function getOrganizationName(): string
     {
         return $this->organizationName;
     }
 
-    /**
-     * @return string
-     */
     public function getFamilyName(): string
     {
         return $this->familyName;
     }
 
-    /**
-     * @return string
-     */
     public function getGivenName(): string
     {
         return $this->givenName;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;

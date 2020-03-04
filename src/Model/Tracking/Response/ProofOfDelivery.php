@@ -28,14 +28,7 @@ class ProofOfDelivery implements ProofOfDeliveryInterface
      */
     private $signee;
 
-    /**
-     * ProofOfDelivery constructor.
-     *
-     * @param \DateTime $timeStamp
-     * @param string $documentUrl
-     * @param PersonInterface|null $signee
-     */
-    public function __construct(\DateTime $timeStamp, string $documentUrl = '', PersonInterface $signee = null)
+    public function __construct(\DateTime $timeStamp, string $documentUrl = '', ?PersonInterface $signee = null)
     {
         $this->timeStamp = $timeStamp;
         $this->documentUrl = $documentUrl;
@@ -52,7 +45,7 @@ class ProofOfDelivery implements ProofOfDeliveryInterface
         return $this->documentUrl;
     }
 
-    public function getSignee()
+    public function getSignee(): ?PersonInterface
     {
         return $this->signee;
     }

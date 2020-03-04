@@ -31,26 +31,17 @@ class ProofOfDelivery
      */
     private $signed;
 
-    /**
-     * @return string
-     */
     public function getTimestamp(): string
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return string
-     */
     public function getDocumentUrl(): string
     {
         return $this->documentUrl;
     }
 
-    /**
-     * @return Person|null
-     */
-    public function getSigned()
+    public function getSigned(): ?Person
     {
         return $this->signed;
     }

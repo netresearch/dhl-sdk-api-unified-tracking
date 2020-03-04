@@ -27,7 +27,7 @@ final class TrackingErrorPlugin implements Plugin
     /**
      * HTTP response codes
      */
-    const HTTP_UNAUTHORIZED = 401;
+    private const HTTP_UNAUTHORIZED = 401;
 
     /**
      * Returns TRUE if the response contains a detailed error response.

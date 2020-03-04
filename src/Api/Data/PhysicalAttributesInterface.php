@@ -20,13 +20,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
 interface PhysicalAttributesInterface
 {
     /**
-     * Package weight
-     *
-     * @return float|null
-     */
-    public function getWeight();
-
-    /**
      * Unit of measurement for the weight
      *
      * @return string
@@ -40,29 +33,13 @@ interface PhysicalAttributesInterface
      */
     public function getDimensionUom(): string;
 
-    /**
-     * Package width
-     *
-     * @return float|null
-     */
-    public function getWidth();
+    public function getWeight(): ?float;
 
-    /**
-     * Package heigth
-     *
-     * @return float|null
-     */
-    public function getHeight();
+    public function getWidth(): ?float;
 
-    /**
-     * Package length
-     *
-     * @return float|null
-     */
-    public function getLength();
+    public function getHeight(): ?float;
 
-    /**
-     * @return float|null
-     */
-    public function getLoadingMeters();
+    public function getLength(): ?float;
+
+    public function getLoadingMeters(): ?float;
 }

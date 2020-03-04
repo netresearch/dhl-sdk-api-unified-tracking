@@ -36,33 +36,21 @@ class Address
      */
     private $streetAddress = '';
 
-    /**
-     * @return string
-     */
     public function getCountryCode(): string
     {
         return $this->countryCode;
     }
 
-    /**
-     * @return string
-     */
     public function getPostalCode(): string
     {
         return $this->postalCode;
     }
 
-    /**
-     * @return string
-     */
     public function getAddressLocality(): string
     {
         return $this->addressLocality;
     }
 
-    /**
-     * @return string
-     */
     public function getStreetAddress(): string
     {
         return $this->streetAddress;

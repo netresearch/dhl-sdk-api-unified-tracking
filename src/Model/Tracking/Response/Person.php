@@ -32,14 +32,6 @@ class Person implements PersonInterface
      */
     private $name;
 
-    /**
-     * Person constructor.
-     *
-     * @param string $organization
-     * @param string $familyName
-     * @param string $givenName
-     * @param string $name
-     */
     public function __construct(string $organization, string $familyName, string $givenName, string $name)
     {
         $this->organization = $organization;

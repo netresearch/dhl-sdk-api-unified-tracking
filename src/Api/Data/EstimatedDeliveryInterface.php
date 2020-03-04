@@ -31,7 +31,7 @@ interface EstimatedDeliveryInterface
      *
      * @return DeliveryTimeFrameInterface|null
      */
-    public function getTimeFrame();
+    public function getTimeFrame(): ?DeliveryTimeFrameInterface;
 
     /**
      * Human readable additional information regarding the delivery time

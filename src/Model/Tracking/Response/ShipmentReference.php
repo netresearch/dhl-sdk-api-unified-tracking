@@ -22,12 +22,6 @@ class ShipmentReference implements ShipmentReferenceInterface
      */
     private $number;
 
-    /**
-     * ShipmentReference constructor.
-     *
-     * @param string $type
-     * @param string $number
-     */
     public function __construct(string $type, string $number)
     {
         $this->type = $type;

@@ -19,11 +19,11 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  */
 interface ShipmentEventInterface
 {
-    const STATUS_CODE_PRE_TRANSIT = 'pre-transit';
-    const STATUS_CODE_TRANSIT = 'transit';
-    const STATUS_CODE_DELIVERED = 'delivered';
-    const STATUS_CODE_FAILURE = 'failure';
-    const STATUS_CODE_UNKNOWN = 'unknown';
+    public const STATUS_CODE_PRE_TRANSIT = 'pre-transit';
+    public const STATUS_CODE_TRANSIT = 'transit';
+    public const STATUS_CODE_DELIVERED = 'delivered';
+    public const STATUS_CODE_FAILURE = 'failure';
+    public const STATUS_CODE_UNKNOWN = 'unknown';
 
     /**
      * Time on which the event happened
@@ -37,7 +37,7 @@ interface ShipmentEventInterface
      *
      * @return AddressInterface|null
      */
-    public function getLocation();
+    public function getLocation(): ?AddressInterface;
 
     /**
      * High level status group, one of:

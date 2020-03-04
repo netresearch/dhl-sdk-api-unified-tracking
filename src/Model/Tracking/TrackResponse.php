@@ -57,7 +57,7 @@ class TrackResponse implements TrackResponseInterface
     /**
      * @var ShipmentEventInterface[]
      */
-    private $statusEvents = [];
+    private $statusEvents;
 
     /**
      * @var PersonInterface|null
@@ -115,24 +115,24 @@ class TrackResponse implements TrackResponseInterface
      * @param PersonInterface|null $sender
      * @param PersonInterface|null $receiver
      * @param ProofOfDeliveryInterface|null $proofOfDelivery
-     * @param array $statusEvents
-     * @param array $relatedPieceIds
-     * @param array $shipmentReferences
+     * @param ShipmentEventInterface[] $statusEvents
+     * @param string[] $relatedPieceIds
+     * @param ShipmentReferenceInterface[] $shipmentReferences
      */
     public function __construct(
         string $trackingId,
         int $sequenceNumber,
         string $service,
         ShipmentEventInterface $latestStatus,
-        int $numberOfPieces = 1,
-        PhysicalAttributesInterface $physicalAttributes = null,
-        AddressInterface $destinationAddress = null,
-        AddressInterface $originAddress = null,
-        string $shippingProduct = '',
-        EstimatedDeliveryInterface $estimatedDeliveryTime = null,
-        PersonInterface $sender = null,
-        PersonInterface $receiver = null,
-        ProofOfDeliveryInterface $proofOfDelivery = null,
+        int $numberOfPieces,
+        ?PhysicalAttributesInterface $physicalAttributes,
+        ?AddressInterface $destinationAddress,
+        ?AddressInterface $originAddress,
+        string $shippingProduct,
+        ?EstimatedDeliveryInterface $estimatedDeliveryTime,
+        ?PersonInterface $sender,
+        ?PersonInterface $receiver,
+        ?ProofOfDeliveryInterface $proofOfDelivery,
         array $statusEvents = [],
         array $relatedPieceIds = [],
         array $shipmentReferences = []
@@ -170,17 +170,17 @@ class TrackResponse implements TrackResponseInterface
         return $this->service;
     }
 
-    public function getEstimatedDeliveryTime()
+    public function getEstimatedDeliveryTime(): ?EstimatedDeliveryInterface
     {
         return $this->estimatedDeliveryTime;
     }
 
-    public function getOriginAddress()
+    public function getOriginAddress(): ?AddressInterface
     {
         return $this->originAddress;
     }
 
-    public function getDestinationAddress()
+    public function getDestinationAddress(): ?AddressInterface
     {
         return $this->destinationAddress;
     }
@@ -190,22 +190,25 @@ class TrackResponse implements TrackResponseInterface
         return $this->latestStatus;
     }
 
+    /**
+     * @return ShipmentEventInterface[]
+     */
     public function getStatusEvents(): array
     {
         return $this->statusEvents;
     }
 
-    public function getSender()
+    public function getSender(): ?PersonInterface
     {
         return $this->sender;
     }
 
-    public function getReceiver()
+    public function getReceiver(): ?PersonInterface
     {
         return $this->receiver;
     }
 
-    public function getShippingProduct()
+    public function getShippingProduct(): string
     {
         return $this->shippingProduct;
     }
@@ -215,21 +218,27 @@ class TrackResponse implements TrackResponseInterface
         return $this->numberOfPieces;
     }
 
+    /**
+     * @return string[]
+     */
     public function getRelatedPieceIds(): array
     {
         return $this->relatedPieceIds;
     }
 
-    public function getProofOfDelivery()
+    public function getProofOfDelivery(): ?ProofOfDeliveryInterface
     {
         return $this->proofOfDelivery;
     }
 
-    public function getPhysicalAttributes()
+    public function getPhysicalAttributes(): ?PhysicalAttributesInterface
     {
         return $this->physicalAttributes;
     }
 
+    /**
+     * @return ShipmentReferenceInterface[]
+     */
     public function getShipmentReferences(): array
     {
         return $this->shipmentReferences;

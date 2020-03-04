@@ -19,7 +19,7 @@ use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClientFactory;
 use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\HttpClientDiscovery;
-use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\Formatter\FullHttpMessageFormatter;
 use Psr\Log\LoggerInterface;
 
@@ -38,7 +38,7 @@ class ServiceFactory implements ServiceFactoryInterface
         );
 
         try {
-            $requestFactory = MessageFactoryDiscovery::find();
+            $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
             $httpClient = HttpClientDiscovery::find();
         } catch (NotFoundException $exception) {
             throw ServiceExceptionFactory::create($exception);

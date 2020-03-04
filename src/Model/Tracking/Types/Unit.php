@@ -26,17 +26,11 @@ class Unit
      */
     private $unitText = '';
 
-    /**
-     * @return float
-     */
     public function getValue(): float
     {
         return $this->value;
     }
 
-    /**
-     * @return string
-     */
     public function getUnitText(): string
     {
         return $this->unitText;

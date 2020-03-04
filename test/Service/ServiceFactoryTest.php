@@ -16,26 +16,46 @@ use Http\Discovery\Strategy\MockClientStrategy;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
+/**
+ * @backupStaticAttributes enabled
+ */
 class ServiceFactoryTest extends TestCase
 {
     /**
+     * Scenario: a service instance is to be created.
+     *
+     * Assert that an instance of {@see TrackingServiceInterface} is created.
+     *
+     * @test
      * @throws ServiceException
      */
-    public function testCreateTrackingService()
+    public function factorySuccess(): void
     {
-        self::markTestIncomplete(
-            'Test seems incomplete. Call to createTrackingService always returns an instance '
-            . 'of TrackingServiceInterface. No need to explicit test this.'
-        );
-
-        $subject = new ServiceFactory();
-        $timezone = new \DateTimeZone('Europe/Berlin');
-
+        // prepend discovery strategy. will be reset via `backupStaticAttributes` annotation.
         HttpClientDiscovery::prependStrategy(MockClientStrategy::class);
 
-        $result = $subject->createTrackingService('randomKey', new NullLogger(), $timezone);
+        $factory = new ServiceFactory();
+        $service = $factory->createTrackingService('randomKey', new NullLogger(), new \DateTimeZone('Europe/Berlin'));
+        self::assertInstanceOf(TrackingServiceInterface::class, $service);
+    }
 
-        // ??? Why not use assertInstanceOf?
-        $this->assertContains(TrackingServiceInterface::class, class_implements($result));
+    /**
+     * Scenario: a service instance is to be created but no HTTP client implementation is available.
+     *
+     * Assert that an instance of {@see ServiceException} is thrown.
+     *
+     * @test
+     *
+     * @throws ServiceException
+     */
+    public function factoryError(): void
+    {
+        // unset all discovery strategies. will be reset via `backupStaticAttributes` annotation.
+        HttpClientDiscovery::setStrategies([]);
+
+        $this->expectException(ServiceException::class);
+
+        $factory = new ServiceFactory();
+        $factory->createTrackingService('randomKey', new NullLogger(), new \DateTimeZone('Europe/Berlin'));
     }
 }

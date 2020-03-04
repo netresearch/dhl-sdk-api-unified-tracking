@@ -19,23 +19,11 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  */
 interface PersonInterface
 {
-    /**
-     * @return string
-     */
     public function getOrganization(): string;
 
-    /**
-     * @return string
-     */
     public function getFamilyName(): string;
 
-    /**
-     * @return string
-     */
     public function getGivenName(): string;
 
-    /**
-     * @return string
-     */
     public function getName(): string;
 }

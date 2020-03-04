@@ -70,57 +70,36 @@ class ShipmentEvent
      */
     private $nextSteps = '';
 
-    /**
-     * @return string
-     */
     public function getTimestamp(): string
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return Place|null
-     */
-    public function getLocation()
+    public function getLocation(): ?Place
     {
         return $this->location;
     }
 
-    /**
-     * @return string
-     */
     public function getStatusCode(): string
     {
         return $this->statusCode;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getRemark(): string
     {
         return $this->remark;
     }
 
-    /**
-     * @return string
-     */
     public function getNextSteps(): string
     {
         return $this->nextSteps;

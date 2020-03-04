@@ -23,9 +23,6 @@ class Organization
      */
     private $organizationName = '';
 
-    /**
-     * @return string
-     */
     public function getOrganizationName(): string
     {
         return $this->organizationName;

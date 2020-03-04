@@ -84,50 +84,32 @@ class Details
      */
     private $references = [];
 
-    /**
-     * @return Organization|null
-     */
-    public function getCarrier()
+    public function getCarrier(): ?Organization
     {
         return $this->carrier;
     }
 
-    /**
-     * @return Product|null
-     */
-    public function getProduct()
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    /**
-     * @return Person|null
-     */
-    public function getReceiver()
+    public function getReceiver(): ?Person
     {
         return $this->receiver;
     }
 
-    /**
-     * @return Person|null
-     */
-    public function getSender()
+    public function getSender(): ?Person
     {
         return $this->sender;
     }
 
-    /**
-     * @return ProofOfDelivery|null
-     */
-    public function getProofOfDelivery()
+    public function getProofOfDelivery(): ?ProofOfDelivery
     {
         return $this->proofOfDelivery;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTotalNumberOfPieces()
+    public function getTotalNumberOfPieces(): ?int
     {
         return $this->totalNumberOfPieces;
     }
@@ -140,34 +122,22 @@ class Details
         return $this->pieceIds;
     }
 
-    /**
-     * @return Unit|null
-     */
-    public function getWeight()
+    public function getWeight(): ?Unit
     {
         return $this->weight;
     }
 
-    /**
-     * @return Unit|null
-     */
-    public function getVolume()
+    public function getVolume(): ?Unit
     {
         return $this->volume;
     }
 
-    /**
-     * @return float|null
-     */
-    public function getLoadingMeters()
+    public function getLoadingMeters(): ?float
     {
         return $this->loadingMeters;
     }
 
-    /**
-     * @return Dimension|null
-     */
-    public function getDimensions()
+    public function getDimensions(): ?Dimension
     {
         return $this->dimensions;
     }

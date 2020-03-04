@@ -38,5 +38,5 @@ interface ProofOfDeliveryInterface
      *
      * @return PersonInterface|null
      */
-    public function getSignee();
+    public function getSignee(): ?PersonInterface;
 }

@@ -34,17 +34,11 @@ class EstimatedTimeFrame
      */
     private $estimatedThrough = '';
 
-    /**
-     * @return string
-     */
     public function getEstimatedFrom(): string
     {
         return $this->estimatedFrom;
     }
 
-    /**
-     * @return string
-     */
     public function getEstimatedThrough(): string
     {
         return $this->estimatedThrough;

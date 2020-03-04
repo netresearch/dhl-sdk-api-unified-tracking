@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Exception;
 
-use Http\Client\Exception as HttpClientException;
+use Psr\Http\Client\ClientExceptionInterface;
 
 /**
  * Class ServiceExceptionFactory
@@ -34,10 +34,10 @@ class ServiceExceptionFactory
     /**
      * Create a HTTP client exception.
      *
-     * @param HttpClientException $exception
+     * @param ClientExceptionInterface $exception
      * @return ServiceException
      */
-    public static function createServiceException(HttpClientException $exception): ServiceException
+    public static function createServiceException(ClientExceptionInterface $exception): ServiceException
     {
         if (!$exception instanceof \Throwable) {
             return new ServiceException('Unknown exception occurred', 0);

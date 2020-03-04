@@ -25,9 +25,6 @@ class Product
      */
     private $productName = '';
 
-    /**
-     * @return string
-     */
     public function getProductName(): string
     {
         return $this->productName;

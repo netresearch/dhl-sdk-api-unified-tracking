@@ -48,17 +48,6 @@ class ShipmentEvent implements ShipmentEventInterface
      */
     private $nextSteps;
 
-    /**
-     * ShipmentEvent constructor.
-     *
-     * @param \DateTime $timeStamp
-     * @param string $statusCode
-     * @param string $status
-     * @param string $description
-     * @param string $remark
-     * @param string $nextSteps
-     * @param AddressInterface|null $location
-     */
     public function __construct(
         \DateTime $timeStamp,
         string $statusCode = '',
@@ -66,7 +55,7 @@ class ShipmentEvent implements ShipmentEventInterface
         string $description = '',
         string $remark = '',
         string $nextSteps = '',
-        AddressInterface $location = null
+        ?AddressInterface $location = null
     ) {
         $this->timeStamp = $timeStamp;
         $this->location = $location;
@@ -82,7 +71,7 @@ class ShipmentEvent implements ShipmentEventInterface
         return $this->timeStamp;
     }
 
-    public function getLocation()
+    public function getLocation(): ?AddressInterface
     {
         return $this->location;
     }

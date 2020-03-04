@@ -32,14 +32,6 @@ class Address implements AddressInterface
      */
     private $streetAddress;
 
-    /**
-     * Address constructor.
-     *
-     * @param string $countryCode
-     * @param string $postalCode
-     * @param string $addressLocality
-     * @param string $streetAddress
-     */
     public function __construct(
         string $countryCode = '',
         string $postalCode = '',

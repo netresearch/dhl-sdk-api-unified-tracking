@@ -15,11 +15,12 @@ use PHPUnit\Framework\TestCase;
 
 class JsonSerializerTest extends TestCase
 {
-
     /**
      * @dataProvider responseJsonProvider
+     * @param string $jsonResponse
+     * @throws \JsonMapper_Exception
      */
-    public function testDecode(string $jsonResponse)
+    public function testDecode(string $jsonResponse): void
     {
         $subject = new JsonSerializer();
         $responseObject = $subject->decode($jsonResponse);

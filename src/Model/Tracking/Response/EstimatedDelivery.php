@@ -28,16 +28,9 @@ class EstimatedDelivery implements EstimatedDeliveryInterface
      */
     private $timeRemark;
 
-    /**
-     * EstimatedDelivery constructor.
-     *
-     * @param \DateTime $dateTime
-     * @param DeliveryTimeFrameInterface|null $timeFrame
-     * @param string $timeRemark
-     */
     public function __construct(
         \DateTime $dateTime,
-        DeliveryTimeFrameInterface $timeFrame = null,
+        ?DeliveryTimeFrameInterface $timeFrame,
         string $timeRemark = ''
     ) {
         $this->dateTime = $dateTime;
@@ -50,7 +43,7 @@ class EstimatedDelivery implements EstimatedDeliveryInterface
         return $this->dateTime;
     }
 
-    public function getTimeFrame()
+    public function getTimeFrame(): ?DeliveryTimeFrameInterface
     {
         return $this->timeFrame;
     }

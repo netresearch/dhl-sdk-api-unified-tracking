@@ -47,25 +47,14 @@ class PhysicalAttributes implements PhysicalAttributesInterface
      */
     private $loadingMeters;
 
-    /**
-     * PhysicalAttributes constructor.
-     *
-     * @param float|null $weight
-     * @param string $weightUom
-     * @param string $dimensionUom
-     * @param float|null $width
-     * @param float|null $height
-     * @param float|null $length
-     * @param float|null $loadingMeters
-     */
     public function __construct(
-        float $weight = null,
+        ?float $weight = null,
         string $weightUom = '',
         string $dimensionUom = '',
-        float $width = null,
-        float $height = null,
-        float $length = null,
-        float $loadingMeters = null
+        ?float $width = null,
+        ?float $height = null,
+        ?float $length = null,
+        ?float $loadingMeters = null
     ) {
         $this->weight = $weight;
         $this->weightUom = $weightUom;
@@ -76,7 +65,7 @@ class PhysicalAttributes implements PhysicalAttributesInterface
         $this->loadingMeters = $loadingMeters;
     }
 
-    public function getWeight()
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
@@ -91,22 +80,22 @@ class PhysicalAttributes implements PhysicalAttributesInterface
         return $this->dimensionUom;
     }
 
-    public function getWidth()
+    public function getWidth(): ?float
     {
         return $this->width;
     }
 
-    public function getHeight()
+    public function getHeight(): ?float
     {
         return $this->height;
     }
 
-    public function getLength()
+    public function getLength(): ?float
     {
         return $this->length;
     }
 
-    public function getLoadingMeters()
+    public function getLoadingMeters(): ?float
     {
         return $this->loadingMeters;
     }

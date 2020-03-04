@@ -21,9 +21,6 @@ class Place
      */
     private $address;
 
-    /**
-     * @return Address
-     */
     public function getAddress(): Address
     {
         return $this->address;

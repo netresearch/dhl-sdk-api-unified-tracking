@@ -86,74 +86,47 @@ class Shipment
      */
     private $events = [];
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getService(): string
     {
         return $this->service;
     }
 
-    /**
-     * @return Place|null
-     */
-    public function getOrigin()
+    public function getOrigin(): ?Place
     {
         return $this->origin;
     }
 
-    /**
-     * @return Place|null
-     */
-    public function getDestination()
+    public function getDestination(): ?Place
     {
         return $this->destination;
     }
 
-    /**
-     * @return ShipmentEvent
-     */
     public function getStatus(): ShipmentEvent
     {
         return $this->status;
     }
 
-    /**
-     * @return string
-     */
     public function getEstimatedTimeOfDelivery(): string
     {
         return $this->estimatedTimeOfDelivery;
     }
 
-    /**
-     * @return EstimatedTimeFrame|null
-     */
-    public function getEstimatedDeliveryTimeFrame()
+    public function getEstimatedDeliveryTimeFrame(): ?EstimatedTimeFrame
     {
         return $this->estimatedDeliveryTimeFrame;
     }
 
-    /**
-     * @return string
-     */
     public function getEstimatedTimeOfDeliveryRemark(): string
     {
         return $this->estimatedTimeOfDeliveryRemark;
     }
 
-    /**
-     * @return Details|null
-     */
-    public function getDetails()
+    public function getDetails(): ?Details
     {
         return $this->details;
     }

@@ -22,12 +22,6 @@ class DeliveryTimeFrame implements DeliveryTimeFrameInterface
      */
     private $end;
 
-    /**
-     * DeliveryTimeFrame constructor.
-     *
-     * @param \DateTime $start
-     * @param \DateTime $end
-     */
     public function __construct(\DateTime $start, \DateTime $end)
     {
         $this->start = $start;

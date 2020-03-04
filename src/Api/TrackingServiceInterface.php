@@ -24,16 +24,16 @@ use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
  */
 interface TrackingServiceInterface
 {
-    const RESOURCE = 'https://api-eu.dhl.com/track/shipments';
+    public const RESOURCE = 'https://api-eu.dhl.com/track/shipments';
 
-    const SERVICE_FREIGHT = 'freight';
-    const SERVICE_EXPRESS = 'express';
-    const SERVICE_PARCEL_DE = 'parcel-de';
-    const SERVICE_PARCEL_NL = 'parcel-nl';
-    const SERVICE_PARCEL_PL = 'parcel-pl';
-    const SERVICE_DSC = 'dsc';
-    const SERVICE_DGF = 'dgf';
-    const SERVICE_ECOMMERCE = 'ecommerce';
+    public const SERVICE_FREIGHT = 'freight';
+    public const SERVICE_EXPRESS = 'express';
+    public const SERVICE_PARCEL_DE = 'parcel-de';
+    public const SERVICE_PARCEL_NL = 'parcel-nl';
+    public const SERVICE_PARCEL_PL = 'parcel-pl';
+    public const SERVICE_DSC = 'dsc';
+    public const SERVICE_DGF = 'dgf';
+    public const SERVICE_ECOMMERCE = 'ecommerce';
 
     /**
      * Fetches shipment information to given tracking number across all of DHL business units
@@ -64,10 +64,10 @@ interface TrackingServiceInterface
      */
     public function retrieveTrackingInformation(
         string $trackingNumber,
-        string $service = null,
-        string $requesterCountryCode = null,
-        string $originCountryCode = null,
-        string $recipientPostalCode = null,
+        ?string $service = null,
+        ?string $requesterCountryCode = null,
+        ?string $originCountryCode = null,
+        ?string $recipientPostalCode = null,
         string $language = 'en'
     ): array;
 }

@@ -8,25 +8,29 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\UnifiedTracking\Service;
 
+use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
 use Dhl\Sdk\UnifiedTracking\Api\TrackingServiceInterface;
 use Dhl\Sdk\UnifiedTracking\Exception\AuthenticationErrorException;
+use Dhl\Sdk\UnifiedTracking\Exception\AuthenticationException;
 use Dhl\Sdk\UnifiedTracking\Exception\DetailedErrorException;
+use Dhl\Sdk\UnifiedTracking\Exception\DetailedServiceException;
+use Dhl\Sdk\UnifiedTracking\Exception\ServiceException;
 use Dhl\Sdk\UnifiedTracking\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\UnifiedTracking\Model\ResponseMapper;
 use Dhl\Sdk\UnifiedTracking\Serializer\JsonSerializer;
-use Http\Client\Exception as HttpClientException;
-use Http\Client\HttpClient;
-use Http\Message\RequestFactory;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 
 class TrackingService implements TrackingServiceInterface
 {
     /**
-     * @var HttpClient
+     * @var ClientInterface
      */
     private $client;
 
     /**
-     * @var RequestFactory
+     * @var RequestFactoryInterface
      */
     private $requestFactory;
 
@@ -40,17 +44,9 @@ class TrackingService implements TrackingServiceInterface
      */
     private $responseMapper;
 
-    /**
-     * TrackingService constructor.
-     *
-     * @param HttpClient $client
-     * @param RequestFactory $requestFactory
-     * @param JsonSerializer $serializer
-     * @param ResponseMapper $responseMapper
-     */
     public function __construct(
-        HttpClient $client,
-        RequestFactory $requestFactory,
+        ClientInterface $client,
+        RequestFactoryInterface $requestFactory,
         JsonSerializer $serializer,
         ResponseMapper $responseMapper
     ) {
@@ -60,12 +56,24 @@ class TrackingService implements TrackingServiceInterface
         $this->responseMapper = $responseMapper;
     }
 
+    /**
+     * @param string $trackingNumber
+     * @param string|null $service
+     * @param string|null $requesterCountryCode
+     * @param string|null $originCountryCode
+     * @param string|null $recipientPostalCode
+     * @param string $language
+     * @return TrackResponseInterface[]
+     * @throws AuthenticationException
+     * @throws DetailedServiceException
+     * @throws ServiceException
+     */
     public function retrieveTrackingInformation(
         string $trackingNumber,
-        string $service = null,
-        string $requesterCountryCode = null,
-        string $originCountryCode = null,
-        string $recipientPostalCode = null,
+        ?string $service = null,
+        ?string $requesterCountryCode = null,
+        ?string $originCountryCode = null,
+        ?string $recipientPostalCode = null,
         string $language = 'en'
     ): array {
         $requestParams = array_filter(
@@ -91,7 +99,7 @@ class TrackingService implements TrackingServiceInterface
             throw ServiceExceptionFactory::createAuthenticationException($exception);
         } catch (DetailedErrorException $exception) {
             throw ServiceExceptionFactory::createDetailedServiceException($exception);
-        } catch (HttpClientException $exception) {
+        } catch (ClientExceptionInterface $exception) {
             throw ServiceExceptionFactory::createServiceException($exception);
         } catch (\Throwable $exception) {
             throw ServiceExceptionFactory::create($exception);
