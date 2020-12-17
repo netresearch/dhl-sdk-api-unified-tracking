@@ -30,9 +30,6 @@ use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
  * Class ResponseMapper
  *
  * Maps web service response object into public interface types
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class ResponseMapper
 {

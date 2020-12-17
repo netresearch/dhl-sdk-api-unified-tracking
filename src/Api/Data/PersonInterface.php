@@ -14,8 +14,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  * Describing detailed information on a person
  *
  * @api
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 interface PersonInterface
 {

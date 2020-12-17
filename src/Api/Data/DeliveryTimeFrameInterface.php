@@ -14,8 +14,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  * Describing possible timeframes in regards to delivery times
  *
  * @api
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 interface DeliveryTimeFrameInterface
 {

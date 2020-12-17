@@ -12,9 +12,6 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
  * Class Details
  *
  * Detailed information about one shipment
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class Details
 {

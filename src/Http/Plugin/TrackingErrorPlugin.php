@@ -19,8 +19,6 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Class TrackingErrorPlugin
  *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 final class TrackingErrorPlugin implements Plugin
 {

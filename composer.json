@@ -8,8 +8,10 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paul Siedler",
-            "email": "paul.siedler@netresearch.de"
+            "email": "plugins@netresearch.de",
+            "name": "Netresearch DTT GmbH",
+            "role": "Manufacturer",
+            "homepage": "https://www.netresearch.de/"
         }
     ],
     "autoload": {
@@ -47,7 +49,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "2.0.x-dev"
+            "dev-develop": "2.1.x-dev"
         }
     }
 }

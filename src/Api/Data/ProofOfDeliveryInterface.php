@@ -14,8 +14,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  * Describing data regarding handling of proof of delivery
  *
  * @api
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 interface ProofOfDeliveryInterface
 {

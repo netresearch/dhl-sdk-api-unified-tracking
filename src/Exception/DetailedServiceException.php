@@ -15,8 +15,6 @@ namespace Dhl\Sdk\UnifiedTracking\Exception;
  * provide a meaningful error message, suitable for UI display.
  *
  * @api
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class DetailedServiceException extends ServiceException
 {

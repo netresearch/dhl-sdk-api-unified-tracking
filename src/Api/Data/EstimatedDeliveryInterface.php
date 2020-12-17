@@ -14,8 +14,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  * Describing information regarding the estimated delivery data
  *
  * @api
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 interface EstimatedDeliveryInterface
 {

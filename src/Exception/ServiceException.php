@@ -16,8 +16,6 @@ namespace Dhl\Sdk\UnifiedTracking\Exception;
  * are suitable for logging.
  *
  * @api
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class ServiceException extends \Exception
 {

@@ -14,8 +14,6 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  * Describes information on specific addresses
  *
  * @api
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 interface AddressInterface
 {

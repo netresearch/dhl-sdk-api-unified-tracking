@@ -12,9 +12,6 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
  * Class ShipmentEvent
  *
  * An event in shipment delivery; also known as Milestone, Checkpoint, Status History Entry
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class ShipmentEvent
 {

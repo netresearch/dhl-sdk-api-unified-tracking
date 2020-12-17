@@ -30,7 +30,6 @@ use Http\Client\Exception\TransferException;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\Formatter\FullHttpMessageFormatter;
 use Http\Mock\Client;
-use Nyholm\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 
@@ -129,7 +128,6 @@ class TrackingServiceTest extends TestCase
             new ResponseMapper($timezone)
         );
 
-        /** @var TrackResponseInterface[] $result */
         $result = $subject->retrieveTrackingInformation(
             'trackingId',
             'express',

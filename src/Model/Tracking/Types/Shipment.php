@@ -10,10 +10,8 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
 
 /**
  * Class Shipment
- * One shipment information including full shipment details and complete list of shipment events.
  *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
+ * One shipment information including full shipment details and complete list of shipment events.
  */
 class Shipment
 {

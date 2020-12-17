@@ -12,9 +12,6 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
  * Class EstimatedTimeFrame
  *
  * Estimated Time Frame of Delivery
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class EstimatedTimeFrame
 {

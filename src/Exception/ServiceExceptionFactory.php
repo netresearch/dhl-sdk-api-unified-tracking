@@ -15,8 +15,6 @@ use Psr\Http\Client\ClientExceptionInterface;
  *
  * A service exception factory to create specific exception instances.
  *
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class ServiceExceptionFactory
 {

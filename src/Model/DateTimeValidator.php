@@ -13,8 +13,6 @@ namespace Dhl\Sdk\UnifiedTracking\Model;
  *
  * Provides methods to validate a date/time string.
  *
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class DateTimeValidator
 {
