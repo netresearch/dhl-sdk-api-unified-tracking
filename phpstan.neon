@@ -1,2 +1,4 @@
 includes:
 parameters:
+  ignoreErrors:
+    - '#is never written, only read\.$#'

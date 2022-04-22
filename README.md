@@ -10,7 +10,7 @@ The Shipment Tracking API provides up-to-the-minute shipment status reports. Use
 
 ### System Requirements
 
-- PHP 7.1+ with JSON extension
+- PHP 7.2+ with JSON extension
 
 ### Package Requirements
 
