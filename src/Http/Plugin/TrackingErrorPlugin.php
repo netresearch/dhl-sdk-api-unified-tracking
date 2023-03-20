@@ -83,7 +83,7 @@ final class TrackingErrorPlugin implements Plugin
     private function handleDetailedError(int $statusCode, RequestInterface $request, ResponseInterface $response)
     {
         $responseJson = (string) $response->getBody();
-        $responseData = \json_decode($responseJson, true);
+        $responseData = \json_decode($responseJson, true) ?: [];
         $errorMessage = $this->formatErrorMessage($statusCode, $responseData);
 
         if ($statusCode === self::HTTP_UNAUTHORIZED) {
