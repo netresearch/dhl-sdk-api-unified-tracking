@@ -13,26 +13,11 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\ProofOfDeliveryInterface;
 
 class ProofOfDelivery implements ProofOfDeliveryInterface
 {
-    /**
-     * @var \DateTime
-     */
-    private $timeStamp;
-
-    /**
-     * @var string
-     */
-    private $documentUrl;
-
-    /**
-     * @var PersonInterface|null
-     */
-    private $signee;
-
-    public function __construct(\DateTime $timeStamp, string $documentUrl = '', ?PersonInterface $signee = null)
-    {
-        $this->timeStamp = $timeStamp;
-        $this->documentUrl = $documentUrl;
-        $this->signee = $signee;
+    public function __construct(
+        private readonly \DateTime $timeStamp,
+        private readonly string $documentUrl = '',
+        private readonly ?PersonInterface $signee = null
+    ) {
     }
 
     public function getTimeStamp(): \DateTime

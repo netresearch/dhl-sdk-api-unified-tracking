@@ -22,15 +22,11 @@ interface TrackResponseInterface
     /**
      * In case the response contains multiple entries for one tracking id the sequence number can be used to uniquely
      * identify the response item
-     *
-     * @return int
      */
     public function getSequenceNumber(): int;
 
     /**
      * The responsible DHL carrier service
-     *
-     * @return string
      */
     public function getService(): string;
 
@@ -42,8 +38,6 @@ interface TrackResponseInterface
 
     /**
      * Last relevant shipment event registered for this shipment
-     *
-     * @return ShipmentEventInterface
      */
     public function getLatestStatus(): ShipmentEventInterface;
 
@@ -56,29 +50,21 @@ interface TrackResponseInterface
 
     /**
      * Personal information of the shipper
-     *
-     * @return PersonInterface|null
      */
     public function getSender(): ?PersonInterface;
 
     /**
      * Personal information of the receiver
-     *
-     * @return PersonInterface|null
      */
     public function getReceiver(): ?PersonInterface;
 
     /**
      * Product name of the shipping product used to transport the shipment
-     *
-     * @return string|null
      */
     public function getShippingProduct(): ?string;
 
     /**
      * Number of packages associated with this shipment
-     *
-     * @return int
      */
     public function getNumberOfPieces(): int;
 
@@ -91,15 +77,11 @@ interface TrackResponseInterface
 
     /**
      * Documents related to the proof of delivery
-     *
-     * @return ProofOfDeliveryInterface|null
      */
     public function getProofOfDelivery(): ?ProofOfDeliveryInterface;
 
     /**
      * Accessor for attributes such as weight or package dimensions
-     *
-     * @return PhysicalAttributesInterface|null
      */
     public function getPhysicalAttributes(): ?PhysicalAttributesInterface;
 

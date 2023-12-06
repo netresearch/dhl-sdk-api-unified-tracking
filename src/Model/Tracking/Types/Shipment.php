@@ -17,10 +17,8 @@ class Shipment
 {
     /**
      * Tracking number
-     *
-     * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * Service (provider) used to resolve this tracking number (id).
@@ -36,53 +34,35 @@ class Shipment
      *
      * @var string
      */
-    private $service;
+    private string $service;
 
     /**
      * Shipment origin
-     *
-     * @var Place|null
      */
-    private $origin;
+    private ?Place $origin = null;
 
     /**
      * Shipment destination
-     *
-     * @var Place|null
      */
-    private $destination;
+    private ?Place $destination = null;
 
-    /**
-     * @var ShipmentEvent
-     */
-    private $status;
+    private ShipmentEvent $status;
 
     /**
      * Timestamp, e.g 2018-08-03T00:00:00Z
-     *
-     * @var string
      */
-    private $estimatedTimeOfDelivery = '';
+    private string $estimatedTimeOfDelivery = '';
 
-    /**
-     * @var EstimatedTimeFrame
-     */
-    private $estimatedDeliveryTimeFrame;
+    private ?EstimatedTimeFrame $estimatedDeliveryTimeFrame = null;
 
-    /**
-     * @var string
-     */
-    private $estimatedTimeOfDeliveryRemark = '';
+    private string $estimatedTimeOfDeliveryRemark = '';
 
-    /**
-     * @var Details|null
-     */
-    private $details;
+    private ?Details $details = null;
 
     /**
      * @var ShipmentEvent[]
      */
-    private $events = [];
+    private array $events = [];
 
     public function getId(): string
     {

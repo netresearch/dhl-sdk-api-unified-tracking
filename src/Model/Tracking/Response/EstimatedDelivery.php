@@ -13,29 +13,11 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\EstimatedDeliveryInterface;
 
 class EstimatedDelivery implements EstimatedDeliveryInterface
 {
-    /**
-     * @var \DateTime
-     */
-    private $dateTime;
-
-    /**
-     * @var DeliveryTimeFrameInterface|null
-     */
-    private $timeFrame;
-
-    /**
-     * @var string
-     */
-    private $timeRemark;
-
     public function __construct(
-        \DateTime $dateTime,
-        ?DeliveryTimeFrameInterface $timeFrame,
-        string $timeRemark = ''
+        private readonly \DateTime $dateTime,
+        private readonly ?DeliveryTimeFrameInterface $timeFrame,
+        private readonly string $timeRemark = ''
     ) {
-        $this->dateTime = $dateTime;
-        $this->timeFrame = $timeFrame;
-        $this->timeRemark = $timeRemark;
     }
 
     public function getDateTime(): \DateTime

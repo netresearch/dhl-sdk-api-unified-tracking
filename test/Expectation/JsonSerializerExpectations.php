@@ -14,16 +14,18 @@ use PHPUnit\Framework\Assert;
 
 class JsonSerializerExpectations
 {
-    public static function assertMappedObjectStructure(string $jsonResponse, TrackingResponseType $responseType)
+    /**
+     * @throws \JsonException
+     */
+    public static function assertMappedObjectStructure(string $jsonResponse, TrackingResponseType $responseType): void
     {
-        $response = json_decode($jsonResponse, false);
+        $response = json_decode($jsonResponse, false, 512, JSON_THROW_ON_ERROR);
         Assert::assertCount(
             count($response->shipments),
             $responseType->getShipments(),
             'Not all shipments in result array'
         );
         foreach ($response->shipments as $id => $shipment) {
-            /** @var Shipment $resultShipment */
             $resultShipment = $responseType->getShipments()[$id];
             Assert::assertNotNull($resultShipment, 'Shipment could not be found');
             Assert::assertSame($shipment->service, $resultShipment->getService(), 'Service name does not match');

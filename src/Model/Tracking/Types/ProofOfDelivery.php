@@ -10,20 +10,11 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
 
 class ProofOfDelivery
 {
-    /**
-     * @var string
-     */
-    private $timestamp = '';
+    private string $timestamp = '';
 
-    /**
-     * @var string
-     */
-    private $documentUrl = '';
+    private string $documentUrl = '';
 
-    /**
-     * @var Person|null
-     */
-    private $signed;
+    private ?Person $signed = null;
 
     public function getTimestamp(): string
     {

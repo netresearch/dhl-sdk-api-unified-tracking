@@ -19,22 +19,16 @@ interface EstimatedDeliveryInterface
 {
     /**
      * Estimated delivery time
-     *
-     * @return \DateTime
      */
     public function getDateTime(): \DateTime;
 
     /**
      * Estimated delivery time frame
-     *
-     * @return DeliveryTimeFrameInterface|null
      */
     public function getTimeFrame(): ?DeliveryTimeFrameInterface;
 
     /**
-     * Human readable additional information regarding the delivery time
-     *
-     * @return string
+     * Human-readable additional information regarding the delivery time
      */
     public function getTimeRemark(): string;
 }

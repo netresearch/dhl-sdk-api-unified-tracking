@@ -19,22 +19,16 @@ interface ProofOfDeliveryInterface
 {
     /**
      * Timestamp of the delivery
-     *
-     * @return \DateTime
      */
     public function getTimeStamp(): \DateTime;
 
     /**
      * The link to related electronic proof of delivery document.
-     *
-     * @return string
      */
     public function getDocumentUrl(): string;
 
     /**
      * Person signing the proof of delivery
-     *
-     * @return PersonInterface|null
      */
     public function getSignee(): ?PersonInterface;
 }

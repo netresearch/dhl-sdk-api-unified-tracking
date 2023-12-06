@@ -17,13 +17,11 @@ class TrackingServiceTestExpectation
 {
     /**
      * Assert that there was an error logged for error responses
-     *
-     * @param string $responseJson
-     * @param TestLogger $logger
+     * @throws \JsonException
      */
-    public static function assertErrorLogged(string $responseJson, TestLogger $logger)
+    public static function assertErrorLogged(string $responseJson, TestLogger $logger): void
     {
-        $errorResponse = json_decode($responseJson, false);
+        $errorResponse = json_decode($responseJson, false, 512, JSON_THROW_ON_ERROR);
 
         Assert::assertTrue($logger->hasErrorRecords(), 'No error logged');
         Assert::assertTrue($logger->hasErrorThatContains($errorResponse->title), 'Error message not logged');
@@ -31,16 +29,12 @@ class TrackingServiceTestExpectation
 
     /**
      * Assert that the API requests and responses were logged to the logger as either info or error
-     *
-     * @param string $responseJson
-     * @param RequestInterface $request
-     * @param TestLogger $logger
      */
     public static function assertCommunicationLogged(
         string $responseJson,
         RequestInterface $request,
         TestLogger $logger
-    ) {
+    ): void {
         Assert::assertTrue($logger->hasInfoRecords(), 'Logger has no info messages');
 
         $statusRegex = '|^HTTP/\d\.\d\s\d{3}\s[\w\s]+$|m';
@@ -57,12 +51,11 @@ class TrackingServiceTestExpectation
     /**
      * Assert that all response objects were properly mapped and are present in the form [trackingId => resultObject]
      *
-     * @param string $jsonResponse
      * @param TrackResponseInterface[] $result
      */
-    public static function assertResultCountMatches(string $jsonResponse, array $result)
+    public static function assertResultCountMatches(string $jsonResponse, array $result): void
     {
-        $response = json_decode($jsonResponse, false);
+        $response = json_decode($jsonResponse, false, 512, JSON_THROW_ON_ERROR);
         Assert::assertCount(count($response->shipments), $result);
         foreach ($response->shipments as $key => $shipment) {
             $index = $shipment->id . '-' . $key;
@@ -74,12 +67,11 @@ class TrackingServiceTestExpectation
     /**
      * Assert that all response objects have been converted and the data is in the correct places
      *
-     * @param string $jsonResponse
      * @param TrackResponseInterface[] $result
      */
-    public static function assertResponseStructureMatches(string $jsonResponse, array $result)
+    public static function assertResponseStructureMatches(string $jsonResponse, array $result): void
     {
-        $response = json_decode($jsonResponse, false);
+        $response = json_decode($jsonResponse, false, 512, JSON_THROW_ON_ERROR);
         foreach ($response->shipments as $key => $shipment) {
             $resultInstance = $result[$shipment->id . '-' . $key];
             Assert::assertEquals($shipment->status->statusCode, $resultInstance->getLatestStatus()->getStatusCode());
@@ -122,7 +114,7 @@ class TrackingServiceTestExpectation
                     $resultInstance->getProofOfDelivery()->getDocumentUrl()
                 );
                 Assert::assertSame(
-                    strtotime($proofOfDelivery->timestamp),
+                    strtotime((string) $proofOfDelivery->timestamp),
                     $resultInstance->getProofOfDelivery()->getTimeStamp()->getTimestamp()
                 );
                 Assert::assertSame(
@@ -135,14 +127,14 @@ class TrackingServiceTestExpectation
                 Assert::assertNotNull($resultInstance->getEstimatedDeliveryTime());
                 if (isset($shipment->estimatedDeliveryTimeFrame)) {
                     Assert::assertSame(
-                        strtotime($shipment->estimatedDeliveryTimeFrame->estimatedFrom),
+                        strtotime((string) $shipment->estimatedDeliveryTimeFrame->estimatedFrom),
                         $resultInstance->getEstimatedDeliveryTime()
                                        ->getTimeFrame()
                                        ->getStart()
                                        ->getTimestamp()
                     );
                     Assert::assertSame(
-                        strtotime($shipment->estimatedDeliveryTimeFrame->estimatedThrough),
+                        strtotime((string) $shipment->estimatedDeliveryTimeFrame->estimatedThrough),
                         $resultInstance->getEstimatedDeliveryTime()
                                        ->getTimeFrame()
                                        ->getEnd()

@@ -20,139 +20,30 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\TrackResponseInterface;
 class TrackResponse implements TrackResponseInterface
 {
     /**
-     * @var string
-     */
-    private $trackingId;
-
-    /**
-     * @var int
-     */
-    private $sequenceNumber;
-
-    /**
-     * @var string
-     */
-    private $service;
-
-    /**
-     * @var EstimatedDeliveryInterface|null
-     */
-    private $estimatedDeliveryTime;
-
-    /**
-     * @var AddressInterface|null
-     */
-    private $originAddress;
-
-    /**
-     * @var AddressInterface|null
-     */
-    private $destinationAddress;
-
-    /**
-     * @var ShipmentEventInterface
-     */
-    private $latestStatus;
-
-    /**
-     * @var ShipmentEventInterface[]
-     */
-    private $statusEvents;
-
-    /**
-     * @var PersonInterface|null
-     */
-    private $sender;
-
-    /**
-     * @var PersonInterface|null
-     */
-    private $receiver;
-
-    /**
-     * @var string
-     */
-    private $shippingProduct = '';
-
-    /**
-     * @var int
-     */
-    private $numberOfPieces = 1;
-
-    /**
-     * @var string[]
-     */
-    private $relatedPieceIds = [];
-
-    /**
-     * @var ProofOfDeliveryInterface|null
-     */
-    private $proofOfDelivery;
-
-    /**
-     * @var PhysicalAttributesInterface|null
-     */
-    private $physicalAttributes;
-
-    /**
-     * @var ShipmentReferenceInterface[]
-     */
-    private $shipmentReferences = [];
-
-    /**
      * TrackResponse constructor.
      *
-     * @param string $trackingId
-     * @param int $sequenceNumber
-     * @param string $service
-     * @param ShipmentEventInterface $latestStatus
-     * @param int $numberOfPieces
-     * @param PhysicalAttributesInterface|null $physicalAttributes
-     * @param AddressInterface|null $destinationAddress
-     * @param AddressInterface|null $originAddress
-     * @param string $shippingProduct
-     * @param EstimatedDeliveryInterface|null $estimatedDeliveryTime
-     * @param PersonInterface|null $sender
-     * @param PersonInterface|null $receiver
-     * @param ProofOfDeliveryInterface|null $proofOfDelivery
      * @param ShipmentEventInterface[] $statusEvents
      * @param string[] $relatedPieceIds
      * @param ShipmentReferenceInterface[] $shipmentReferences
      */
     public function __construct(
-        string $trackingId,
-        int $sequenceNumber,
-        string $service,
-        ShipmentEventInterface $latestStatus,
-        int $numberOfPieces,
-        ?PhysicalAttributesInterface $physicalAttributes,
-        ?AddressInterface $destinationAddress,
-        ?AddressInterface $originAddress,
-        string $shippingProduct,
-        ?EstimatedDeliveryInterface $estimatedDeliveryTime,
-        ?PersonInterface $sender,
-        ?PersonInterface $receiver,
-        ?ProofOfDeliveryInterface $proofOfDelivery,
-        array $statusEvents = [],
-        array $relatedPieceIds = [],
-        array $shipmentReferences = []
+        private readonly string $trackingId,
+        private readonly int $sequenceNumber,
+        private readonly string $service,
+        private readonly ShipmentEventInterface $latestStatus,
+        private readonly int $numberOfPieces,
+        private readonly ?PhysicalAttributesInterface $physicalAttributes,
+        private readonly ?AddressInterface $destinationAddress,
+        private readonly ?AddressInterface $originAddress,
+        private readonly string $shippingProduct,
+        private readonly ?EstimatedDeliveryInterface $estimatedDeliveryTime,
+        private readonly ?PersonInterface $sender,
+        private readonly ?PersonInterface $receiver,
+        private readonly ?ProofOfDeliveryInterface $proofOfDelivery,
+        private readonly array $statusEvents = [],
+        private readonly array $relatedPieceIds = [],
+        private readonly array $shipmentReferences = []
     ) {
-        $this->trackingId = $trackingId;
-        $this->sequenceNumber = $sequenceNumber;
-        $this->service = $service;
-        $this->estimatedDeliveryTime = $estimatedDeliveryTime;
-        $this->originAddress = $originAddress;
-        $this->destinationAddress = $destinationAddress;
-        $this->latestStatus = $latestStatus;
-        $this->statusEvents = $statusEvents;
-        $this->sender = $sender;
-        $this->receiver = $receiver;
-        $this->shippingProduct = $shippingProduct;
-        $this->numberOfPieces = $numberOfPieces;
-        $this->relatedPieceIds = $relatedPieceIds;
-        $this->proofOfDelivery = $proofOfDelivery;
-        $this->physicalAttributes = $physicalAttributes;
-        $this->shipmentReferences = $shipmentReferences;
     }
 
     public function getTrackingId(): string

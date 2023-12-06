@@ -12,20 +12,10 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\ShipmentReferenceInterface;
 
 class ShipmentReference implements ShipmentReferenceInterface
 {
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var string
-     */
-    private $number;
-
-    public function __construct(string $type, string $number)
-    {
-        $this->type = $type;
-        $this->number = $number;
+    public function __construct(
+        private readonly string $type,
+        private readonly string $number
+    ) {
     }
 
     public function getType(): string

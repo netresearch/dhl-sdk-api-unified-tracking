@@ -9,14 +9,12 @@ declare(strict_types=1);
 namespace Dhl\Sdk\UnifiedTracking\Test\Model;
 
 use Dhl\Sdk\UnifiedTracking\Model\DateTimeValidator;
+use Dhl\Sdk\UnifiedTracking\Test\Fixture\DateTimeProvider;
 use PHPUnit\Framework\TestCase;
 
 class DateTimeValidatorTest extends TestCase
 {
-    /**
-     * @var DateTimeValidator
-     */
-    private $dateTimeValidator;
+    private DateTimeValidator $dateTimeValidator;
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -29,24 +27,18 @@ class DateTimeValidatorTest extends TestCase
         $this->dateTimeValidator = new DateTimeValidator();
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider \Dhl\Sdk\UnifiedTracking\Test\Fixture\DateTimeProvider::withTimeZone
-     * @param string $time
-     */
-    public function hasTimeZone(string $time)
+
+    #[\PHPUnit\Framework\Attributes\DataProviderExternal(DateTimeProvider::class, 'withTimeZone')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function hasTimeZone(string $time): void
     {
         self::assertTrue($this->dateTimeValidator->hasTimeZone($time));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider \Dhl\Sdk\UnifiedTracking\Test\Fixture\DateTimeProvider::noTimeZone
-     * @param string $time
-     */
-    public function hasNoTimeZone(string $time)
+
+    #[\PHPUnit\Framework\Attributes\DataProviderExternal(DateTimeProvider::class, 'noTimeZone')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function hasNoTimeZone(string $time): void
     {
         self::assertFalse($this->dateTimeValidator->hasTimeZone($time));
     }

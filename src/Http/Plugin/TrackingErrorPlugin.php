@@ -30,9 +30,7 @@ final class TrackingErrorPlugin implements Plugin
     /**
      * Returns TRUE if the response contains a detailed error response.
      *
-     * @param ResponseInterface $response
      *
-     * @return bool
      */
     private function isDetailedErrorResponse(ResponseInterface $response): bool
     {
@@ -47,7 +45,6 @@ final class TrackingErrorPlugin implements Plugin
      *
      * @param int $statusCode The response status code
      * @param string[] $responseData The response data in application/problem+json format
-     * @return string
      */
     private function formatErrorMessage(int $statusCode, array $responseData): string
     {
@@ -71,19 +68,14 @@ final class TrackingErrorPlugin implements Plugin
     /**
      * Handles client/server errors with error messages in response body.
      *
-     * @param int $statusCode
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     *
-     * @return void
-     *
      * @throws AuthenticationErrorException
      * @throws DetailedErrorException
+     * @throws \JsonException
      */
-    private function handleDetailedError(int $statusCode, RequestInterface $request, ResponseInterface $response)
+    private function handleDetailedError(int $statusCode, RequestInterface $request, ResponseInterface $response): void
     {
         $responseJson = (string) $response->getBody();
-        $responseData = \json_decode($responseJson, true) ?: [];
+        $responseData = \json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR) ?: [];
         $errorMessage = $this->formatErrorMessage($statusCode, $responseData);
 
         if ($statusCode === self::HTTP_UNAUTHORIZED) {
@@ -96,18 +88,12 @@ final class TrackingErrorPlugin implements Plugin
     }
 
     /**
-     * Handles all client/server errors when response does not contains body with error message.
-     *
-     * @param int $statusCode
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     *
-     * @return void
+     * Handles all client/server errors when response does not contain body with error message.
      *
      * @throws AuthenticationErrorException
      * @throws HttpException
      */
-    private function handleError(int $statusCode, RequestInterface $request, ResponseInterface $response)
+    private function handleError(int $statusCode, RequestInterface $request, ResponseInterface $response): void
     {
         if ($statusCode === self::HTTP_UNAUTHORIZED) {
             throw new AuthenticationErrorException(
@@ -125,19 +111,18 @@ final class TrackingErrorPlugin implements Plugin
     /**
      * Handle the request and return the response coming from the next callable.
      *
-     * @param RequestInterface $request
      * @param callable $next Next middleware in the chain, the request is passed as the first argument
-     * @param callable $first First middleware in the chain, used to to restart a request
-     *
-     * @return Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as HttpAsyncClient).
+     * @param callable $first First middleware in the chain, used to restart a request
+     * @return Promise<ResponseInterface> Resolves a PSR-7 Response or fails with a Http\Client\Exception
+     *                                    (The same as HttpAsyncClient).
+     * @throws \JsonException
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
-        /** @var Promise $promise */
         $promise = $next($request);
 
         // a response is available. transform error responses into exceptions
-        $fnFulfilled = function (ResponseInterface $response) use ($request) {
+        $fnFulfilled = function (ResponseInterface $response) use ($request): ResponseInterface {
             $statusCode = $response->getStatusCode();
 
             if ($statusCode >= 400 && $statusCode < 600) {

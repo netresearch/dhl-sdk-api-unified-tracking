@@ -15,25 +15,13 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
  */
 class Person
 {
-    /**
-     * @var string
-     */
-    private $organizationName = '';
+    private string $organizationName = '';
 
-    /**
-     * @var string
-     */
-    private $familyName = '';
+    private string $familyName = '';
 
-    /**
-     * @var string
-     */
-    private $givenName = '';
+    private string $givenName = '';
 
-    /**
-     * @var string
-     */
-    private $name = '';
+    private string $name = '';
 
     public function getOrganizationName(): string
     {

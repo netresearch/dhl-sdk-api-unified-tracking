@@ -16,9 +16,7 @@ use Http\Discovery\Strategy\MockClientStrategy;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
-/**
- * @backupStaticAttributes enabled
- */
+#[\PHPUnit\Framework\Attributes\BackupStaticProperties(true)]
 class ServiceFactoryTest extends TestCase
 {
     /**
@@ -26,9 +24,9 @@ class ServiceFactoryTest extends TestCase
      *
      * Assert that an instance of {@see TrackingServiceInterface} is created.
      *
-     * @test
      * @throws ServiceException
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function factorySuccess(): void
     {
         // prepend discovery strategy. will be reset via `backupStaticAttributes` annotation.
@@ -44,10 +42,10 @@ class ServiceFactoryTest extends TestCase
      *
      * Assert that an instance of {@see ServiceException} is thrown.
      *
-     * @test
      *
      * @throws ServiceException
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function factoryError(): void
     {
         // unset all discovery strategies. will be reset via `backupStaticAttributes` annotation.

@@ -18,18 +18,14 @@ class EstimatedTimeFrame
     /**
      * example: 2018-08-03T00:00:00Z
      * The start date of the estimated time frame, http://schema.org/DateTime
-     *
-     * @var string
      */
-    private $estimatedFrom = '';
+    private string $estimatedFrom = '';
 
     /**
      * example: 2018-08-03T22:00:00Z
      * The end date of the estimated time frame,
-     *
-     * @var string
      */
-    private $estimatedThrough = '';
+    private string $estimatedThrough = '';
 
     public function getEstimatedFrom(): string
     {

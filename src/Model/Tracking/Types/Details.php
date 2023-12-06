@@ -15,71 +15,43 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
  */
 class Details
 {
-    /**
-     * @var Organization|null
-     */
-    private $carrier;
+    private ?Organization $carrier = null;
 
-    /**
-     * @var Product|null
-     */
-    private $product;
+    private ?Product $product = null;
 
-    /**
-     * @var Person|null
-     */
-    private $receiver;
+    private ?Person $receiver = null;
 
-    /**
-     * @var Person|null
-     */
-    private $sender;
+    private ?Person $sender = null;
 
-    /**
-     * @var ProofOfDelivery|null
-     */
-    private $proofOfDelivery;
+    private ?ProofOfDelivery $proofOfDelivery = null;
 
     /**
      * Total number of items or pieces in the shipment
-     *
-     * @var int|null
      */
-    private $totalNumberOfPieces;
+    private ?int $totalNumberOfPieces = null;
 
     /**
      * Ids of all the items or pieces in the shipment
      *
      * @var string[]
      */
-    private $pieceIds = [];
+    private array $pieceIds = [];
 
-    /**
-     * @var Unit
-     */
-    private $weight;
+    private ?Unit $weight = null;
 
-    /**
-     * @var Unit|null
-     */
-    private $volume;
+    private ?Unit $volume = null;
 
     /**
      * A loading meter standard unit of measurement for transport by truck
-     *
-     * @var float|null
      */
-    private $loadingMeters;
+    private ?float $loadingMeters = null;
 
-    /**
-     * @var Dimension|null
-     */
-    private $dimensions;
+    private ?Dimension $dimensions = null;
 
     /**
      * @var Reference[]
      */
-    private $references = [];
+    private array $references = [];
 
     public function getCarrier(): ?Organization
     {

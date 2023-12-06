@@ -10,10 +10,7 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
 
 class Reference
 {
-    /**
-     * @var string
-     */
-    private $number = '';
+    private string $number = '';
 
     /**
      * One of:
@@ -25,10 +22,8 @@ class Reference
      * - masterbill
      * - container-number
      * - domestic-consignment-id
-     *
-     * @var string
      */
-    private $type = '';
+    private string $type = '';
 
     public function getNumber(): string
     {

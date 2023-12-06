@@ -10,25 +10,13 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
 
 class Address
 {
-    /**
-     * @var string
-     */
-    private $countryCode = '';
+    private string $countryCode = '';
 
-    /**
-     * @var string
-     */
-    private $postalCode = '';
+    private string $postalCode = '';
 
-    /**
-     * @var string
-     */
-    private $addressLocality = '';
+    private string $addressLocality = '';
 
-    /**
-     * @var string
-     */
-    private $streetAddress = '';
+    private string $streetAddress = '';
 
     public function getCountryCode(): string
     {

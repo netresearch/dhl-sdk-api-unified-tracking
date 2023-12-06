@@ -38,7 +38,7 @@ class TrackingServiceTest extends TestCase
     /**
      * @return string[][]
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return TrackResponse::getSuccessFullTrackResponses();
     }
@@ -46,7 +46,7 @@ class TrackingServiceTest extends TestCase
     /**
      * @return string[][]
      */
-    public function errorDataProvider(): array
+    public static function errorDataProvider(): array
     {
         return TrackResponse::getNotFoundTrackResponse();
     }
@@ -54,7 +54,7 @@ class TrackingServiceTest extends TestCase
     /**
      * @return TransferException[][]
      */
-    public function exceptionProvider(): array
+    public static function exceptionProvider(): array
     {
         $messageFactory = Psr17FactoryDiscovery::findRequestFactory();
 
@@ -91,13 +91,12 @@ class TrackingServiceTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider successDataProvider
      *
-     * @param string $jsonResponse
      * @throws ServiceException
      */
-    public function retrieveTrackingInformationSuccess(string $jsonResponse)
+    #[\PHPUnit\Framework\Attributes\DataProvider('successDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function retrieveTrackingInformationSuccess(string $jsonResponse): void
     {
         $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
         $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
@@ -142,15 +141,14 @@ class TrackingServiceTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider errorDataProvider
      *
-     * @param string $jsonResponse
      * @throws ServiceException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('errorDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function retrieveTrackingInformationError(string $jsonResponse): void
     {
-        $response = json_decode($jsonResponse, true);
+        $response = json_decode($jsonResponse, true, 512, JSON_THROW_ON_ERROR);
 
         if ($response['status'] === 401) {
             $this->expectException(AuthenticationException::class);
@@ -206,13 +204,12 @@ class TrackingServiceTest extends TestCase
     /**
      * Assert that HTTP client exceptions are transformed into service exceptions.
      *
-     * @test
-     * @dataProvider exceptionProvider
      *
-     * @param \Exception $exception
      * @throws ServiceException
      */
-    public function exceptionMasking(\Exception $exception)
+    #[\PHPUnit\Framework\Attributes\DataProvider('exceptionProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function exceptionMasking(\Exception $exception): void
     {
         $this->expectException(ServiceException::class);
 

@@ -27,12 +27,6 @@ interface ServiceFactoryInterface
      * time zone designator. Pass in the user's (UI) time zone to have these
      * dates displayed properly.
      *
-     * @param string $consumerKey
-     * @param LoggerInterface $logger
-     * @param \DateTimeZone $defaultTimeZone
-     *
-     * @return TrackingServiceInterface
-     *
      * @throws ServiceException
      */
     public function createTrackingService(

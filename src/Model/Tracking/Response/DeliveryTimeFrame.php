@@ -12,20 +12,8 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\DeliveryTimeFrameInterface;
 
 class DeliveryTimeFrame implements DeliveryTimeFrameInterface
 {
-    /**
-     * @var \DateTime
-     */
-    private $start;
-
-    /**
-     * @var \DateTime
-     */
-    private $end;
-
-    public function __construct(\DateTime $start, \DateTime $end)
+    public function __construct(private readonly \DateTime $start, private readonly \DateTime $end)
     {
-        $this->start = $start;
-        $this->end = $end;
     }
 
     public function getStart(): \DateTime

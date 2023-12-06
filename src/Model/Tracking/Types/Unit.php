@@ -10,15 +10,9 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
 
 class Unit
 {
-    /**
-     * @var float
-     */
-    private $value;
+    private float $value;
 
-    /**
-     * @var string
-     */
-    private $unitText = '';
+    private string $unitText = '';
 
     public function getValue(): float
     {

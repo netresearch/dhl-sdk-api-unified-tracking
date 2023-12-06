@@ -10,12 +10,9 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
 
 class Place
 {
-    /**
-     * @var Address
-     */
-    private $address;
+    private ?Address $address = null;
 
-    public function getAddress(): Address
+    public function getAddress(): ?Address
     {
         return $this->address;
     }

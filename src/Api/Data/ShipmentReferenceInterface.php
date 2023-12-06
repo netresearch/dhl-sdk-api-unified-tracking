@@ -27,15 +27,11 @@ interface ShipmentReferenceInterface
      * - masterbill
      * - container-number
      * - domestic-consignment-id
-     *
-     * @return string
      */
     public function getType(): string;
 
     /**
      * Reference number
-     *
-     * @return string
      */
     public function getNumber(): string;
 }

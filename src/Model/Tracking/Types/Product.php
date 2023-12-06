@@ -17,10 +17,8 @@ class Product
 {
     /**
      * Consumer friendly short description of the product suitable for compact presentation.
-     *
-     * @var string
      */
-    private $productName = '';
+    private string $productName = '';
 
     public function getProductName(): string
     {

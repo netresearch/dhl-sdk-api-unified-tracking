@@ -17,23 +17,19 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
  */
 interface ShipmentEventInterface
 {
-    public const STATUS_CODE_PRE_TRANSIT = 'pre-transit';
-    public const STATUS_CODE_TRANSIT = 'transit';
-    public const STATUS_CODE_DELIVERED = 'delivered';
-    public const STATUS_CODE_FAILURE = 'failure';
-    public const STATUS_CODE_UNKNOWN = 'unknown';
+    final public const STATUS_CODE_PRE_TRANSIT = 'pre-transit';
+    final public const STATUS_CODE_TRANSIT = 'transit';
+    final public const STATUS_CODE_DELIVERED = 'delivered';
+    final public const STATUS_CODE_FAILURE = 'failure';
+    final public const STATUS_CODE_UNKNOWN = 'unknown';
 
     /**
      * Time on which the event happened
-     *
-     * @return \DateTime
      */
     public function getTimeStamp(): \DateTime;
 
     /**
      * Location information to the event
-     *
-     * @return AddressInterface|null
      */
     public function getLocation(): ?AddressInterface;
 
@@ -44,36 +40,26 @@ interface ShipmentEventInterface
      * - delivered
      * - failure
      * - unknown
-     *
-     * @return string
      */
     public function getStatusCode(): string;
 
     /**
      * Status title
-     *
-     * @return string
      */
     public function getStatus(): string;
 
     /**
      * Detailed event description
-     *
-     * @return string
      */
     public function getDescription(): string;
 
     /**
      * Remark regarding the shipment status
-     *
-     * @return string
      */
     public function getRemark(): string;
 
     /**
      * Description of the next steps for the shipment
-     *
-     * @return string
      */
     public function getNextSteps(): string;
 }

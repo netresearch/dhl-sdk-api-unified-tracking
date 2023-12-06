@@ -12,32 +12,12 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\PersonInterface;
 
 class Person implements PersonInterface
 {
-    /**
-     * @var string
-     */
-    private $organization;
-
-    /**
-     * @var string
-     */
-    private $familyName;
-
-    /**
-     * @var string
-     */
-    private $givenName;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    public function __construct(string $organization, string $familyName, string $givenName, string $name)
-    {
-        $this->organization = $organization;
-        $this->familyName = $familyName;
-        $this->givenName = $givenName;
-        $this->name = $name;
+    public function __construct(
+        private readonly string $organization,
+        private readonly string $familyName,
+        private readonly string $givenName,
+        private readonly string $name
+    ) {
     }
 
     public function getOrganization(): string

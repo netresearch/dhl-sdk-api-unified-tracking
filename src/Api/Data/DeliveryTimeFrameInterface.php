@@ -11,7 +11,7 @@ namespace Dhl\Sdk\UnifiedTracking\Api\Data;
 /**
  * Interface DeliveryTimeFrameInterface
  *
- * Describing possible timeframes in regards to delivery times
+ * Describing possible timeframes in regard to delivery times
  *
  * @api
  */
@@ -19,15 +19,11 @@ interface DeliveryTimeFrameInterface
 {
     /**
      * Earliest possible delivery time
-     *
-     * @return \DateTime
      */
     public function getStart(): \DateTime;
 
     /***
      * Latest possible delivery time
-     *
-     * @return \DateTime
      */
     public function getEnd(): \DateTime;
 }

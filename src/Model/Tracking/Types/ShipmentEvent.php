@@ -17,15 +17,10 @@ class ShipmentEvent
 {
     /**
      * A date value in ISO 8601 format (2017-06-21) or a combination of date and time of day (2017-06-21T14:07:17Z)
-     *
-     * @var string
      */
-    private $timestamp = '';
+    private string $timestamp = '';
 
-    /**
-     * @var Place|null
-     */
-    private $location;
+    private ?Place $location = null;
 
     /**
      * Code of the event; These codes are high-level grouping statuses.
@@ -34,38 +29,28 @@ class ShipmentEvent
      * - delivered
      * - failure
      * - unknown
-     *
-     * @var string
      */
-    private $statusCode = '';
+    private string $statusCode = '';
 
     /**
      * Short description of the status - title
-     *
-     * @var string
      */
-    private $status = '';
+    private string $status = '';
 
     /**
      * Detailed description of the event
-     *
-     * @var string
      */
-    private $description = '';
+    private string $description = '';
 
     /**
      * Remark regarding the shipment status
-     *
-     * @var string
      */
-    private $remark = '';
+    private string $remark = '';
 
     /**
      * Description of the next steps
-     *
-     * @var string
      */
-    private $nextSteps = '';
+    private string $nextSteps = '';
 
     public function getTimestamp(): string
     {

@@ -19,15 +19,11 @@ interface PhysicalAttributesInterface
 {
     /**
      * Unit of measurement for the weight
-     *
-     * @return string
      */
     public function getWeightUom(): string;
 
     /**
      * Unit of measurement for width, length and height
-     *
-     * @return string
      */
     public function getDimensionUom(): string;
 

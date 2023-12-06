@@ -15,41 +15,23 @@ namespace Dhl\Sdk\UnifiedTracking\Model\Tracking\Types;
  */
 class Dimension
 {
-    /**
-     * @var Unit
-     */
-    private $width;
+    private ?Unit $width = null;
 
-    /**
-     * @var Unit
-     */
-    private $height;
+    private ?Unit $height = null;
 
-    /**
-     * @var Unit
-     */
-    private $length;
+    private ?Unit $length = null;
 
-    /**
-     * @return Unit
-     */
-    public function getWidth(): Unit
+    public function getWidth(): ?Unit
     {
         return $this->width;
     }
 
-    /**
-     * @return Unit
-     */
-    public function getHeight(): Unit
+    public function getHeight(): ?Unit
     {
         return $this->height;
     }
 
-    /**
-     * @return Unit
-     */
-    public function getLength(): Unit
+    public function getLength(): ?Unit
     {
         return $this->length;
     }

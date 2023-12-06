@@ -16,10 +16,10 @@ use PHPUnit\Framework\TestCase;
 class JsonSerializerTest extends TestCase
 {
     /**
-     * @dataProvider responseJsonProvider
-     * @param string $jsonResponse
      * @throws \JsonMapper_Exception
+     * @throws \JsonException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('responseJsonProvider')]
     public function testDecode(string $jsonResponse): void
     {
         $subject = new JsonSerializer();
@@ -31,7 +31,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @return string[]
      */
-    public function responseJsonProvider(): array
+    public static function responseJsonProvider(): array
     {
         return TrackResponse::getSuccessFullTrackResponses();
     }

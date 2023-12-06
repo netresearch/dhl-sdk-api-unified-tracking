@@ -24,15 +24,15 @@ interface TrackingServiceInterface
 {
     public const RESOURCE = 'https://api-eu.dhl.com/track/shipments';
 
-    public const SERVICE_FREIGHT = 'freight';
-    public const SERVICE_EXPRESS = 'express';
-    public const SERVICE_POST_DE = 'post-de';
-    public const SERVICE_PARCEL_DE = 'parcel-de';
-    public const SERVICE_PARCEL_NL = 'parcel-nl';
-    public const SERVICE_PARCEL_PL = 'parcel-pl';
-    public const SERVICE_DSC = 'dsc';
-    public const SERVICE_DGF = 'dgf';
-    public const SERVICE_ECOMMERCE = 'ecommerce';
+    final public const SERVICE_FREIGHT = 'freight';
+    final public const SERVICE_EXPRESS = 'express';
+    final public const SERVICE_POST_DE = 'post-de';
+    final public const SERVICE_PARCEL_DE = 'parcel-de';
+    final public const SERVICE_PARCEL_NL = 'parcel-nl';
+    final public const SERVICE_PARCEL_PL = 'parcel-pl';
+    final public const SERVICE_DSC = 'dsc';
+    final public const SERVICE_DGF = 'dgf';
+    final public const SERVICE_ECOMMERCE = 'ecommerce';
 
     /**
      * Fetches shipment information to given tracking number across all of DHL business units

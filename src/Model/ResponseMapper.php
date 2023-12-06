@@ -19,12 +19,15 @@ use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\ShipmentEvent;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Response\ShipmentReference;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\TrackResponse;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Details;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Dimension;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\EstimatedTimeFrame;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Person as ApiPerson;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Place;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Reference;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Shipment;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\ShipmentEvent as ApiShipmentEvent;
 use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
+use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\Unit;
 
 /**
  * Class ResponseMapper
@@ -33,27 +36,15 @@ use Dhl\Sdk\UnifiedTracking\Model\Tracking\Types\TrackingResponseType;
  */
 class ResponseMapper
 {
-    /**
-     * @var \DateTimeZone
-     */
-    private $defaultTimeZone;
+    private DateTimeValidator $dateTimeValidator;
 
-    /**
-     * @var DateTimeValidator
-     */
-    private $dateTimeValidator;
-
-    public function __construct(
-        \DateTimeZone $defaultTimeZone
-    ) {
-        $this->defaultTimeZone = $defaultTimeZone;
+    public function __construct(private readonly \DateTimeZone $defaultTimeZone)
+    {
         $this->dateTimeValidator = new DateTimeValidator();
     }
 
     /**
      * Transforms API response types into easier usable TrackResponseInterface
-     *
-     * @param TrackingResponseType $response
      *
      * @return TrackResponseInterface[]
      * @throws \Exception
@@ -62,7 +53,7 @@ class ResponseMapper
     public function map(TrackingResponseType $response): array
     {
         $results = [];
-        /** @var Shipment $shipment */
+
         foreach ($response->getShipments() as $shipment) {
             $shipmentDetails = $shipment->getDetails();
             $proofOfDelivery = null;
@@ -78,7 +69,7 @@ class ResponseMapper
                 if ($shipmentDetails->getProofOfDelivery() !== null) {
                     try {
                         $proofOfDelivery = $this->convertProofOfDelivery($shipmentDetails->getProofOfDelivery());
-                    } catch (\Exception $exception) {
+                    } catch (\Exception) {
                         // no proof of delivery
                     }
                 }
@@ -93,12 +84,10 @@ class ResponseMapper
                 }
                 $pieceIds = $shipmentDetails->getPieceIds();
                 $shipmentReferences = array_map(
-                    static function (Reference $reference) {
-                        return new ShipmentReference(
-                            $reference->getType(),
-                            $reference->getNumber()
-                        );
-                    },
+                    static fn(Reference $reference): ShipmentReference => new ShipmentReference(
+                        $reference->getType(),
+                        $reference->getNumber()
+                    ),
                     $shipmentDetails->getReferences()
                 );
                 if ($shipmentDetails->getSender() !== null) {
@@ -109,8 +98,8 @@ class ResponseMapper
                 }
             }
             try {
-                $shipmentEvents = array_map([$this, 'convertEvent'], $shipment->getEvents());
-            } catch (\Exception $exception) {
+                $shipmentEvents = array_map($this->convertEvent(...), $shipment->getEvents());
+            } catch (\Exception) {
                 $shipmentEvents = [];
             }
 
@@ -118,7 +107,7 @@ class ResponseMapper
             if (!empty($shipment->getEstimatedTimeOfDelivery())) {
                 try {
                     $estimatedDelivery = $this->extractEstimatedDelivery($shipment);
-                } catch (\Exception $exception) {
+                } catch (\Exception) {
                     // no estimated delivery date in response
                 }
             }
@@ -158,25 +147,19 @@ class ResponseMapper
      * instance gets created with the default time zone passed into the SDK
      * (=the time zone that will be used to display the date in the UI).
      *
-     * @param string $time
      *
-     * @return \DateTime
      * @throws \Exception
      */
     private function getDateTimeInstance(string $time): \DateTime
     {
         if (!$this->dateTimeValidator->hasTimeZone($time)) {
-            $date = new \DateTime($time, $this->defaultTimeZone);
-        } else {
-            $date = new \DateTime($time);
+            return new \DateTime($time, $this->defaultTimeZone);
         }
 
-        return $date;
+        return new \DateTime($time);
     }
 
     /**
-     * @param Tracking\Types\ProofOfDelivery $proofOfDelivery
-     * @return ProofOfDelivery
      * @throws \Exception
      */
     private function convertProofOfDelivery(
@@ -185,14 +168,12 @@ class ResponseMapper
         return new ProofOfDelivery(
             $this->getDateTimeInstance($proofOfDelivery->getTimestamp()),
             $proofOfDelivery->getDocumentUrl(),
-            $proofOfDelivery->getSigned() !== null ? $this->convertPerson($proofOfDelivery->getSigned()) : null
+            $proofOfDelivery->getSigned() instanceof ApiPerson
+                ? $this->convertPerson($proofOfDelivery->getSigned())
+                : null
         );
     }
 
-    /**
-     * @param ApiPerson $person
-     * @return Person
-     */
     private function convertPerson(
         ApiPerson $person
     ): Person {
@@ -204,10 +185,6 @@ class ResponseMapper
         );
     }
 
-    /**
-     * @param Details $details
-     * @return PhysicalAttributes
-     */
     private function createPhysicalAttributes(
         Details $details
     ): PhysicalAttributes {
@@ -217,14 +194,14 @@ class ResponseMapper
         $length = null;
         $weight = null;
         $weightUom = '';
-        if ($details->getDimensions() !== null) {
+        if ($details->getDimensions() instanceof Dimension) {
             $dimensionUnit = $details->getDimensions()->getHeight()->getUnitText();
             $width = $details->getDimensions()->getWidth()->getValue();
             $height = $details->getDimensions()->getHeight()->getValue();
             $length = $details->getDimensions()->getLength()->getValue();
         }
 
-        if ($details->getWeight() !== null) {
+        if ($details->getWeight() instanceof Unit) {
             $weight = $details->getWeight()->getValue();
             $weightUom = $details->getWeight()->getUnitText();
         }
@@ -241,14 +218,12 @@ class ResponseMapper
     }
 
     /**
-     * @param ApiShipmentEvent $event
-     * @return ShipmentEvent
      * @throws \Exception
      */
     private function convertEvent(
         ApiShipmentEvent $event
     ): ShipmentEvent {
-        $location = $event->getLocation() !== null ? $this->convertAddress($event->getLocation()) : null;
+        $location = $event->getLocation() instanceof Place ? $this->convertAddress($event->getLocation()) : null;
 
         return new ShipmentEvent(
             $this->getDateTimeInstance($event->getTimestamp()),
@@ -261,10 +236,6 @@ class ResponseMapper
         );
     }
 
-    /**
-     * @param Place $place
-     * @return Address
-     */
     private function convertAddress(
         Place $place
     ): Address {
@@ -277,14 +248,12 @@ class ResponseMapper
     }
 
     /**
-     * @param Shipment $shipment
-     * @return EstimatedDelivery
      * @throws \Exception
      */
     private function extractEstimatedDelivery(
         Shipment $shipment
     ): EstimatedDelivery {
-        $timeFrame = $shipment->getEstimatedDeliveryTimeFrame() !== null ? new DeliveryTimeFrame(
+        $timeFrame = $shipment->getEstimatedDeliveryTimeFrame() instanceof EstimatedTimeFrame ? new DeliveryTimeFrame(
             $this->getDateTimeInstance($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedFrom()),
             $this->getDateTimeInstance($shipment->getEstimatedDeliveryTimeFrame()->getEstimatedThrough())
         ) : null;

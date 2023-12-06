@@ -13,57 +13,15 @@ use Dhl\Sdk\UnifiedTracking\Api\Data\ShipmentEventInterface;
 
 class ShipmentEvent implements ShipmentEventInterface
 {
-    /**
-     * @var \DateTime
-     */
-    private $timeStamp;
-
-    /**
-     * @var AddressInterface|null
-     */
-    private $location;
-
-    /**
-     * @var string
-     */
-    private $statusCode;
-
-    /**
-     * @var string
-     */
-    private $status;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $remark;
-
-    /**
-     * @var string
-     */
-    private $nextSteps;
-
     public function __construct(
-        \DateTime $timeStamp,
-        string $statusCode = '',
-        string $status = '',
-        string $description = '',
-        string $remark = '',
-        string $nextSteps = '',
-        ?AddressInterface $location = null
+        private readonly \DateTime $timeStamp,
+        private readonly string $statusCode = '',
+        private readonly string $status = '',
+        private readonly string $description = '',
+        private readonly string $remark = '',
+        private readonly string $nextSteps = '',
+        private readonly ?AddressInterface $location = null
     ) {
-        $this->timeStamp = $timeStamp;
-        $this->location = $location;
-        $this->statusCode = $statusCode;
-        $this->status = $status;
-        $this->description = $description;
-        $this->remark = $remark;
-        $this->nextSteps = $nextSteps;
     }
 
     public function getTimeStamp(): \DateTime

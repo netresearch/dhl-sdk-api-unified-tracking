@@ -12,10 +12,8 @@ class Organization
 {
     /**
      * The name of the organization expressed in text.
-     *
-     * @var string
      */
-    private $organizationName = '';
+    private string $organizationName = '';
 
     public function getOrganizationName(): string
     {
