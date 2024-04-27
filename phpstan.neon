@@ -1,4 +1,7 @@
 includes:
 parameters:
-  ignoreErrors:
+   level: 7
+   paths:
+       - src
+   ignoreErrors:
     - '#is never written, only read\.$#'

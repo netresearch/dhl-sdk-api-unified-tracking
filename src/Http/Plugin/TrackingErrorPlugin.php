@@ -113,7 +113,7 @@ final class TrackingErrorPlugin implements Plugin
      *
      * @param callable $next Next middleware in the chain, the request is passed as the first argument
      * @param callable $first First middleware in the chain, used to restart a request
-     * @return Promise<ResponseInterface> Resolves a PSR-7 Response or fails with a Http\Client\Exception
+     * @return Promise Resolves a PSR-7 Response or fails with a Http\Client\Exception
      *                                    (The same as HttpAsyncClient).
      * @throws \JsonException
      */
