@@ -5,3 +5,4 @@ parameters:
        - src
    ignoreErrors:
     - '#is never written, only read\.$#'
+    - '#Property .* is never assigned .* so it can be removed from the property type\.#'

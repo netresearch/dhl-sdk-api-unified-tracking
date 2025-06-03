@@ -29,6 +29,7 @@ class JsonSerializer
     {
         $jsonMapper = new \JsonMapper();
         $jsonMapper->bIgnoreVisibility = true;
+        $jsonMapper->bStrictObjectTypeChecking = false;
         $jsonMapper->classMap = $this->classMap;
 
         $response = \json_decode($jsonResponse, false, 512, JSON_THROW_ON_ERROR);

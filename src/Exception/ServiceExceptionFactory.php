@@ -30,10 +30,6 @@ class ServiceExceptionFactory
      */
     public static function createServiceException(ClientExceptionInterface $exception): ServiceException
     {
-        if (!$exception instanceof \Throwable) {
-            return new ServiceException('Unknown exception occurred', 0);
-        }
-
         return self::create($exception);
     }
 

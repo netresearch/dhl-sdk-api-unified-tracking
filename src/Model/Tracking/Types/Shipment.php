@@ -31,8 +31,6 @@ class Shipment
      * - dsc
      * - dgf
      * - ecommerce
-     *
-     * @var string
      */
     private string $service;
 
